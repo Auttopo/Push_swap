@@ -10,11 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct s_stack
+
+typedef struct s_nod
 {
 	int value;
-	t_stack *top;
-	t_stack *next;
-	t_stack *last;
+	t_nod *next;
+
+}	t_nod;
+
+typedef struct s_stack
+{
+	t_nod	*top;
+	t_nod	*last;
 
 }	t_stack;

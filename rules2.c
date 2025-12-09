@@ -10,4 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 
+void	ra(t_stack *stack)
+{
+	t_stack *temp;
+	temp = stack->top;
+
+
+	stack->last->next = stack->top;
+	stack->last = stack->top;
+	stack->last->next = NULL;
+	
+	stack->top = stack->top->next;
+
+	stack->top = stack;
+	
+
+	write("ra\n");
+}
