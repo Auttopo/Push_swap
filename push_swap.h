@@ -17,8 +17,12 @@ typedef struct s_stack
 {
 	int value;
 	struct s_stack *next;
-	struct s_stack **last;
+	struct s_stack *previous;
 
 }	t_stack;
+
+void	swap(t_stack **s);
+void	push(t_stack **s1, t_stack **s2);
+void	rotate(t_stack **s, int flag);
 
 #endif
