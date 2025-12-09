@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/09 13:50:48 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 14:51:55 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ void	push(t_stack **s1, t_stack **s2)
 	*s1 = (*s1)->next;
 	tmp->next = *s2;
 	*s2 = tmp;
+}
+
+void	rotate(t_stack **s, int flag)
+{
+	t_stack	*tmp;
+
+	if (!*s)
+		return ;
+	else if (!(*s)->next)
+		return ;
+	if (flag > 0)
+		*s = (*s)->next;
+	else
+		*s = (*s)->previous;		
 }
