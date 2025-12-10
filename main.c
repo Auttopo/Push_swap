@@ -13,7 +13,7 @@
 #include <stdio.h> //REMOVE BEFORE THE END PROJECT
 #include "push_swap.h"
 #include <stdlib.h>
-
+#include "rules.c"
 // TESTS Functions/
 
 t_stack	*get_nodx(t_stack *stack, int n)
@@ -27,18 +27,6 @@ t_stack	*get_nodx(t_stack *stack, int n)
 	return (stack);
 }
 
-void	show_last(t_stack *stack)
-{
-	if (stack == NULL)
-	{
-		printf("\n\n");
-		return ;
-	}
-	printf("|%p| |%d|\n", stack->last, (*stack->last)->value);
-	show_last(stack->next);
-}
-
-
 void	show_stack(t_stack *stack)
 {
 	if (stack == NULL)
@@ -50,30 +38,28 @@ void	show_stack(t_stack *stack)
 	show_stack(stack->next);
 }
 
-void	add_back_nod(t_stack **lst, t_stack *new)
+void	add_back_nod(t_stack **stack, t_stack *new)
 {
-	if (*lst == NULL)
+	if (*stack == NULL)
 	{
-	//	*(lst->last) = new;
-		*lst = new;
+		*stack = new;
 		return ;
 	}
-	if ((*lst)->next == NULL)
+	if ((*stack)->next == NULL)
 	{
-	//	*(lst->last) = new;
-		(*lst)->next = new;
+		(*stack)->next = new;
 		return ;
 	}
-	add_back_nod(&(*lst)->next, new);
+	add_back_nod(&(*stack)->next, new);
 }
 
-void	add_front_nod(t_stack **lst, t_stack *new)
+void	add_front_nod(t_stack **stack, t_stack *new)
 {
-	new->next = *lst;
-	*lst = new;
+	new->next = *stack;
+	*stack = new;
 }
 
-t_stack	*new_elem(t_stack stack, int value)
+t_stack	*new_elem(int value)
 {
 	t_stack	*nod;
 	nod = malloc(sizeof(t_stack));
@@ -85,15 +71,15 @@ t_stack	*new_elem(t_stack stack, int value)
 	return (nod);
 }
 
-t_stack	*last_nod(t_stack *lst)
+t_stack	*last_nod(t_stack *stack)
 {
-	if (lst == NULL)
+	if (stack == NULL)
 		return NULL;
-	while (lst->next != NULL)
+	while (stack->next != NULL)
 	{
-		lst = lst->next;
+		stack = stack->next;
 	}
-	return (lst);
+	return (stack);
 }
 
 void	clear_list(t_stack **stack)
@@ -117,19 +103,18 @@ int	main()
 	t_stack *last_pt = &fake;
 */
 
-	//t_stack *stack = malloc(sizeof(t_stack));
+//	t_stack *stack = malloc(sizeof(t_stack));
 	t_stack *stack = NULL;
-/*	stack->last = &last_pt;
-	stack->value = 1;
-	stack->next = NULL;*/
+//	stack->value = 1;
+//	stack->next = NULL;
 
-	add_back_nod(&stack, new_elem(*stack, 6));
-/*	add_back_nod(&stack, new_elem(*stack, 2));
-	add_back_nod(&stack, new_elem(*stack, 4));
-	add_back_nod(&stack, new_elem(*stack, 6));
-	add_back_nod(&stack, new_elem(*stack, 9));
-	add_back_nod(&stack, new_elem(*stack, 7));
-	add_back_nod(&stack, new_elem(*stack, 3));*/
+	add_back_nod(&stack, new_elem(6));
+	add_back_nod(&stack, new_elem(2));
+	add_back_nod(&stack, new_elem(4));
+	add_back_nod(&stack, new_elem(6));
+	add_back_nod(&stack, new_elem(9));
+	add_back_nod(&stack, new_elem(7));
+	add_back_nod(&stack, new_elem(3));
 
 	// STACK TWO -----------------------------------------//
 
@@ -156,10 +141,10 @@ int	main()
 
 //--------------------------------------------------------//
 
-/*	show_stack(stack);		
-	rotate(stack);
 	show_stack(stack);		
-*/
+//	rotate(stack);
+//	show_stack(stack);		
+
 
 /*
 	show_stack(stack);
