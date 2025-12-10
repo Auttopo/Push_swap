@@ -15,6 +15,7 @@
 void    bubble(t_stack **s1, int size)
 {
     int i;
+
     i = 0;
     while (i <= size)
     {
@@ -22,9 +23,9 @@ void    bubble(t_stack **s1, int size)
         if ((*s1)->value > (*s1)->next->value)
         {
             swap(s1);
-            rotate(s1);
             i = 0;
         }
+        rotate(s1);
     }
         
 }
