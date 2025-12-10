@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    bubble(t_stack **s1, int size)
+void    bubble(t_stack **s1)
 {
     int i;
 
