@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/10 10:43:31 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 16:17:09 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ void	r_prev(t_stack **s)
 
 void	rotate(t_stack **s, void (*move)(t_stack **), char *str)
 {
-	t_stack	*tmp;
-
 	if (!*s)
 		return ;
 	move(s);
+	*s = (*s)->next;
 	if (str)
 		ft_putstr(str);
 }

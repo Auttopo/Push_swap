@@ -6,26 +6,26 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:00:27 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/10 12:00:29 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 16:14:12 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    bubble(t_stack **s1)
+void    bubble(t_stack **s1, int size)
 {
     int i;
 
     i = 0;
-    while (i <= size)
+    while (i <= size - 1)
     {
         i++;
         if ((*s1)->value > (*s1)->next->value)
         {
-            swap(s1);
+            swap(s1, "sa");
             i = 0;
         }
-        rotate(s1);
+        rotate(s1, r_next, "ra");
     }
         
 }
