@@ -13,7 +13,6 @@
 #include <stdio.h> //REMOVE BEFORE THE END PROJECT
 #include "push_swap.h"
 #include <stdlib.h>
-#include "rules.c"
 // TESTS Functions/
 
 t_stack	*get_nodx(t_stack *stack, int n)
@@ -105,6 +104,13 @@ int	main()
 
 //	t_stack *stack = malloc(sizeof(t_stack));
 	t_stack *stack = NULL;
+	t_stack *pull = NULL;
+/*	t_stack *data = NULL;
+	t_stack *sort = NULL;
+	t_stack **stack = &data;
+	t_stack **pull = &sort;
+*/
+
 //	stack->value = 1;
 //	stack->next = NULL;
 
@@ -115,6 +121,9 @@ int	main()
 	add_back_nod(&stack, new_elem(9));
 	add_back_nod(&stack, new_elem(7));
 	add_back_nod(&stack, new_elem(3));
+
+	selection(&stack, &pull);
+
 
 	// STACK TWO -----------------------------------------//
 
