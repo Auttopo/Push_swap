@@ -10,22 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "push_swap.h"
 
-void	ra(t_stack *stack)
+void	dblswap(t_stack **s1, t_stack **s2)
 {
-	t_stack *temp;
-	temp = stack->top;
+	if (!*s1 || !*s2)
+		return ;
+	swap(s1, "ss");
+	swap(s2, 0);
+}
 
+void	dblrotate(t_stack **s1, t_stack **s2)
+{
+	rotate(s1, 1, "rr");
+	rotate(s2, 1, 0);
+}
 
-	stack->last->next = stack->top;
-	stack->last = stack->top;
-	stack->last->next = NULL;
-	
-	stack->top = stack->top->next;
-
-	stack->top = stack;
-	
-
-	write("ra\n");
+void	dblrrotate(t_stack **s1, t_stack **s2)
+{
+	rotate(s1, 0, "rrr");
+	rotate(s2, 0, 0);
 }
