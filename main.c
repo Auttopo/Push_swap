@@ -54,11 +54,13 @@ void	add_back_nod(t_stack **lst, t_stack *new)
 {
 	if (*lst == NULL)
 	{
+	//	*(lst->last) = new;
 		*lst = new;
 		return ;
 	}
 	if ((*lst)->next == NULL)
 	{
+	//	*(lst->last) = new;
 		(*lst)->next = new;
 		return ;
 	}
@@ -78,8 +80,6 @@ t_stack	*new_elem(t_stack stack, int value)
 	if (nod == NULL)
 		return (NULL);
 
-	nod->last = stack.last;
-	*(nod->last) = *(stack.last);
 	nod->value = value;
 	nod->next = NULL;
 	return (nod);
@@ -110,30 +110,30 @@ int	main()
 {
 
 	// STACK ONE -------------------------------------//
-	
+/*	
 	t_stack fake;
 	fake.value = 99;
 
 	t_stack *last_pt = &fake;
+*/
 
-
-	t_stack *stack = malloc(sizeof(t_stack));
-	stack->last = &last_pt;
-//	*(stack->last) = stack;
+	//t_stack *stack = malloc(sizeof(t_stack));
+	t_stack *stack = NULL;
+/*	stack->last = &last_pt;
 	stack->value = 1;
-	stack->next = NULL;
+	stack->next = NULL;*/
 
 	add_back_nod(&stack, new_elem(*stack, 6));
-	add_back_nod(&stack, new_elem(*stack, 2));
+/*	add_back_nod(&stack, new_elem(*stack, 2));
 	add_back_nod(&stack, new_elem(*stack, 4));
 	add_back_nod(&stack, new_elem(*stack, 6));
 	add_back_nod(&stack, new_elem(*stack, 9));
 	add_back_nod(&stack, new_elem(*stack, 7));
-	add_back_nod(&stack, new_elem(*stack, 3));
+	add_back_nod(&stack, new_elem(*stack, 3));*/
 
 	// STACK TWO -----------------------------------------//
 
-	t_stack *stack2 = malloc(sizeof(t_stack));
+/*	t_stack *stack2 = malloc(sizeof(t_stack));
 	stack2->last = &stack2;
 	*(stack2->last) = stack2;
 	stack2->value = 0;
@@ -146,6 +146,7 @@ int	main()
 	add_back_nod(&stack2, new_elem(*stack2, 0));
 	add_back_nod(&stack2, new_elem(*stack2, 0));
 	add_back_nod(&stack2, new_elem(*stack2, 0));
+*/
 
 	// LAST TESTS ------------------------------------------------//	
 	/*t_stack *last = last_nod(stack);
@@ -155,9 +156,10 @@ int	main()
 
 //--------------------------------------------------------//
 
-	show_stack(stack);		
+/*	show_stack(stack);		
 	rotate(stack);
 	show_stack(stack);		
+*/
 
 /*
 	show_stack(stack);
@@ -179,9 +181,8 @@ int	main()
 
 
 
-
 	clear_list(&stack);
-	clear_list(&stack2);
+//	clear_list(&stack2);
 
 
 }

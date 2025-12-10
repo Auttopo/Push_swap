@@ -11,21 +11,13 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "push_swap.h"
 
-void	ra(t_stack *stack)
+void	rotate(t_stack *stack)
 {
-	t_stack *temp;
-	temp = stack->top;
-
-
-	stack->last->next = stack->top;
-	stack->last = stack->top;
-	stack->last->next = NULL;
+	(*(stack->last))->next = stack;
+	(*(stack->last)) = stack;
+	(*(stack->last))->next = NULL;
 	
-	stack->top = stack->top->next;
-
-	stack->top = stack;
-	
-
-	write("ra\n");
+	stack = stack->next;
 }

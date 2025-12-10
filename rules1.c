@@ -31,7 +31,7 @@ void	push(t_stack **s1, t_stack **s2)
 	tmp->next = *s2;
 	*s2 = tmp;
 }
-
+/*
 int	main()
 {
 	t_stack	*pt1;
@@ -56,3 +56,4 @@ int	main()
 
 	return (0);
 }
+*/
