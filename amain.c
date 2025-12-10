@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   amain.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:19 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/08 20:30:19 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 15:59:29 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,10 @@ int	main()
 
 	show_stack(stack);		
 //	rotate(stack);
-//	show_stack(stack);		
+//	show_stack(stack);	
+	bubble(&stack, 7);		
 
+	show_stack(stack);		
 
 /*
 	show_stack(stack);
