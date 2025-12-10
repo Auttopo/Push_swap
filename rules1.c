@@ -9,6 +9,7 @@
 /*   Updated: 2025/12/10 10:43:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 #include <unistd.h>
 
@@ -55,18 +56,26 @@ void	push(t_stack **s1, t_stack **s2, char *str)
 		ft_putstr(str);
 }
 
-void	rotate(t_stack **s, int flag, char *str)
+void	r_next(t_stack **s)
+{
+	*s = (*s)->next;
+}
+
+void	r_prev(t_stack **s)
+{
+	*s = (*s)->previous;
+}
+
+void	rotate(t_stack **s, void (*move)(t_stack **), char *str)
 {
 	t_stack	*tmp;
 
 	if (!*s)
 		return ;
-	else if (!(*s)->next)
-		return ;
-	if (flag > 0)
-		*s = (*s)->next;
-	else
-		*s = (*s)->previous;
+	move(s);
 	if (str)
 		ft_putstr(str);
 }
+
+
+

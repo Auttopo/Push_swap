@@ -23,7 +23,7 @@ typedef struct s_stack
 
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);
-void	rotate(t_stack **s, int flag, char *str);
+void	rotate(t_stack **s, void (*move)(t_stack **), char *str);
 void	dblswap(t_stack **s1, t_stack **s2);
 void	dblrotate(t_stack **s1, t_stack **s2);
 void	dblrrotate(t_stack **s1, t_stack **s2);
