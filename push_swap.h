@@ -21,7 +21,7 @@ typedef struct s_stack
 
 }	t_stack;
 
-void	swap(t_stack **s);
+void	swap(char *str);
 void	push(t_stack **s1, t_stack **s2);
 void	rotate(t_stack **s, int flag);
 
