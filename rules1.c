@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/10 16:17:09 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 08:31:32 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,35 @@ void	ft_putstr(char *s)
 
 void	swap(t_stack **s, char *str)
 {
+//	t_stack	*tmp1;
+//	t_stack	*tmp2;
 	t_stack	*tmp;
+
+	int	temp;
 
 	if (!*s)
 		return ;
 	else if (!(*s)->next)
 		return ;
-	tmp = (*s)->next;
-	(*s)->next = (*s)->next->next;
-	tmp->next = *s;
-	*s = tmp;
-	if (str)
-		ft_putstr(str);
+/*
+	tmp1 = *s;
+	tmp2 = (*s)->next->next;
+	*s = (*s)->next;
+	(*s)->previous = tmp1->previous;
+	(*s)->next = tmp1;
+	tmp1->next = tmp2;
+	tmp1->previous = *s;
+*/
+	tmp = (*s)->next->next;
+	(*s)->next->previous = (*s)->previous;
+	(*s)->next = tmp;
+	(*s)->previous->next = tmp->previous;
+	(*s)->previous = tmp->previous;
+	tmp->previous->next = *s;
+	*s = tmp->previous;	
+
+
+		
 }
 
 void	push(t_stack **s1, t_stack **s2, char *str)
@@ -71,7 +88,6 @@ void	rotate(t_stack **s, void (*move)(t_stack **), char *str)
 	if (!*s)
 		return ;
 	move(s);
-	*s = (*s)->next;
 	if (str)
 		ft_putstr(str);
 }
