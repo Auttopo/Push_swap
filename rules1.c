@@ -28,35 +28,28 @@ void	ft_putstr(char *s)
 
 void	swap(t_stack **s, char *str)
 {
-//	t_stack	*tmp1;
-//	t_stack	*tmp2;
 	t_stack	*tmp;
-
-	int	temp;
+	t_stack	*data;
 
 	if (!*s)
 		return ;
 	else if (!(*s)->next)
 		return ;
-/*
-	tmp1 = *s;
-	tmp2 = (*s)->next->next;
-	*s = (*s)->next;
-	(*s)->previous = tmp1->previous;
-	(*s)->next = tmp1;
-	tmp1->next = tmp2;
-	tmp1->previous = *s;
-*/
+
+	t_stack *data = (*s)->next;
+
 	tmp = (*s)->next->next;
-	(*s)->next->previous = (*s)->previous;
+	(*s)->next->next = (*s)->next;
 	(*s)->next = tmp;
-	(*s)->previous->next = tmp->previous;
-	(*s)->previous = tmp->previous;
-	tmp->previous->next = *s;
-	tmp->previous = *s;
-	*s = tmp->previous;	
 
+	tmp = (*s)->next->previous;
+	(*s)->next->previous = (*s)->previous;
+	(*s)->previous = tmp;
 
+	*s = data;
+	
+	(*s)->previous->next = data
+	(*s)->next->next->previous = (*s)->next;
 		
 }
 

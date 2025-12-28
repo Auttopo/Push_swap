@@ -44,10 +44,10 @@ void	show_stack(t_stack **stack)
 
 	temp = (*stack)->next;
 //	printf("|%d|\n", (*stack)->value);
-	printf("|%dPREV %dNEXT %dIAM|\n", (*stack)->previous->value, (*stack)->next->value, (*stack)->value);
+	printf("|%dPREV %dIAM %dNEXT|\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value);
 	while (temp != *stack)
 	{	
-		printf("|%dPREV %dNEXT %dIAM|\n", temp->previous->value, temp->next->value, temp->value);
+		printf("|%dPREV %dIAM %dNEXT|\n", temp->previous->value, temp->value, temp->next->value);
 //		printf("|%d|\n", temp->value);
 		temp = temp->next;
 	}
@@ -128,11 +128,11 @@ int	main()
 
 	init_list(&stack, new_elem(6));
 	add_back_nod(&stack, new_elem(2));
-	add_back_nod(&stack, new_elem(4));
-	add_back_nod(&stack, new_elem(1));
+//	add_back_nod(&stack, new_elem(4));
+/*	add_back_nod(&stack, new_elem(1));
 	add_back_nod(&stack, new_elem(9));
 	add_back_nod(&stack, new_elem(7));
-	add_back_nod(&stack, new_elem(3));
+	add_back_nod(&stack, new_elem(3));*/
 
 	
 
@@ -189,7 +189,7 @@ int	main()
 
 
 
-	clear_list(&stack);
+//	clear_list(&stack);
 //	clear_list(&stack2);
 
 
