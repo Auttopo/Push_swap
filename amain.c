@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:19 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/11 08:49:25 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/28 15:42:46 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,10 +176,10 @@ int	main()
 //	rotate(stack);
 //	show_stack(stack);		
 	
-	show_stack(&stack);
-//	swap(&stack, "ss");
-	bubble(&stack, 7);		
-	show_stack(&stack);
+//	show_stack(&stack);
+	swap(&stack, "ss");
+//	bubble(&stack, 7);		
+//	show_stack(&stack);
 
 /*
 	show_stack(stack);
