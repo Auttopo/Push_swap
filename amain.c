@@ -103,9 +103,21 @@ void	clear_list(t_stack **stack)
 	}
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
 
+	int	i;
+	t_stack *stack = NULL;
+	t_stack *pull = NULL;
+
+	i = 1;
+	init_list(&stack, new_elem(ft_atoi(argv[i])));
+	i++;
+	while (i < argc)
+	{
+		add_back_nod(&stack, new_elem(ft_atoi(argv[i])));
+		i++;
+	}
 	// STACK ONE -------------------------------------//
 /*	
 	t_stack fake;
@@ -115,8 +127,8 @@ int	main()
 */
 
 //	t_stack *stack = malloc(sizeof(t_stack));
-	t_stack *stack = NULL;
-	t_stack *pull = NULL;
+//	t_stack *stack = NULL;
+//	t_stack *pull = NULL;
 /*	t_stack *data = NULL;
 	t_stack *sort = NULL;
 	t_stack **stack = &data;
@@ -126,13 +138,13 @@ int	main()
 //	stack->value = 1;
 //	stack->next = NULL;
 
-	init_list(&stack, new_elem(6));
+/*	init_list(&stack, new_elem(6));
 	add_back_nod(&stack, new_elem(2));
 	add_back_nod(&stack, new_elem(4));
 	add_back_nod(&stack, new_elem(1));
 	add_back_nod(&stack, new_elem(9));
 	add_back_nod(&stack, new_elem(7));
-/*	add_back_nod(&stack, new_elem(3));*/
+	add_back_nod(&stack, new_elem(3));*/
 
 	
 
@@ -166,8 +178,8 @@ int	main()
 
 	
 	show_stack(&stack);
-	swap(&stack, "ss");
-//	bubble(&stack, 7);		
+//	swap(&stack, "ss");
+	bubble(&stack, argc);		
 	show_stack(&stack);
 
 /*

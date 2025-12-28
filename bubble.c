@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:00:27 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/28 19:13:28 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/28 19:33:11 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void    bubble(t_stack **s1, int size)
 	int	j;
 	int	k;
 
-	n = size;
+	n = size - 1;
 	i = 0;
 
 	while (i < size)
