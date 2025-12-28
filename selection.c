@@ -14,32 +14,16 @@
 
 void	selection(int total, t_stack **stack, t_stack **stock)
 {
-	long long	comp;
-	int			i;
-	int			pos;
-	t_stack		*origin;
+	t_stack	*local;
+	int	i;
 
-	i = 0;
-	origin = (*stack);
-
-
-/*
-	comp = 3000000000;
+	local = *stack
 	while (i < total)
 	{
-		if ((*stack)->value < comp)
-			pos = i;
-		(*stack) = (*stack)->next;
+		if (local->value < 
+
+		local = local->next;
 		i++;
 	}
-*/
 	
-
-//	i = 0;
-//	while (i < pos)
-//	{
-//
-//	}
-
-
 }
