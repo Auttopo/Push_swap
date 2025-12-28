@@ -23,7 +23,7 @@ void	selection(int total, t_stack **stack, t_stack **stock)
 	origin = (*stack);
 
 
-
+/*
 	comp = 3000000000;
 	while (i < total)
 	{
@@ -32,7 +32,9 @@ void	selection(int total, t_stack **stack, t_stack **stock)
 		(*stack) = (*stack)->next;
 		i++;
 	}
+*/
 	
+
 //	i = 0;
 //	while (i < pos)
 //	{
