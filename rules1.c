@@ -26,33 +26,6 @@ void	ft_putstr(char *s)
 	write (1, "\n", 1);
 }
 
-void	swap(t_stack **s, char *str)
-{
-	t_stack	*tmp;
-	t_stack	*data;
-
-	if (!*s)
-		return ;
-	else if (!(*s)->next)
-		return ;
-
-	t_stack *data = (*s)->next;
-
-	tmp = (*s)->next->next;
-	(*s)->next->next = (*s)->next;
-	(*s)->next = tmp;
-
-	tmp = (*s)->next->previous;
-	(*s)->next->previous = (*s)->previous;
-	(*s)->previous = tmp;
-
-	*s = data;
-	
-	(*s)->previous->next = data
-	(*s)->next->next->previous = (*s)->next;
-		
-}
-
 void	push(t_stack **s1, t_stack **s2, char *str)
 {
 	t_stack	*tmp;
@@ -84,6 +57,34 @@ void	rotate(t_stack **s, void (*move)(t_stack **), char *str)
 	move(s);
 	if (str)
 		ft_putstr(str);
+}
+
+void	swap(t_stack **s, char *str)
+{
+	t_stack	*tmp;
+
+	if (!*s)
+		return ;
+	else if (!(*s)->next)
+		return ;
+
+	if ((*s)->next == (*s)->previous)
+	{
+		rotate(s, r_next, str);
+		return ;
+	}
+
+	tmp = (*s)->next->next;
+	(*s)->next->previous = (*s)->previous;
+	(*s)->next = tmp;
+	(*s)->previous->next = tmp->previous;
+	(*s)->previous = tmp->previous;
+	tmp->previous->next = *s;
+	*s = tmp->previous;	
+		
+	(*s)->next->next->previous = (*s)->next;
+
+	ft_putstr(str);
 }
 
 

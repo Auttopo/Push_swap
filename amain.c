@@ -128,11 +128,11 @@ int	main()
 
 	init_list(&stack, new_elem(6));
 	add_back_nod(&stack, new_elem(2));
-//	add_back_nod(&stack, new_elem(4));
-/*	add_back_nod(&stack, new_elem(1));
+	add_back_nod(&stack, new_elem(4));
+	add_back_nod(&stack, new_elem(1));
 	add_back_nod(&stack, new_elem(9));
 	add_back_nod(&stack, new_elem(7));
-	add_back_nod(&stack, new_elem(3));*/
+/*	add_back_nod(&stack, new_elem(3));*/
 
 	
 
