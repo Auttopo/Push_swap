@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/28 15:21:22 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/28 16:19:10 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	swap(t_stack **s, char *str)
 	(*s)->previous->next = tmp->previous;
 	(*s)->previous = tmp->previous;
 	tmp->previous->next = *s;
+	tmp->previous = *s;
 	*s = tmp->previous;	
 
 
