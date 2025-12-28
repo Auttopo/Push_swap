@@ -40,7 +40,7 @@ t_stack	*get_nodx(t_stack **stack, int n)
 		temp = temp->next;
 		i++;
 	}
-	return (temp);
+	return (temp);31
 }
 
 void	show_stack(t_stack **stack)
@@ -54,12 +54,12 @@ void	show_stack(t_stack **stack)
 	}
 
 	temp = (*stack)->next;
-	printf("|%d|\n", (*stack)->value);
+//	printf("|%d|\n", (*stack)->value);
+	printf("|%dPREV %dNEXT %dIAM|\n", (*stack)->previous->value, (*stack)->next->value, (*stack)->value);
 	while (temp != *stack)
 	{	
-//		printf("|%dPREV %dNEXT %dIAM|\n", temp->previous->value, temp->next->value, temp->value);
-		printf("|%d|\n", temp->value);
-//		printf("%d != %d\n", check, temp->value);
+		printf("|%dPREV %dNEXT %dIAM|\n", temp->previous->value, temp->next->value, temp->value);
+//		printf("|%d|\n", temp->value);
 		temp = temp->next;
 	}
 	printf("\n");
@@ -180,8 +180,8 @@ int	main()
 //	show_stack(stack);		
 	
 	show_stack(&stack);
-//	swap(&stack, "ss");
-	bubble(&stack, 7);		
+	swap(&stack, "ss");
+//	bubble(&stack, 7);		
 	show_stack(&stack);
 
 /*
