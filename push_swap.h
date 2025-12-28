@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:36:11 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/09 09:55:29 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 16:04:49 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ typedef struct s_stack
 
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);
-void	rotate(t_stack **s, void (*move)(t_stack **), char *str);
+void	rotate(t_stack **s, void (*move) (t_stack **), char *str);
 void	dblswap(t_stack **s1, t_stack **s2);
 void	dblrotate(t_stack **s1, t_stack **s2);
 void	dblrrotate(t_stack **s1, t_stack **s2);
 void	bubble(t_stack **s1, int size);
-
+void    r_next(t_stack **s);
+void    r_prev(t_stack **s);
 #endif

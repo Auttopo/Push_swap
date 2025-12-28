@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:30:19 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/10 15:59:29 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 08:49:25 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,22 @@ t_stack	*get_nodx(t_stack **stack, int n)
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
+	int	check;
 
 	temp = *stack;
+	check = (*stack)->value;;
 	printf("|%d|\n", temp->value);
-	while (temp->next != *stack)
-	{
-		temp = temp->next;
+	temp = temp->next;
+	while (temp != *stack)
+	{	
+//		printf("|%dPREV %dNEXT %dIAM|\n", temp->previous->value, temp->next->value, temp->value);
 		printf("|%d|\n", temp->value);
+//		printf("%d != %d\n", check, temp->value);
+		if ((int)temp->value == (int)check)
+			break;
+		temp = temp->next;
 	}
+	printf("\n\n");
 }
 
 void	init_list(t_stack **stack, t_stack *new)
@@ -129,12 +137,11 @@ int	main()
 	init_list(&stack, new_elem(6));
 	add_back_nod(&stack, new_elem(2));
 	add_back_nod(&stack, new_elem(4));
-	add_back_nod(&stack, new_elem(6));
+	add_back_nod(&stack, new_elem(1));
 	add_back_nod(&stack, new_elem(9));
 	add_back_nod(&stack, new_elem(7));
 	add_back_nod(&stack, new_elem(3));
 
-	show_stack(&stack);		
 	
 
 //	selection(&stack, &pull);
@@ -165,16 +172,18 @@ int	main()
 
 //--------------------------------------------------------//
 
-//	rotate(stack);
 //	show_stack(stack);	
+//	rotate(stack);
+//	show_stack(stack);		
+	
+	show_stack(&stack);
+//	swap(&stack, "ss");
 	bubble(&stack, 7);		
-
-	show_stack(stack);		
+	show_stack(&stack);
 
 /*
 	show_stack(stack);
 	printf("SWAP\n\n");
-	swap(&stack);
 	show_stack(stack);		
 	printf("PUSH\n\n");
 	push(&stack, &stack2);
