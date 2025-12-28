@@ -46,22 +46,23 @@ t_stack	*get_nodx(t_stack **stack, int n)
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
-	int	check;
 
-	temp = *stack;
-	check = (*stack)->value;;
-	printf("|%d|\n", temp->value);
-	temp = temp->next;
+	if (*stack == NULL)
+	{
+		printf("no stack\n\n");
+		return ;
+	}
+
+	temp = (*stack)->next;
+	printf("|%d|\n", (*stack)->value);
 	while (temp != *stack)
 	{	
 //		printf("|%dPREV %dNEXT %dIAM|\n", temp->previous->value, temp->next->value, temp->value);
 		printf("|%d|\n", temp->value);
 //		printf("%d != %d\n", check, temp->value);
-		if ((int)temp->value == (int)check)
-			break;
 		temp = temp->next;
 	}
-	printf("\n\n");
+	printf("\n");
 }
 
 void	init_list(t_stack **stack, t_stack *new)
@@ -102,6 +103,8 @@ void	clear_list(t_stack **stack)
 {
 	t_stack	*temp;
 
+	if (*stack == NULL)
+		return ;
 	(*stack)->previous->next = NULL;
 	while (*stack != NULL)
 	{
