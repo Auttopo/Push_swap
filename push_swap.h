@@ -21,6 +21,10 @@ typedef struct s_stack
 
 }	t_stack;
 
+int		add_back_nod(t_stack **stack, t_stack *new);
+t_stack	*new_elem(int value);
+void	selection(int total, t_stack **stack, t_stack **pull);
+
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);
 void	rotate(t_stack **s, void (*move) (t_stack **), char *str);

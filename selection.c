@@ -12,18 +12,45 @@
 
 #include "push_swap.h"
 
-void	selection(int total, t_stack **stack, t_stack **stock)
+void	selection(int total, t_stack **stack, t_stack **pull)
 {
 	t_stack	*local;
-	int	i;
+	int		i;
+	long	comp;
+	long	max;
+	int		pos;
 
-	local = *stack
-	while (i < total)
+	int e = 0;
+	while (e < total - 1)
 	{
-		if (local->value < 
+		max = 3000000000;
+		comp = max;
+		local = *stack;
+		i = 0;
+		while (i < total)
+		{
+			if ((long)local->value < comp)
+			{
+				pos = i;
+				comp = (long)local->value;
+			}
+			local = local->next;
+			i++;
+		}
 
-		local = local->next;
-		i++;
+		i = 0;
+		while (i < pos)
+		{
+			rotate(stack, r_next, "MOV");
+			i++;
+		}
+		push(pull, stack, "pb");
+		e++;
 	}
-	
+	e = 0;
+	while (e < total - 1)
+	{
+		push(stack, pull, "pa");
+		e++;
+	}
 }
