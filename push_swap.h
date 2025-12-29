@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:36:11 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/28 19:54:15 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2025/12/29 17:11:11 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_stack
 }	t_stack;
 //utils.c
 int	ft_atoi(const char *nptr);
+float compute_disorder(t_stack *s, int size);
 
 int		add_back_nod(t_stack **stack, t_stack *new);
 t_stack	*new_elem(int value);
