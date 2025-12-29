@@ -38,11 +38,15 @@ void	selection(int total, t_stack **stack, t_stack **pull)
 			i++;
 		}
 
-		i = 0;
-		while (i < pos)
+		if (pos < (total / 2))
 		{
-			rotate(stack, r_next, "ra");
-			i++;
+			while ((long)(*stack)->value != comp)
+				rotate(stack, r_next, "ra");
+		}
+		else
+		{
+			while ((long)(*stack)->value != comp)
+				rotate(stack, r_prev, "rra");
 		}
 		push(pull, stack, "pb");
 		e++;

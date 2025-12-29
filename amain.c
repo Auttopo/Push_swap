@@ -174,7 +174,7 @@ int	main(int argc, char **argv)
 	}
 	selection(argc - 1, &stack, &pull);
 
-	//show_stack(&stack);
+	show_stack(&stack);
 	clear_list(&stack);
 	clear_list(&pull);
 }
