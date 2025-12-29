@@ -41,7 +41,7 @@ void	selection(int total, t_stack **stack, t_stack **pull)
 		i = 0;
 		while (i < pos)
 		{
-			rotate(stack, r_next, "MOV");
+			rotate(stack, r_next, "ra");
 			i++;
 		}
 		push(pull, stack, "pb");

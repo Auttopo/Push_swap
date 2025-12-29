@@ -163,17 +163,18 @@ int	main(int argc, char **argv)
 	t_stack *stack = NULL;
 	t_stack *pull = NULL;
 
+	if (argc < 2)
+		return (0);
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
-		add_front_nod(&stack, new_elem(5));
+		add_front_nod(&stack, new_elem(ft_atoi(argv[i])));
 		
+		i++;
 	}
+	selection(argc - 1, &stack, &pull);
 
-
-
+	//show_stack(&stack);
 	clear_list(&stack);
 	clear_list(&pull);
-
-
 }
