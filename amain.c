@@ -177,10 +177,10 @@ int	main(int argc, char **argv)
 //--------------------------------------------------------//
 
 	
-	show_stack(&stack);
+//	show_stack(&stack);
 //	swap(&stack, "ss");
-	bubble(&stack, argc);		
-	show_stack(&stack);
+	bubble(&stack, argc - 1);		
+//	show_stack(&stack);
 
 /*
 	show_stack(stack);
