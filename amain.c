@@ -179,9 +179,10 @@ int	main(int argc, char **argv)
 	
 //	show_stack(&stack);
 //	swap(&stack, "ss");
-	bubble(&stack, argc - 1);		
+//	bubble(&stack, argc - 1);		
 //	show_stack(&stack);
 
+	printf("%.2f", compute_disorder(stack, argc - 1));
 /*
 	show_stack(stack);
 	printf("SWAP\n\n");
