@@ -106,7 +106,7 @@ int	add_back_nod(t_stack **stack, t_stack *new)
 	new->previous = temp;
 	temp->next = new;
 	(*stack)->previous = new;
-	return (1);
+	return (new->value);
 }
 
 int	add_front_nod(t_stack **stack, t_stack *new)
@@ -159,22 +159,34 @@ void	clear_list(t_stack **stack)
 
 int	main(int argc, char **argv)
 {
-	int	i;
+	int		i;
+	int		temp;
 	t_stack *stack = NULL;
 	t_stack *pull = NULL;
+	t_info	data;
 
+	data.min = 3000000000;
+	data.max = -3000000000;
+	data.total = argc - 1;
 	if (argc < 2)
 		return (0);
 	i = 1;
 	while (i < argc)
 	{
-		add_front_nod(&stack, new_elem(ft_atoi(argv[i])));
-		
+		temp = add_back_nod(&stack, new_elem(ft_atoi(argv[i])));
+		if (data.max < (long)temp)
+			data.max = (long)temp;
+		else if (data.min > (long)temp)
+			data.min = (long)temp;
 		i++;
 	}
-	selection(argc - 1, &stack, &pull);
+//	selection(data.total, &stack, &pull);
+	buckets(data, &stack, &pull);
 
 	show_stack(&stack);
+	printf("-----------------\n");
+	show_stack(&pull);
+
 	clear_list(&stack);
 	clear_list(&pull);
 }

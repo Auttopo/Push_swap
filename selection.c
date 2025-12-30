@@ -12,31 +12,37 @@
 
 #include "push_swap.h"
 
+long	min_select(int total, t_stack *local, int *pos)
+{
+	long	comp;
+	int		i;
+
+	comp = 3000000000;
+	i = 0;
+	while (i < total)
+	{
+		if ((long)local->value < comp)
+		{
+			*pos = i;
+			comp = (long)local->value;
+		}
+		local = local->next;
+		i++;
+	}
+	return (comp);
+}
+
 void	selection(int total, t_stack **stack, t_stack **pull)
 {
-	t_stack	*local;
 	int		i;
+	int		e;
 	long	comp;
-	long	max;
 	int		pos;
 
-	int e = 0;
+	e = 0;
 	while (e < total - 1)
 	{
-		max = 3000000000;
-		comp = max;
-		local = *stack;
-		i = 0;
-		while (i < total)
-		{
-			if ((long)local->value < comp)
-			{
-				pos = i;
-				comp = (long)local->value;
-			}
-			local = local->next;
-			i++;
-		}
+		comp = min_select(total, *stack, &pos);
 
 		if (pos < (total / 2))
 		{
