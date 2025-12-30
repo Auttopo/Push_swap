@@ -46,10 +46,10 @@ void	show_bugs(t_stack **stack, int max)
 	i = 0;
 	temp = (*stack)->next;
 //	printf("|%d|\n", (*stack)->value);
-	printf("|%dPREV %dIAM %dNEXT|\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value);
+	printf("|%d PREV %d IAM %d NEXT|  %d buk\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value, (*stack)->bucket);
 	while (i < max - 1)
 	{	
-		printf("|%dPREV %dIAM %dNEXT|\n", temp->previous->value, temp->value, temp->next->value);
+		printf("|%d PREV %d IAM %d NEXT|  %d buk\n", temp->previous->value, temp->value, temp->next->value, temp->bucket);
 //		printf("|%d|\n", temp->value);
 		temp = temp->next;
 		i++;
@@ -70,10 +70,10 @@ void	show_stack(t_stack **stack)
 
 	temp = (*stack)->next;
 //	printf("|%d|\n", (*stack)->value);
-	printf("|%dPREV %dIAM %dNEXT|\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value);
+	printf("|%d PREV %d IAM %d NEXT|  %d buk\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value, (*stack)->bucket);
 	while (temp != *stack)
 	{	
-		printf("|%dPREV %dIAM %dNEXT|\n", temp->previous->value, temp->value, temp->next->value);
+		printf("|%d PREV %d IAM %d NEXT|  %d buk\n", temp->previous->value, temp->value, temp->next->value, temp->bucket);
 //		printf("|%d|\n", temp->value);
 		temp = temp->next;
 	}
@@ -139,6 +139,7 @@ t_stack	*new_elem(int value)
 		return (NULL);
 
 	nod->value = value;
+	nod->bucket = 0;
 	return (nod);
 }
 
@@ -181,7 +182,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 //	selection(data.total, &stack, &pull);
-	buckets(data, &stack, &pull);
+	buckets(&data, &stack, &pull);
 //	radis..
 //show_stack(&stack);
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include <stdlib.h>
 #include "push_swap.h"
 
 static int	ft_sqrt(int nb)
@@ -27,22 +27,16 @@ static int	ft_sqrt(int nb)
 	return (i - 1);
 }
 
-static int	buk_select(t_info d, t_stack *local, int buck, long *comp)
+static	int	first_select(t_info d, t_stack *local, long *comp, int buck)
 {
 	int		i;
-	int	nbr_buk;
-	int	range;
-
-	range = (d.max - d.min);
+	
 	i = 0;
 	while (i < d.total)
 	{
-		__builtin_printf("%d value | %ld buck limit\n", local->value, (d.max - ((range / d.buk_nbr) * buck)));
-		__builtin_printf("%ld MAX ; %d RANGE ; %d BUCKS ; %d buck\n\n", d.max, range, d.buk_nbr, buck);
-
-		if ((float)local->value < ((float)d.max - (((float)range / (float)d.buk_nbr) * (float)buck)))
+		if (local->bucket == buck)
 		{
-			*comp = local->value;
+			*comp = (long)local->value;
 			return (i);
 		}
 		local = local->next;
@@ -52,7 +46,75 @@ static int	buk_select(t_info d, t_stack *local, int buck, long *comp)
 	return (-1);
 }
 
-void	buckets(t_info d, t_stack **stack, t_stack **pull)
+static	t_stack	*all_select(int	total, t_stack *local, int buck)
+{
+	t_stack	*temp;
+	int		i;
+	long	comp;
+	
+	i = 0;
+	comp = -3000000000;
+	temp = NULL;
+	while (i < total)
+	{
+		if (local->bucket == buck && (long)local->value > comp)
+		{
+			temp = local;
+			comp = temp->value;
+		}
+		local = local->next;
+		i++;
+	}
+	return (temp);
+}
+
+void	buk_setup(t_info d, t_stack *local)
+{
+	t_stack *temp;
+	int		buk_nbr_tmp;
+	int		i;
+
+	i = 0;
+	buk_nbr_tmp = d.buk_nbr;
+	while (buk_nbr_tmp != 0)
+	{
+		temp = (all_select(d.total, local, 0));
+		temp->bucket = buk_nbr_tmp;
+		i++;
+		if (i == d.buk_nbr)
+		{
+			i = 0;
+			buk_nbr_tmp -= 1;
+		}
+	}
+	buk_nbr_tmp = 1;
+	while (temp != NULL)
+	{
+		temp->bucket = buk_nbr_tmp;
+		temp = (all_select(d.total, local, 0));
+	}
+}
+/*
+void	value_select()
+{
+	
+}
+
+void	value_sorter(t_info d, t_stack **stack, t_stack **pull)
+{
+	t_stack *start;
+	int	e;
+
+	e = 0;
+	while (e < d.total - 0)
+	{
+		all_select
+		push(stack, pull, "pa");
+		e++;
+	}
+}
+*/
+void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 {
 	int		i;
 	int		e;
@@ -62,24 +124,28 @@ void	buckets(t_info d, t_stack **stack, t_stack **pull)
 
 
 	e = 0;
-	d.buk_nbr = ft_sqrt(d.total);
-	buck = d.buk_nbr - 1;
-	__builtin_printf("%ld buk | %ld range\n", d.min, d.max - d.min);
-	while (e < d.total)
+	buck = 1;
+	comp = -3000000000;
+	d->buk_nbr = ft_sqrt(d->total);
+
+	buk_setup(*d, *stack);
+
+	while (e < d->total)
 	{
-		pos = buk_select(d, *stack, buck, &comp);
+		pos = first_select(*d, *stack, &comp, buck);
 		if (pos == -1)
 		{
-			buck--;
+			buck++;
 			continue;
 		}
-		if (pos == -1 && comp == 3000000000)
-		{
-			__builtin_printf("\nSOMETHING GONE SERIOUSLY WRONG !\n");
-			return ;
-		}
-		i = -1;
-		if (pos < (d.total / 2))
+//		if (pos == -1 && comp == 3000000000)
+//		{
+//			__builtin_printf("\nSOMETHING GONE SERIOUSLY WRONG !\n");
+//			return ;
+//		}
+//		i = -1;
+
+		if (pos < (d->total / 2))
 		{
 			while ((long)(*stack)->value != comp)
 				rotate(stack, r_next, "ra");
@@ -93,10 +159,4 @@ void	buckets(t_info d, t_stack **stack, t_stack **pull)
 		push(pull, stack, "pb");
 		e++;
 	}
-/*	e = 0;
-	while (e < d.total - 1)
-	{
-		push(stack, pull, "pa");
-		e++;
-	}*/
 }

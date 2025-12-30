@@ -25,6 +25,7 @@ typedef struct s_info
 typedef struct s_stack
 {
 	int value;
+	int	bucket;
 	struct s_stack *next;
 	struct s_stack *previous;
 
@@ -39,8 +40,7 @@ long	min_select(int total, t_stack *local, int *pos);
 void	selection(int total, t_stack **stack, t_stack **pull);
 
 
-void	buckets(t_info d, t_stack **stack, t_stack **pull);
-
+void	buckets(t_info *d, t_stack **stack, t_stack **pull);
 
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);
