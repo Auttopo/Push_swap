@@ -27,7 +27,7 @@ static int	ft_sqrt(int nb)
 	return (i - 1);
 }
 
-static int	buk_select(t_info d, t_stack *local, int buck)
+static int	buk_select(t_info d, t_stack *local, int buck, long *comp)
 {
 	int		i;
 	int	nbr_buk;
@@ -37,11 +37,18 @@ static int	buk_select(t_info d, t_stack *local, int buck)
 	i = 0;
 	while (i < d.total)
 	{
-		if (local->value < (d.max - (range / d.buk_nbr * buck)))
+		__builtin_printf("%d value | %ld buck limit\n", local->value, (d.max - ((range / d.buk_nbr) * buck)));
+		__builtin_printf("%ld MAX ; %d RANGE ; %d BUCKS ; %d buck\n\n", d.max, range, d.buk_nbr, buck);
+
+		if ((float)local->value < ((float)d.max - (((float)range / (float)d.buk_nbr) * (float)buck)))
+		{
+			*comp = local->value;
 			return (i);
+		}
 		local = local->next;
 		i++;
 	}
+	*comp = 3000000000;
 	return (-1);
 }
 
@@ -54,15 +61,24 @@ void	buckets(t_info d, t_stack **stack, t_stack **pull)
 	int		buck;
 
 
+	e = 0;
 	d.buk_nbr = ft_sqrt(d.total);
 	buck = d.buk_nbr - 1;
-	__builtin_printf("%d buk | %ld range\n", d.buk_nbr, d.max - d.min);
+	__builtin_printf("%ld buk | %ld range\n", d.min, d.max - d.min);
 	while (e < d.total)
 	{
-		pos = buk_select(d, *stack, buck);
+		pos = buk_select(d, *stack, buck, &comp);
 		if (pos == -1)
+		{
 			buck--;
-
+			continue;
+		}
+		if (pos == -1 && comp == 3000000000)
+		{
+			__builtin_printf("\nSOMETHING GONE SERIOUSLY WRONG !\n");
+			return ;
+		}
+		i = -1;
 		if (pos < (d.total / 2))
 		{
 			while ((long)(*stack)->value != comp)

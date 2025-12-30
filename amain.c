@@ -182,9 +182,10 @@ int	main(int argc, char **argv)
 	}
 //	selection(data.total, &stack, &pull);
 	buckets(data, &stack, &pull);
+//	radis..
+//show_stack(&stack);
 
 	show_stack(&stack);
-	printf("-----------------\n");
 	show_stack(&pull);
 
 	clear_list(&stack);
