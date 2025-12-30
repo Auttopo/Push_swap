@@ -32,6 +32,32 @@ t_stack	*get_nodx(t_stack **stack, int n)
 	return (temp);
 }
 
+void	show_bugs(t_stack **stack, int max)
+{
+	t_stack	*temp;
+	int	i;
+
+	if (*stack == NULL)
+	{
+		printf("no stack\n\n");
+		return ;
+	}
+
+	i = 0;
+	temp = (*stack)->next;
+//	printf("|%d|\n", (*stack)->value);
+	printf("|%dPREV %dIAM %dNEXT|\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value);
+	while (i < max - 1)
+	{	
+		printf("|%dPREV %dIAM %dNEXT|\n", temp->previous->value, temp->value, temp->next->value);
+//		printf("|%d|\n", temp->value);
+		temp = temp->next;
+		i++;
+	}
+	printf("\n");
+}
+
+
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
@@ -67,6 +93,12 @@ int	add_back_nod(t_stack **stack, t_stack *new)
 
 	if (new == NULL)
 		return (0);
+	if (*stack == NULL)
+	{
+		init_list(stack, new);
+		return (1);
+	}
+
 	temp = *stack;
 	while (temp->next != *stack)
 		temp = temp->next;
@@ -74,6 +106,28 @@ int	add_back_nod(t_stack **stack, t_stack *new)
 	new->previous = temp;
 	temp->next = new;
 	(*stack)->previous = new;
+	return (new->value);
+}
+
+int	add_front_nod(t_stack **stack, t_stack *new)
+{
+	t_stack	*temp;
+
+	
+	if (new == NULL)
+		return (0);
+	if (*stack == NULL)
+	{
+		init_list(stack, new);
+		return (1);
+	}
+
+	new->next = *stack;
+	new->previous = (*stack)->previous;
+	(*stack)->previous = new;
+	new->previous->next = new;
+
+	*stack = new;
 	return (1);
 }
 
@@ -105,105 +159,34 @@ void	clear_list(t_stack **stack)
 
 int	main(int argc, char **argv)
 {
-
-	int	i;
+	int		i;
+	int		temp;
 	t_stack *stack = NULL;
 	t_stack *pull = NULL;
+	t_info	data;
 
+	data.min = 3000000000;
+	data.max = -3000000000;
+	data.total = argc - 1;
+	if (argc < 2)
+		return (0);
 	i = 1;
-	init_list(&stack, new_elem(ft_atoi(argv[i])));
-	i++;
 	while (i < argc)
 	{
-		add_back_nod(&stack, new_elem(ft_atoi(argv[i])));
+		temp = add_back_nod(&stack, new_elem(ft_atoi(argv[i])));
+		if (data.max < (long)temp)
+			data.max = (long)temp;
+		else if (data.min > (long)temp)
+			data.min = (long)temp;
 		i++;
 	}
-	// STACK ONE -------------------------------------//
-/*	
-	t_stack fake;
-	fake.value = 99;
+//	selection(data.total, &stack, &pull);
+	buckets(data, &stack, &pull);
 
-	t_stack *last_pt = &fake;
-*/
+	show_stack(&stack);
+	printf("-----------------\n");
+	show_stack(&pull);
 
-//	t_stack *stack = malloc(sizeof(t_stack));
-//	t_stack *stack = NULL;
-//	t_stack *pull = NULL;
-/*	t_stack *data = NULL;
-	t_stack *sort = NULL;
-	t_stack **stack = &data;
-	t_stack **pull = &sort;
-*/
-
-//	stack->value = 1;
-//	stack->next = NULL;
-
-/*	init_list(&stack, new_elem(6));
-	add_back_nod(&stack, new_elem(2));
-	add_back_nod(&stack, new_elem(4));
-	add_back_nod(&stack, new_elem(1));
-	add_back_nod(&stack, new_elem(9));
-	add_back_nod(&stack, new_elem(7));
-	add_back_nod(&stack, new_elem(3));*/
-
-	
-
-//	selection(&stack, &pull);
-
-
-	// STACK TWO -----------------------------------------//
-
-/*	t_stack *stack2 = malloc(sizeof(t_stack));
-	stack2->last = &stack2;
-	*(stack2->last) = stack2;
-	stack2->value = 0;
-	stack2->next = NULL;
-
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-	add_back_nod(&stack2, new_elem(*stack2, 0));
-*/
-
-	// LAST TESTS ------------------------------------------------//	
-	/*t_stack *last = last_nod(stack);
-	(*stack->last) = get_nodx(stack, 3);
-	show_stack(stack);	
-	show_last(stack);*/
-
-//--------------------------------------------------------//
-
-	
-//	show_stack(&stack);
-//	swap(&stack, "ss");
-//	bubble(&stack, argc - 1);		
-//	show_stack(&stack);
-
-	printf("%.2f", compute_disorder(stack, argc - 1));
-/*
-	show_stack(stack);
-	printf("SWAP\n\n");
-	show_stack(stack);		
-	printf("PUSH\n\n");
-	push(&stack, &stack2);
-	show_stack(stack);		
-	show_stack(stack2);		
-*/
-
-
-
-
-
-
-
-
-
-
-//	clear_list(&stack);
-//	clear_list(&stack2);
-
-
+	clear_list(&stack);
+	clear_list(&pull);
 }

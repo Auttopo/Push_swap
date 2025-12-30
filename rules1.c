@@ -26,18 +26,42 @@ void	ft_putstr(char *s)
 	write (1, "\n", 1);
 }
 
-void	push(t_stack **s1, t_stack **s2, char *str)
+void	push(t_stack **dest, t_stack **src, char *str)
 {
 	t_stack	*tmp;
 	
-	if (!*s1)
+	if (*src == NULL)
 		return ;
-	tmp = *s1;
-	*s1 = (*s1)->next;
-	tmp->next = *s2;
-	*s2 = tmp;
-	if (str)
-		ft_putstr(str);
+	ft_putstr(str);
+
+	if ((*src)->next == *src)
+		tmp = NULL;
+	else
+		tmp = (*src)->next;
+
+	(*src)->previous->next = (*src)->next;
+	(*src)->next->previous = (*src)->previous;
+
+	if (*dest == NULL)
+	{
+		*dest = *src;
+		(*src)->next = *src;
+		(*src)->previous = *src;
+
+		*src = tmp;
+
+		return ;
+	}
+
+	(*src)->next = *dest;
+	(*src)->previous = (*dest)->previous;
+
+
+	(*dest)->previous->next = *src;
+	(*dest)->previous = *src;
+
+	*dest = *src;
+	*src = tmp;
 }
 
 void	r_next(t_stack **s)
