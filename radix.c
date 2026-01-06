@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/04 19:57:12 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/06 17:53:20 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h> // DELETE BEFORE PUSH
 
 //return ptr node min for one unit (if unit == 1 then find min (value / 1) % 10. if unit == 10 then find min (value/10) % 10)
-t_stack	*find_min(t_stack *pstack, int unit)
+t_stack	*find_minmax(t_stack *pstack, int unit, int min_max)
 {
 	t_stack	*tmp;
 	t_stack	*result;
@@ -28,16 +28,10 @@ t_stack	*find_min(t_stack *pstack, int unit)
 		return (result);
 	while (tmp != pstack)
 	{
-		if (!((tmp->value / unit) % 10) && !(tmp->value / 10) && !((result->value / unit) % 10) && !(result->value / 10) )
-		{
-			testnull = NULL;
-			add_back_nod(&testnull, new_elem(tmp->value));
-			add_back_nod(&testnull, new_elem(result->value));
-			testnull = find_min(testnull, unit / 10);
-			if (testnull->value == tmp->value)
-				result = tmp;
-		}
-		if ((tmp->value / unit) % 10  < (result->value / unit) % 10)
+		/*if (((tmp->value / unit) % 10) * min_max > ((result->value / unit) % 10) * min_max)
+			result = tmp;
+		tmp = tmp->next;*/
+		if (((tmp->index / unit) % 10) * min_max > ((result->index / unit) % 10) * min_max)
 			result = tmp;
 		tmp = tmp->next;
 	}
@@ -94,43 +88,54 @@ int	count(t_stack *stack, t_stack *pmin)
 	return (-j);
 }
 //move stack
-void	move(t_stack **stack, int count)
+void	rotate_stack(t_stack **stack, int count, int rstack)
 {
+	char	*str;
+
+	str = "error";
+	if (rstack == 1 && count > 0)
+		str = "ra";
+	else if (rstack == 1 && count < 0)
+		str = "rra";
+	else if (rstack == 2 && count > 0)
+		str = "rb";
+	else if (rstack == 2 && count < 0)
+		str = "rrb";
 	if (!stack)
 		return ;
 	if (count > 0)
 	{
 		while (count > 0)
 		{
-			rotate(stack, r_next, "rra");
+			rotate(stack, r_next, str);
 			count--;
 		}
 	}
-	else
+	else if (count < 0)
 	{
 		while (count < 0)
 		{
-			rotate(stack, r_prev, "ra");
+			rotate(stack, r_prev, str);
 			count++;
 		}
 	}
 }
 // move s1 -> s2
-void	radix_move(t_stack **s1, t_stack **s2, int size, int unit, char *str)
+void	radix_move(t_stack **s1, t_stack **s2, int size, int unit, char *pushstr, int min_max, int rotate)
 {
 	t_stack	*pstack;
 	t_stack	*pmin;
 	pstack = *s1;
 	while(size > 1)
 	{
-		pmin = find_min(pstack, unit);
+		pmin = find_minmax(pstack, unit, min_max);
 		if (pmin == pstack)
 			pstack = pstack->next;
-		move(s1, count(*s1, pmin));
-		push(s2, s1, str);
+		rotate_stack(s1, count(*s1, pmin), rotate);
+		push(s2, s1, pushstr);
 		size--;
 	}
-	push(s2, s1, str);
+	push(s2, s1, pushstr);
 }
 
 int	find_unit(t_stack *stack)
@@ -140,26 +145,29 @@ int	find_unit(t_stack *stack)
 	int	result;
 	int	absol;
 
-	result = 0;
+	result = 1;
+	max = stack->index;
 	tmp = stack->next;
-	if (stack->value < 0)
-		max = stack->value * -1;
+/*	if (stack->value < 0)
+		max = stack->value * -1;*/
 	while (tmp != stack)
 	{
-		absol = tmp->value;
-		if (absol < 0)
-			absol *= -1;
+		absol = tmp->index;
+		/*if (absol < 0)
+			absol *= -1;*/
 		if (absol > max)
 			max = absol;
 		tmp = tmp->next;
 	}
-	while (absol / 10 || absol % 10)
+	while (max / 10 || max % 10)
 	{
 		result++;
-		absol = absol / 10;
+		max = max / 10;
 	}
 	return (result);
 }
+
+
 
 void	radix(t_stack **stack, t_stack **pull, int size)
 {
@@ -169,28 +177,26 @@ void	radix(t_stack **stack, t_stack **pull, int size)
 	int	i;
 	int	max;
 
-	max = find_unit(*stack);
 	i = 1;
 	unit = 1;
 	pstack = *stack;
-
+	init_index(*stack, size);
+	max = find_unit(*stack);
 	while (i <= max)
 	{
 		if (i % 2 != 0)
-			radix_move(stack, pull, size, unit, "pa");
+			radix_move(stack, pull, size, unit, "pb", -1, 1);
 		else
-			radix_move(pull, stack, size, unit, "pb");
+			radix_move(pull, stack, size, unit, "pa", 1, 2);
 		unit *= 10;
 		i++;
 	}
-	/*
-	if (max % 2 != 0)
+	if (!(*stack))
 	{
 		while (size > 0)
 		{
-			rotate(pull, r_prev, "rrb");
-			push(stack, pull, "pb");
+			push(stack, pull, "pa");
 			size--;
 		}
-	}*/
+	}
 }
