@@ -13,6 +13,35 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
+/*
+void	buk_setup(t_info d, t_stack *local)
+{
+	t_stack *temp;
+	int		buk_nbr_tmp;
+	int		i;
+
+	i = 0;
+	buk_nbr_tmp = d.buk_nbr;
+	while (buk_nbr_tmp != 0)
+	{
+		temp = (all_select(d.total, local, 0));
+		temp->bucket = buk_nbr_tmp;
+		i++;
+		if (i == d.buk_nbr)
+		{
+			i = 0;
+			buk_nbr_tmp -= 1;
+		}
+	}
+	buk_nbr_tmp = 1;
+	while (temp != NULL)
+	{
+		temp->bucket = buk_nbr_tmp;
+		temp = (all_select(d.total, local, 0));
+	}
+}
+*/
+
 static int	ft_sqrt(int nb)
 {
 	int	i;
@@ -46,7 +75,7 @@ static	int	first_select(t_info d, t_stack *local, long *comp, int buck)
 	return (-1);
 }
 
-static	t_stack	*all_select(int	total, t_stack *local, int buck)
+static	t_stack	*all_select(int	total, t_stack *local)
 {
 	t_stack	*temp;
 	int		i;
@@ -57,7 +86,7 @@ static	t_stack	*all_select(int	total, t_stack *local, int buck)
 	temp = NULL;
 	while (i < total)
 	{
-		if (local->bucket == buck && (long)local->value > comp)
+		if ((long)local->value > comp)
 		{
 			temp = local;
 			comp = temp->value;
@@ -67,6 +96,7 @@ static	t_stack	*all_select(int	total, t_stack *local, int buck)
 	}
 	return (temp);
 }
+
 
 void	buk_setup(t_info d, t_stack *local)
 {
@@ -78,7 +108,7 @@ void	buk_setup(t_info d, t_stack *local)
 	buk_nbr_tmp = d.buk_nbr;
 	while (buk_nbr_tmp != 0)
 	{
-		temp = (all_select(d.total, local, 0));
+		temp = all_select(d.total, local);
 		temp->bucket = buk_nbr_tmp;
 		i++;
 		if (i == d.buk_nbr)
@@ -94,6 +124,7 @@ void	buk_setup(t_info d, t_stack *local)
 		temp = (all_select(d.total, local, 0));
 	}
 }
+
 
 void	efficient_move(int total, t_stack **stack, char *str, int pos)
 {

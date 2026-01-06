@@ -186,13 +186,13 @@ int	main(int argc, char **argv)
 //	radis..
 
 
-	buckets(&data, &stack, &pull);
 //	show_stack(&stack);
 //	show_stack(&pull);
 
-	value_sorter(data, &stack, &pull);
-//	show_stack(&stack);
-//	show_stack(&pull);
+	buckets(&data, &stack, &pull);
+//	value_sorter(data, &stack, &pull);
+	show_stack(&stack);
+	show_stack(&pull);
 
 	clear_list(&stack);
 	clear_list(&pull);
