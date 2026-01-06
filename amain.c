@@ -169,6 +169,7 @@ int	main(int argc, char **argv)
 	data.min = 3000000000;
 	data.max = -3000000000;
 	data.total = argc - 1;
+	data.currentot = argc - 1;
 	if (argc < 2)
 		return (0);
 	i = 1;
@@ -182,12 +183,16 @@ int	main(int argc, char **argv)
 		i++;
 	}
 //	selection(data.total, &stack, &pull);
-	buckets(&data, &stack, &pull);
 //	radis..
-//show_stack(&stack);
 
-	show_stack(&stack);
-	show_stack(&pull);
+
+	buckets(&data, &stack, &pull);
+//	show_stack(&stack);
+//	show_stack(&pull);
+
+	value_sorter(data, &stack, &pull);
+//	show_stack(&stack);
+//	show_stack(&pull);
 
 	clear_list(&stack);
 	clear_list(&pull);

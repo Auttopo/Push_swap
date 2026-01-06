@@ -18,6 +18,7 @@ typedef struct s_info
 	long max;
 	long min;
 	int total;
+	int	currentot;
 	int	buk_nbr;
 
 }	t_info;
@@ -41,6 +42,7 @@ void	selection(int total, t_stack **stack, t_stack **pull);
 
 
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
+void	value_sorter(t_info d, t_stack **stack, t_stack **pull);
 
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);

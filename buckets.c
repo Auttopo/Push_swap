@@ -94,26 +94,94 @@ void	buk_setup(t_info d, t_stack *local)
 		temp = (all_select(d.total, local, 0));
 	}
 }
-/*
-void	value_select()
+
+void	efficient_move(int total, t_stack **stack, char *str, int pos)
 {
-	
+	int	i;
+
+	i = 0;
+	if (pos < (total / 2))
+	{
+		while (i < pos)
+		{
+			rotate(stack, r_next, str);
+			i++;
+		}
+	}
+	else
+	{
+		while ((total - i) != pos)
+		{
+			rotate(stack, r_prev, "rra");
+			i++;
+		}
+	}
+}
+
+int	value_select(int st_tot, t_stack *local, int buck)
+{
+	long	comp;
+	int		pos;
+	int		i;
+	int		moves;
+
+	pos = -1;
+	i = 0;
+	moves = 0;
+	comp = (long)local->next->value;
+	while (local->previous->bucket == buck && buck != 1)
+	{
+		local = local->previous;
+		moves++;
+	}
+	comp = -3000000000;
+	while (local->bucket == buck && local->value != comp)
+	{
+		if ((long)local->value > comp)
+		{
+			comp = local->value;
+			pos = i;
+		}
+		local = local->next;
+		i++;
+	}
+	if (pos != -1)
+	{
+		pos = pos - moves;
+		if (pos < 0)
+		{
+			pos = st_tot + pos;
+		}
+	}
+	return (pos);
 }
 
 void	value_sorter(t_info d, t_stack **stack, t_stack **pull)
 {
 	t_stack *start;
-	int	e;
+	int	i;
+	int	buck;
+	int	pos;
+	int	st_tot;
 
-	e = 0;
-	while (e < d.total - 0)
+	i = 0;
+	buck = d.buk_nbr;
+	st_tot = d.total;
+	while (i < d.total && buck > 0)
 	{
-		all_select
+		pos = value_select(st_tot, *pull, buck);
+		if (pos == -1)
+		{
+			buck--;
+			continue;
+		}
+		efficient_move(st_tot, pull, "pa", pos);
 		push(stack, pull, "pa");
-		e++;
+		st_tot -= 1;
+		i++;
 	}
 }
-*/
+
 void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 {
 	int		i;
@@ -145,7 +213,7 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 //		}
 //		i = -1;
 
-		if (pos < (d->total / 2))
+		if (pos < (d->currentot / 2))
 		{
 			while ((long)(*stack)->value != comp)
 				rotate(stack, r_next, "ra");
@@ -155,8 +223,9 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 			while ((long)(*stack)->value != comp)
 				rotate(stack, r_prev, "rra");
 		}
-
+		d->currentot -= 1;
 		push(pull, stack, "pb");
 		e++;
 	}
+	d->currentot = d->total;
 }
