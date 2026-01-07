@@ -13,36 +13,7 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-/*
-void	buk_setup(t_info d, t_stack *local)
-{
-	t_stack *temp;
-	int		buk_nbr_tmp;
-	int		i;
-
-	i = 0;
-	buk_nbr_tmp = d.buk_nbr;
-	while (buk_nbr_tmp != 0)
-	{
-		temp = (all_select(d.total, local, 0));
-		temp->bucket = buk_nbr_tmp;
-		i++;
-		if (i == d.buk_nbr)
-		{
-			i = 0;
-			buk_nbr_tmp -= 1;
-		}
-	}
-	buk_nbr_tmp = 1;
-	while (temp != NULL)
-	{
-		temp->bucket = buk_nbr_tmp;
-		temp = (all_select(d.total, local, 0));
-	}
-}
-*/
-
-static int	ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
 	int	i;
 
@@ -75,7 +46,29 @@ static	int	first_select(t_info d, t_stack *local, long *comp, int buck)
 	return (-1);
 }
 
-static	t_stack	*all_select(int	total, t_stack *local)
+int	max_in_bucket(t_stack *local, int buck)
+{
+	long	comp;
+	int		i;
+	int		pos;
+
+	comp = -3000000000;
+	i = 0;
+	pos = -1;
+	while (local->bucket == buck && local->value != comp)
+	{
+		if ((long)local->value > comp)
+		{
+			comp = local->value;
+			pos = i;
+		}
+		local = local->next;
+		i++;
+	}
+	return (pos);
+}
+
+static	t_stack	*max_nod_select(int	total, t_stack *local)
 {
 	t_stack	*temp;
 	int		i;
@@ -86,7 +79,7 @@ static	t_stack	*all_select(int	total, t_stack *local)
 	temp = NULL;
 	while (i < total)
 	{
-		if ((long)local->value > comp)
+		if (local->bucket == 0 && (long)local->value > comp)
 		{
 			temp = local;
 			comp = temp->value;
@@ -97,40 +90,43 @@ static	t_stack	*all_select(int	total, t_stack *local)
 	return (temp);
 }
 
-
 void	buk_setup(t_info d, t_stack *local)
 {
 	t_stack *temp;
 	int		buk_nbr_tmp;
 	int		i;
+	int		number_per_bucket;
 
+	number_per_bucket = d.total / d.buk_nbr;
 	i = 0;
 	buk_nbr_tmp = d.buk_nbr;
 	while (buk_nbr_tmp != 0)
 	{
-		temp = all_select(d.total, local);
+		temp = max_nod_select(d.total, local);
 		temp->bucket = buk_nbr_tmp;
 		i++;
-		if (i == d.buk_nbr)
+		if (i == number_per_bucket)
 		{
 			i = 0;
 			buk_nbr_tmp -= 1;
 		}
 	}
-	buk_nbr_tmp = 1;
 	while (temp != NULL)
 	{
-		temp->bucket = buk_nbr_tmp;
-		temp = (all_select(d.total, local, 0));
+		temp->bucket = 1;
+		temp = max_nod_select(d.total, local);
 	}
 }
-
 
 void	efficient_move(int total, t_stack **stack, char *str, int pos)
 {
 	int	i;
+	char	*strr;
 
 	i = 0;
+	strr = "rrb";
+	if (str[1] == 'a')
+		strr = "rra";
 	if (pos < (total / 2))
 	{
 		while (i < pos)
@@ -143,7 +139,7 @@ void	efficient_move(int total, t_stack **stack, char *str, int pos)
 	{
 		while ((total - i) != pos)
 		{
-			rotate(stack, r_prev, "rra");
+			rotate(stack, r_prev, strr);
 			i++;
 		}
 	}
@@ -156,7 +152,6 @@ int	value_select(int st_tot, t_stack *local, int buck)
 	int		i;
 	int		moves;
 
-	pos = -1;
 	i = 0;
 	moves = 0;
 	comp = (long)local->next->value;
@@ -165,17 +160,7 @@ int	value_select(int st_tot, t_stack *local, int buck)
 		local = local->previous;
 		moves++;
 	}
-	comp = -3000000000;
-	while (local->bucket == buck && local->value != comp)
-	{
-		if ((long)local->value > comp)
-		{
-			comp = local->value;
-			pos = i;
-		}
-		local = local->next;
-		i++;
-	}
+	pos = max_in_bucket(local, buck);
 	if (pos != -1)
 	{
 		pos = pos - moves;
@@ -206,7 +191,7 @@ void	value_sorter(t_info d, t_stack **stack, t_stack **pull)
 			buck--;
 			continue;
 		}
-		efficient_move(st_tot, pull, "pa", pos);
+		efficient_move(st_tot, pull, "rb", pos);
 		push(stack, pull, "pa");
 		st_tot -= 1;
 		i++;
@@ -221,14 +206,10 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 	int		pos;
 	int		buck;
 
-
 	e = 0;
 	buck = 1;
 	comp = -3000000000;
-	d->buk_nbr = ft_sqrt(d->total);
-
 	buk_setup(*d, *stack);
-
 	while (e < d->total)
 	{
 		pos = first_select(*d, *stack, &comp, buck);
@@ -237,26 +218,11 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 			buck++;
 			continue;
 		}
-//		if (pos == -1 && comp == 3000000000)
-//		{
-//			__builtin_printf("\nSOMETHING GONE SERIOUSLY WRONG !\n");
-//			return ;
-//		}
-//		i = -1;
-
-		if (pos < (d->currentot / 2))
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_next, "ra");
-		}
-		else
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_prev, "rra");
-		}
+		efficient_move(d->currentot, stack, "ra", pos);
 		d->currentot -= 1;
 		push(pull, stack, "pb");
 		e++;
 	}
 	d->currentot = d->total;
+	value_sorter(*d, stack, pull);
 }

@@ -31,6 +31,16 @@ typedef struct s_stack
 	struct s_stack *previous;
 
 }	t_stack;
+
+typedef struct s_flags
+{
+	char	*bench;
+	char	*simple;
+	char	*medium;
+	char	*complex_;
+	char	*adaptative;
+}	t_flags;
+
 //utils.c
 int	ft_atoi(const char *nptr);
 float compute_disorder(t_stack *s, int size);
@@ -43,6 +53,7 @@ void	selection(int total, t_stack **stack, t_stack **pull);
 
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
 void	value_sorter(t_info d, t_stack **stack, t_stack **pull);
+int		ft_sqrt(int nb);
 
 void	swap(t_stack **s1, char *str);
 void	push(t_stack **s1, t_stack **s2, char *str);
