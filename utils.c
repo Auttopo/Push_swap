@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:42:40 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/06 17:26:34 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 07:40:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ void	init_index(t_stack *stack, int size)
 {
 	int	i;
 
-	i = 0;
-	while (i < size)
+	i = 1;
+	while (i <= size)
 	{
 		min_indexing(size, stack, i); 
 		i++;
