@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:42:40 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/29 17:27:50 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/07 07:40:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,72 @@ float compute_disorder(t_stack *s, int size)
 	}
 	metric =(float)mistakes / (float)total;
 	return (metric);
+}
+/*
+void	init_index(t_stack **stack, int size)
+{
+	t_stack	*tmp;
+	t_stack	*result;
+	int	i;
+
+	i = 0;
+	if (!stack)
+		return ;
+//	result = stack;
+//	tmp = stack->next;
+//	if (result == tmp)
+//		result->index = 0;
+	while (i < size)
+	{
+
+		result = (*stack);
+		tmp = (*stack)->next;
+		while (tmp != (*stack))
+		{
+			__builtin_printf("%d <  %d\n", tmp->value, result->value);
+			if (tmp->value  < result->value && tmp->index == -1)
+				result = tmp;
+			tmp = tmp->next;
+		}
+		__builtin_printf(" ------------------- \n");
+		result->index = i;
+		i++;
+	}
+}
+*/
+void    min_indexing(int total, t_stack *local, int x)
+{
+	t_stack	*temp;
+        long    comp;
+        int     i;
+	int	pos;
+
+        comp = 3000000000;
+        i = 0;
+        while (i < total)
+        {
+                if (((long)local->value < comp) && (local->index == -1))
+                {
+                        temp = local;
+                        comp = (long)local->value;
+                }
+                local = local->next;
+                i++;
+        }
+
+	temp->index = x;
+}
+
+void	init_index(t_stack *stack, int size)
+{
+	int	i;
+
+	i = 1;
+	while (i <= size)
+	{
+		min_indexing(size, stack, i); 
+		i++;
+	}
 }
 
 
