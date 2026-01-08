@@ -427,6 +427,9 @@ int	main(int argc, char **argv)
 		
 	}
 
+	if (data.flag > 9)
+		bench_mod(data, disorder, mod(data.flag));
+
 
 
 //	show_stack(&stack);

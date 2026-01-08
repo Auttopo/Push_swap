@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include <unistd.h>
+#include "ft_printf/ft_printf.h"
 
 static void	r_case(t_info *d, char *s)
 {
@@ -51,7 +52,7 @@ static void	put_in_log(t_info *d, char *s)
 	}
 }
 
-static void	ft_putstr(t_info *d, char *s)
+static void	putstr_log(t_info *d, char *s)
 {
 	int	i;
 
@@ -73,7 +74,7 @@ void	push(t_info *d, t_stack **dest, t_stack **src, char *str)
 	
 	if (*src == NULL)
 		return ;
-	ft_putstr(d, str);
+	putstr_log(d, str);
 
 	if ((*src)->next == *src)
 		tmp = NULL;
@@ -121,7 +122,7 @@ void	rotate(t_info *d, t_stack **s, void (*move)(t_stack **), char *str)
 		return ;
 	move(s);
 	if (str)
-		ft_putstr(d, str);
+		putstr_log(d, str);
 }
 
 void	swap(t_info *d, t_stack **s, char *str)
@@ -149,8 +150,26 @@ void	swap(t_info *d, t_stack **s, char *str)
 		
 	(*s)->next->next->previous = (*s)->next;
 
-	ft_putstr(d, str);
+	putstr_log(d, str);
 }
 
+void	bench_mod(t_info d, float disorder, int strat)
+{
+	char	*strategy;
+	int		total;
 
+	total = d.sa + d.sb + d.ss + d.pa + d.pb + d.ra + d.rb + d.rr + d.rra + d.rrb + d.rrr;
+	if (strat == 1)
+		strategy = "Simple / (O(n²))";
+	else if (strat == 2)
+		strategy = "Medium / (O(n√n))";
+	else
+		strategy = "Complex / (O(n log n))";
 
+	ft_printf("[BENCH MOD]\n\ndisorder: %d%%\n", (int)disorder * 100);
+	ft_printf("strategy: %s\n", strategy);
+	ft_printf("total operations: %d\n", total);
+	ft_printf("sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n", d.sa ,d.sb ,d.ss ,d.pa ,d.pb);
+	ft_printf("ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n", d.ra, d.rb, d.rr, d.rra, d.rrb, d.rrr);
+
+}

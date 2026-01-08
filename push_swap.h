@@ -81,4 +81,9 @@ void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
 void	bubble(t_info *d, t_stack **s1, int size);
 void    r_next(t_stack **s);
 void    r_prev(t_stack **s);
+
+
+void	bench_mod(t_info d, float disorder, int strat);
+
+
 #endif
