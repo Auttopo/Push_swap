@@ -21,6 +21,18 @@ typedef struct s_info
 	int	currentot;
 	int	buk_nbr;
 
+	int	sa;
+	int	sb;
+	int ss;
+	int pa;
+	int pb;
+	int ra;
+	int rb;
+	int rr;
+	int rra;
+	int	rrb;
+	int	rrr;
+
 }	t_info;
 
 typedef struct s_stack
@@ -56,6 +68,7 @@ void	selection(int total, t_stack **stack, t_stack **pull);
 
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
 void	value_sorter(t_info d, t_stack **stack, t_stack **pull);
+void	efficient_move(int total, t_stack **stack, char *str, int pos);
 int		ft_sqrt(int nb);
 
 void	swap(t_stack **s1, char *str);

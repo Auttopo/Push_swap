@@ -43,18 +43,10 @@ void	selection(int total, t_stack **stack, t_stack **pull)
 	while (e < total - 1)
 	{
 		comp = min_select(total, *stack, &pos);
+		efficient_move(total, stack, "ra", pos);
 
-		if (pos < (total / 2))
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_next, "ra");
-		}
-		else
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_prev, "rra");
-		}
 		push(pull, stack, "pb");
+
 		e++;
 	}
 	e = 0;

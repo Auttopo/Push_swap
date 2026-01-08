@@ -240,7 +240,7 @@ char	**arg_parser(char *src, char **list, int *e)
 	return (NULL);
 }
 
-int strategy(int flag)
+int mod(int flag)
 {
 	return (flag % 10);
 }
@@ -304,19 +304,28 @@ int	main(int argc, char **argv)
 	int		i;
 	int		temp;
 	int		flg;
-	t_stack *stack = NULL;
-	t_stack *pull = NULL;
+	float	disorder;
+	t_flags	f;
 	t_info	data;
 
+	data.sa = 0;
+	data.sb = 0;
+	data.ss = 0;
+	data.pa = 0;
+	data.pb = 0;
+	data.ra = 0;
+	data.rb = 0;
+	data.rr = 0;
+	data.rra = 0;
+	data.rrb = 0;
+	data.rrr = 0;
+
+
+	t_stack *stack = NULL;
+	t_stack *pull = NULL;
 	data.min = 3000000000;
 	data.max = -3000000000;
-	data.total = argc - 1;
-	data.currentot = argc - 1;
-
-	data.buk_nbr = ((float)ft_sqrt(data.total) * (float)0.6);
-
 	flg = 0;
-	t_flags	f;
 	f.bench = "--bench";
 	f.simple = "--simple";
 	f.medium = "--medium";
@@ -354,24 +363,11 @@ int	main(int argc, char **argv)
 */
 
 /*
-
-	int flag;
-	int flag1 = flag_reader(argv[1]);
-	int flag2;
-	if (argc > 3)
-	{
-		flag2 = flag_reader(argv[2]):
-	}
-	flag = flag1 + flag2;
 	10 for bench
 	1 simple
 	2 medium
 	3 complex
 	0 adaptative
-
-
-
-
 */
 
 
@@ -386,8 +382,10 @@ int	main(int argc, char **argv)
 			data.min = (long)temp;
 		i++;
 	}
-
-
+	data.total = i;
+	data.currentot = i;
+	data.buk_nbr = ((float)ft_sqrt(data.total) * (float)0.6);
+	disorder = compute_disorder(stack, data.total);
 
 
 
@@ -397,21 +395,22 @@ int	main(int argc, char **argv)
 
 
 
-	if (strategy(flg) == 1)
+	if (mod(flg) == 1 || (disorder < (float)0.2 && mod(flg) == 0))
 	{
 		selection(data.total, &stack, &pull);
 	}
-	else if (strategy(flg) == 2)
+	else if (mod(flg) == 2 || (disorder < (float)0.5 && mod(flg) == 0))
 	{
 		buckets(&data, &stack, &pull);
 	}
-	else if (strategy(flg) == 3)
+	else if (mod(flg) == 3 || (disorder < (float)0.2 && mod(flg) == 0))
 	{
 		printf("radix not implemented\n");
 	}
 	else
 	{
-		printf("need optimisation\n");
+		printf("%f\n", disorder);
+		
 	}
 
 
