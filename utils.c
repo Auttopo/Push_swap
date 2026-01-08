@@ -35,7 +35,7 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * min);
 }
-
+/*
 float compute_disorder(t_stack *s, int size)
 {
 	int	mistakes;
@@ -76,6 +76,7 @@ float compute_disorder(t_stack *s, int size)
 	metric =(float)mistakes / (float)total;
 	return (metric);
 }
+*/
 /*
 void	init_index(t_stack **stack, int size)
 {

@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include <unistd.h>
 
-void    bubble(t_stack **s1, int size)
+void    bubble(t_info *d, t_stack **s1, int size)
 {
 	int	n;
 	int	i;
@@ -30,11 +30,11 @@ void    bubble(t_stack **s1, int size)
 		{
 			if((*s1)->value > (*s1)->next->value)
 			{
-				swap(s1, "sa");
-				rotate(s1, r_next, "ra");
+				swap(d, s1, "sa");
+				rotate(d, s1, r_next, "ra");
 			}
 			else 
-				rotate(s1, r_next, "ra");
+				rotate(d, s1, r_next, "ra");
 			j++;
 		}
 		i++;
@@ -42,7 +42,7 @@ void    bubble(t_stack **s1, int size)
 		k = 0;
 		while (k < i)
 		{
-			rotate(s1, r_next, "ra");
+			rotate(d, s1, r_next, "ra");
 			k++;
 		}
 	}

@@ -12,26 +12,26 @@
 
 #include "push_swap.h"
 
-void	dblswap(t_stack **s1, t_stack **s2)
+void	dblswap(t_info *d, t_stack **s1, t_stack **s2)
 {
 	if (!*s1 || !*s2)
 		return ;
-	swap(s1, "ss");
-	swap(s2, 0);
+	swap(d, s1, "ss");
+	swap(d, s2, "\0\0");
 }
 
-void	dblrotate(t_stack **s1, t_stack **s2)
+void	dblrotate(t_info *d, t_stack **s1, t_stack **s2)
 {
 	if (!*s1 || !*s2)
 		return ;
-	rotate(s1, r_next, "ra");
-	rotate(s2, r_next, "rb");
+	rotate(d, s1, r_next, "rr");
+	rotate(d, s2, r_next, "\0\0");
 }
 
-void	dblrrotate(t_stack **s1, t_stack **s2)
+void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2)
 {
 	if (!*s1 || !*s2)
 		return ;
-	rotate(s1, r_prev, "ra");
-	rotate(s2, r_prev, "rrb");
+	rotate(d, s1, r_prev, "rrr");
+	rotate(d, s2, r_prev, "\0\0");
 }

@@ -118,7 +118,7 @@ void	buk_setup(t_info d, t_stack *local)
 	}
 }
 
-void	efficient_move(int total, t_stack **stack, char *str, int pos)
+void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 {
 	int	i;
 	char	*strr;
@@ -127,19 +127,19 @@ void	efficient_move(int total, t_stack **stack, char *str, int pos)
 	strr = "rrb";
 	if (str[1] == 'a')
 		strr = "rra";
-	if (pos < (total / 2))
+	if (pos < (d->currentot / 2))
 	{
 		while (i < pos)
 		{
-			rotate(stack, r_next, str);
+			rotate(d, stack, r_next, str);
 			i++;
 		}
 	}
 	else
 	{
-		while ((total - i) != pos)
+		while ((d->currentot - i) != pos)
 		{
-			rotate(stack, r_prev, strr);
+			rotate(d, stack, r_prev, strr);
 			i++;
 		}
 	}
@@ -172,30 +172,29 @@ int	value_select(int st_tot, t_stack *local, int buck)
 	return (pos);
 }
 
-void	value_sorter(t_info d, t_stack **stack, t_stack **pull)
+void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 {
 	t_stack *start;
 	int	i;
 	int	buck;
 	int	pos;
-	int	st_tot;
 
 	i = 0;
-	buck = d.buk_nbr;
-	st_tot = d.total;
-	while (i < d.total && buck > 0)
+	buck = d->buk_nbr;
+	while (i < d->total && buck > 0)
 	{
-		pos = value_select(st_tot, *pull, buck);
+		pos = value_select(d->currentot, *pull, buck);
 		if (pos == -1)
 		{
 			buck--;
 			continue;
 		}
-		efficient_move(st_tot, pull, "rb", pos);
-		push(stack, pull, "pa");
-		st_tot -= 1;
+		efficient_move(d, pull, "rb", pos);
+		push(d, stack, pull, "pa");
+		d->currentot -= 1;
 		i++;
 	}
+	d->currentot = d->total;
 }
 
 void	buckets(t_info *d, t_stack **stack, t_stack **pull)
@@ -218,11 +217,11 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 			buck++;
 			continue;
 		}
-		efficient_move(d->currentot, stack, "ra", pos);
+		efficient_move(d, stack, "ra", pos);
 		d->currentot -= 1;
-		push(pull, stack, "pb");
+		push(d, pull, stack, "pb");
 		e++;
 	}
 	d->currentot = d->total;
-	value_sorter(*d, stack, pull);
+	value_sorter(d, stack, pull);
 }

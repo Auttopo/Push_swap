@@ -234,7 +234,7 @@ void	radix(t_stack **stack, t_stack **pull, int size)
 	i = 1;
 	unit = 1;
 	pstack = *stack;
-	init_index(*stack, size);
+//	init_index(*stack, size); FOCTION INXISTANTE MIS EN COMMENTAIRE PAR AMIN BENABDELLAH LE JANVIER 8 2026 A 13H35 SUR LE POSTE Z4R9P4
 //	max = find_unit(*stack);
 	max = find_max_bin(size);
 	while (i <= max)

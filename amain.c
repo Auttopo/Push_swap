@@ -185,14 +185,18 @@ int	arg_checker(char *src)
 	e = 0;
 	while (src[i])
 	{
-		while (src[i] == 32 || (src[i] > 8 && src[i] < 14))
+		while ((src[i] == 32) || ((src[i] > 8) && (src[i] < 14)))
 			i++;
 		temp = i;
+		if (src[i] == '-')
+			i++;
 		while (src[i] >= '0' && src[i] <= '9')
 			i++;
 		if (temp != i)
 			e++;
 		else if (src[i] != '\0')
+			return (0);
+		if (src[i - 1] == '-')
 			return (0);
 	}
 	return (e);
@@ -204,13 +208,16 @@ char	*extract_str(char *str, int *i)
 	int		e;
 
 	e = *i;
+
+	if (str[e] == '-')
+		e++;
 	while (str[e] >= '0' && str[e] <= '9')
 		e++;
 	new = malloc(sizeof(char) * (e + 1));
 	if (new == NULL)
 		return (NULL);
 	e = 0;
-	while (str[*i] >= '0' && str[*i] <= '9')
+	while (str[*i] >= '0' && str[*i] <= '9' || str[*i] == '-')
 	{
 		new[e] = str[*i];
 		e++;
@@ -228,7 +235,7 @@ char	**arg_parser(char *src, char **list, int *e)
 	i = 0;
 	while (src[i])
 	{
-		while (src[i] == 32 || (src[i] > 8 && src[i] < 14))
+		while ((src[i] == 32) || ((src[i] > 8) && (src[i] < 14)))
 			i++;
 		if (src[i] == '\0')
 			break ;
@@ -325,7 +332,6 @@ int	main(int argc, char **argv)
 	t_stack *pull = NULL;
 	data.min = 3000000000;
 	data.max = -3000000000;
-	flg = 0;
 	f.bench = "--bench";
 	f.simple = "--simple";
 	f.medium = "--medium";
@@ -333,14 +339,17 @@ int	main(int argc, char **argv)
 
 	
 	if (argc < 2)
+	{
+		printf("Error, need arguments\n");
 		return (0);
+	}
 	i = 1;
 
 	while (i < (argc - 1) && (i < 3))
 	{
 		temp = flag_check(f, argv[i]);
-		if ((flg % 10) == 0 || temp > 9)
-			flg += temp;
+		if ((data.flag % 10) == 0 || temp > 9)
+			data.flag += temp;
 		i++;
 	}
 	if (temp == 0)
@@ -350,7 +359,10 @@ int	main(int argc, char **argv)
 	
 
 	if (list == NULL)
+	{
+		printf("Error occured in parsing\n");
 		return (0);
+	}
 /*
 	i = 0;
 	while (list[i] != NULL)
@@ -385,6 +397,8 @@ int	main(int argc, char **argv)
 	data.total = i;
 	data.currentot = i;
 	data.buk_nbr = ((float)ft_sqrt(data.total) * (float)0.6);
+	if (data.buk_nbr < 1)
+		data.buk_nbr = 1;
 	disorder = compute_disorder(stack, data.total);
 
 
@@ -395,21 +409,21 @@ int	main(int argc, char **argv)
 
 
 
-	if (mod(flg) == 1 || (disorder < (float)0.2 && mod(flg) == 0))
+	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0))
 	{
-		selection(data.total, &stack, &pull);
+		selection(&data, &stack, &pull);
 	}
-	else if (mod(flg) == 2 || (disorder < (float)0.5 && mod(flg) == 0))
+	else if (mod(data.flag) == 2 || (disorder < (float)0.5 && mod(data.flag) == 0))
 	{
 		buckets(&data, &stack, &pull);
 	}
-	else if (mod(flg) == 3 || (disorder < (float)0.2 && mod(flg) == 0))
+	else if (mod(data.flag) == 3 || (disorder < (float)0.2 && mod(data.flag) == 0))
 	{
 		printf("radix not implemented\n");
 	}
 	else
 	{
-		printf("%f\n", disorder);
+		printf("%f NEED CODE HERE \n", disorder);
 		
 	}
 

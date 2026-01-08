@@ -13,11 +13,52 @@
 #include "push_swap.h"
 #include <unistd.h>
 
-void	ft_putstr(char *s)
+static void	r_case(t_info *d, char *s)
+{
+	if (s[1] == 'a')
+		d->ra += 1;
+	else if (s[1] == 'b')
+		d->rb += 1;
+	else if (s[2] == 'a')
+		d->rra += 1;	
+	else if (s[2] == 'b')
+		d->rrb += 1;
+	else if (s[2] == 'r')
+		d->rrr += 1;
+	else
+		d->rr += 1;
+}
+
+static void	put_in_log(t_info *d, char *s)
+{	
+	if (s[0] == 'p')
+	{
+		if (s[1] == 'a')
+			d->pa += 1;
+		else
+			d->pb += 1;
+	}
+	else if (s[0] == 'r')
+		r_case(d, s);
+	else
+	{
+		if (s[1] == 'a')
+			d->sa += 1;
+		else if (s[1] == 'b')
+			d->sb += 1;
+		else
+			d->ss += 1;
+	}
+}
+
+static void	ft_putstr(t_info *d, char *s)
 {
 	int	i;
 
 	i = 0;
+	put_in_log(d, s);
+	if (d->flag > 9)
+		return ;
 	while (s[i])
 	{
 		write(1, &s[i], 1);
@@ -26,13 +67,13 @@ void	ft_putstr(char *s)
 	write (1, "\n", 1);
 }
 
-void	push(t_stack **dest, t_stack **src, char *str)
+void	push(t_info *d, t_stack **dest, t_stack **src, char *str)
 {
 	t_stack	*tmp;
 	
 	if (*src == NULL)
 		return ;
-	ft_putstr(str);
+	ft_putstr(d, str);
 
 	if ((*src)->next == *src)
 		tmp = NULL;
@@ -74,16 +115,16 @@ void	r_prev(t_stack **s)
 	*s = (*s)->previous;
 }
 
-void	rotate(t_stack **s, void (*move)(t_stack **), char *str)
+void	rotate(t_info *d, t_stack **s, void (*move)(t_stack **), char *str)
 {
 	if (!*s)
 		return ;
 	move(s);
 	if (str)
-		ft_putstr(str);
+		ft_putstr(d, str);
 }
 
-void	swap(t_stack **s, char *str)
+void	swap(t_info *d, t_stack **s, char *str)
 {
 	t_stack	*tmp;
 
@@ -94,7 +135,7 @@ void	swap(t_stack **s, char *str)
 
 	if ((*s)->next == (*s)->previous)
 	{
-		rotate(s, r_next, str);
+		rotate(d, s, r_next, str);
 		return ;
 	}
 
@@ -108,7 +149,7 @@ void	swap(t_stack **s, char *str)
 		
 	(*s)->next->next->previous = (*s)->next;
 
-	ft_putstr(str);
+	ft_putstr(d, str);
 }
 
 
