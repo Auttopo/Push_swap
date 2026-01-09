@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   amain.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
+/*   Updated: 2026/01/09 15:22:34 by jsam             ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <stdio.h> //REMOVE BEFORE THE END PROJECT
 #include <unistd.h> // FOR READ
@@ -392,21 +404,20 @@ int	main(int argc, char **argv)
 			data.min = (long)temp;
 		i++;
 	}
-	radix(&stack, &pull, argc - 1);
 	data.total = i;
 	data.currentot = i;
 	data.buk_nbr = ((float)ft_sqrt(data.total) * (float)0.6);
 	if (data.buk_nbr < 1)
 		data.buk_nbr = 1;
-	disorder = compute_disorder(stack, data.total);
+	disorder = compute_disorder(stack);
 
 
 
-	show_stack(&stack);
-	show_stack(&pull);
+//	show_stack(&stack);
+//	show_stack(&pull);
 
 
-	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0))
+	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0) || data.total < 50) // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1
 	{
 		selection(&data, &stack, &pull);
 	}
@@ -414,9 +425,10 @@ int	main(int argc, char **argv)
 	{
 		buckets(&data, &stack, &pull);
 	}
-	else if (mod(data.flag) == 3 || (disorder < (float)0.2 && mod(data.flag) == 0))
+	else if (mod(data.flag) == 3 || (disorder >= (float)0.5 && mod(data.flag) == 0))
 	{
-		printf("radix not implemented\n");
+		radix(&data, &stack, &pull, data.total);
+//		printf("radix not implemented\n");
 	}
 	else
 	{
@@ -428,15 +440,15 @@ int	main(int argc, char **argv)
 		bench_mod(data, disorder, mod(data.flag));
 
 
-
 //	show_stack(&stack);
 //	show_stack(&pull);
 
 //	buckets(&data, &stack, &pull);
 //	value_sorter(data, &stack, &pull);
-
-	show_stack(&stack);
-	show_stack(&pull);
+	
+//	radix(&data, &stack, &pull, data.total);
+//	show_stack(&stack);
+//	show_stack(&pull);
 
 	free_all(list);
 	clear_list(&stack);

@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:36:11 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/06 15:18:58 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 15:22:00 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ typedef struct s_flags
 	char	*adaptative;
 }	t_flags;
 
-//utils.c
 int	ft_atoi(const char *nptr);
-float compute_disorder(t_stack *s, int size);
-
-//radix.c
-void    radix(t_stack **s1, t_stack **s2, int size);
+float	compute_disorder(t_stack *s);
+void	init_index(t_stack *stack, int size);
+void    radix(t_info *info, t_stack **s1, t_stack **s2, int size);
 
 int		add_back_nod(t_stack **stack, t_stack *new);
 t_stack	*new_elem(int value);

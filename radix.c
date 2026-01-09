@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/07 08:46:00 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 13:45:49 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	count(t_stack *stack, t_stack *pmin)
 	return (-j);
 }
 //move stack
-void	rotate_stack(t_stack **stack, int count, int rstack)
+void	rotate_stack(t_info *info, t_stack **stack, int count, int rstack)
 {
 	char	*str;
 
@@ -107,7 +107,7 @@ void	rotate_stack(t_stack **stack, int count, int rstack)
 	{
 		while (count > 0)
 		{
-			rotate(stack, r_next, str);
+			rotate(info, stack, r_next, str);
 			count--;
 		}
 	}
@@ -115,7 +115,7 @@ void	rotate_stack(t_stack **stack, int count, int rstack)
 	{
 		while (count < 0)
 		{
-			rotate(stack, r_prev, str);
+			rotate(info, stack, r_prev, str);
 			count++;
 		}
 	}
@@ -138,7 +138,7 @@ void	rotate_stack(t_stack **stack, int count, int rstack)
 	push(s2, s1, pushstr);
 }*/
 
-void    radix_move(t_stack **s1, t_stack **s2, int size, int unit, char *pushstr, int min_max, char *rotatestr)
+void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max, char *rotatestr)
 {
         t_stack *pstack;
         t_stack *pmin;
@@ -162,9 +162,9 @@ void    radix_move(t_stack **s1, t_stack **s2, int size, int unit, char *pushstr
 				(*s1)->index /= 2;
 		}
 		if ((min_max == -1 && check == 0) || (min_max == 1 && check == 1))
-			push(s2, s1, pushstr);
+			push(info, s2, s1, pushstr);
 		else
-			rotate(s1, r_next, rotatestr);
+			rotate(info, s1, r_next, rotatestr);
 		i++;
         }
 /*	if (*s1)
@@ -175,7 +175,7 @@ void    radix_move(t_stack **s1, t_stack **s2, int size, int unit, char *pushstr
 			rotate(s1, r_next, rotatestr);
 	}*/
 	while (*s1)
-		push(s2, s1, pushstr);
+		push(info, s2, s1, pushstr);
 }
 
 
@@ -223,18 +223,19 @@ int	find_max_bin(int size)
 	return (i);
 }
 
-void	radix(t_stack **stack, t_stack **pull, int size)
+void	radix(t_info *info, t_stack **stack, t_stack **pull, int size)
 {
 	t_stack	*pstack;
 	t_stack	*pmin;
-	int	unit;
+//	int	unit;
 	int	i;
 	int	max;
 
 	i = 1;
-	unit = 1;
+//	unit = 1;
 	pstack = *stack;
-//	init_index(*stack, size); FOCTION INXISTANTE MIS EN COMMENTAIRE PAR AMIN BENABDELLAH LE JANVIER 8 2026 A 13H35 SUR LE POSTE Z4R9P4
+	init_index(*stack, size); //FOCTION INXISTANTE MIS EN COMMENTAIRE PAR AMIN BENABDELLAH LE JANVIER 8 2026 A 13H35 SUR LE POSTE Z4R9P4
+				  //FONCTION DANS UTILS.C
 //	max = find_unit(*stack);
 	max = find_max_bin(size);
 	while (i <= max)
@@ -247,17 +248,16 @@ void	radix(t_stack **stack, t_stack **pull, int size)
 		i++;*/
 
 		if (i % 2 != 0)
-			radix_move(stack, pull, size, unit, "pb", -1, "ra");
+			radix_move(info, stack, pull, size, "pb", -1, "ra");
 		else
-			radix_move(pull, stack, size, unit, "pa", 1, "rb");
-		unit++;
+			radix_move(info, pull, stack, size, "pa", 1, "rb");
 		i++;
 	}
 	if (!(*stack))
 	{
 		while (size > 0)
 		{
-			push(stack, pull, "pa");
+			push(info, stack, pull, "pa");
 			size--;
 		}
 	}

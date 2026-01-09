@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   disordermetricabenabdejsam291235.c                 :+:      :+:    :+:   */
+/*   disordermetric.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:00:45 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/30 14:44:57 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 15:27:12 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 float compute_disorder(t_stack *s, int size)
 {
 	int	mistakes;
@@ -31,7 +31,7 @@ float compute_disorder(t_stack *s, int size)
 	while (i < size)
 	{
 		tmp = s->value;
-		j = 0;
+		j = i + 1;
 		while (j < n)
 		{
 			if (s->next->value < tmp)
@@ -48,6 +48,33 @@ float compute_disorder(t_stack *s, int size)
 			s = s->next;
 			k++;
 		}
+	}
+	metric =(float)mistakes / (float)total;
+	return (metric);
+}*/
+
+float compute_disorder(t_stack *s)
+{
+	int	mistakes;
+	int	total;
+	float	metric;
+	t_stack	*p1;
+	t_stack *p2;
+	
+	p1 = s;
+	mistakes = 0;
+	total = 0;
+	while (p1 != s->previous)
+	{
+		p2 = p1->next;
+		while (p2 != s)
+		{
+			if (p1->value > p2->value)
+				mistakes++;
+			p2 = p2->next;
+			total++;
+		}
+		p1 = p1->next;
 	}
 	metric =(float)mistakes / (float)total;
 	return (metric);
