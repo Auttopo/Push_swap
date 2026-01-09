@@ -32,7 +32,7 @@ long	min_select(int total, t_stack *local, int *pos)
 	return (comp);
 }
 
-void	selection(int total, t_stack **stack, t_stack **pull)
+void	selection(t_info *d, t_stack **stack, t_stack **pull)
 {
 	int		i;
 	int		e;
@@ -40,27 +40,19 @@ void	selection(int total, t_stack **stack, t_stack **pull)
 	int		pos;
 
 	e = 0;
-	while (e < total - 1)
+	while (e < d->total - 1)
 	{
-		comp = min_select(total, *stack, &pos);
+		comp = min_select(d->total, *stack, &pos);
+		efficient_move(d, stack, "ra", pos);
 
-		if (pos < (total / 2))
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_next, "ra");
-		}
-		else
-		{
-			while ((long)(*stack)->value != comp)
-				rotate(stack, r_prev, "rra");
-		}
-		push(pull, stack, "pb");
+		push(d, pull, stack, "pb");
+
 		e++;
 	}
 	e = 0;
-	while (e < total - 1)
+	while (e < d->total - 1)
 	{
-		push(stack, pull, "pa");
+		push(d, stack, pull, "pa");
 		e++;
 	}
 }
