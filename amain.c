@@ -70,10 +70,10 @@ void	show_stack(t_stack **stack)
 
 	temp = (*stack)->next;
 //	printf("|%d|\n", (*stack)->value);
-	printf("|%dPREV %dIAM %dNEXT|\n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value);
+	printf("|%d_PREV %d_IAM %d_NEXT| %d \n", (*stack)->previous->value, (*stack)->value, (*stack)->next->value, (*stack)->index);
 	while (temp != *stack)
 	{	
-		printf("|%dPREV %dIAM %dNEXT|\n", temp->previous->value, temp->value, temp->next->value);
+		printf("|%d_PREV %d_IAM %d_NEXT| %d \n", temp->previous->value, temp->value, temp->next->value, temp->index);
 //		printf("|%d|\n", temp->value);
 		temp = temp->next;
 	}
@@ -137,7 +137,7 @@ t_stack	*new_elem(int value)
 	nod = malloc(sizeof(t_stack));
 	if (nod == NULL)
 		return (NULL);
-
+	nod->index = -1;
 	nod->value = value;
 	return (nod);
 }
@@ -156,6 +156,7 @@ void	clear_list(t_stack **stack)
 		*stack = temp;
 	}
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -180,12 +181,17 @@ int	main(int argc, char **argv)
 			data.min = (long)temp;
 		i++;
 	}
-//	selection(data.total, &stack, &pull);
-	buckets(data, &stack, &pull);
+//	show_stack(&stack);
+//	printf("-----------------\n");
+//	show_stack(&pull);
 
-	show_stack(&stack);
-	printf("-----------------\n");
-	show_stack(&pull);
+	radix(&stack, &pull, argc - 1);
+//	selection(data.total, &stack, &pull);
+//	buckets(data, &stack, &pull);
+
+//	show_stack(&stack);
+//	printf("-----------------\n");
+//	show_stack(&pull);
 
 	clear_list(&stack);
 	clear_list(&pull);
