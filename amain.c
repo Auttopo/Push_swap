@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/09 15:22:34 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 12:09:03 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,8 @@ int	flag_check(t_flags f, char *str)
 		return (2);
 	else if (str_comp(str, f.complex_) == 1)
 		return (3);
+	else if (str_comp(str, f.adaptative) == 1)
+		return (4);
 	return (0);
 }
 
@@ -342,11 +344,12 @@ int	main(int argc, char **argv)
 	t_stack *pull = NULL;
 	data.min = 3000000000;
 	data.max = -3000000000;
+	data.flag = 0;
 	f.bench = "--bench";
 	f.simple = "--simple";
 	f.medium = "--medium";
 	f.complex_ = "--complex";
-
+	f.adaptative = "--adaptative";
 	
 	if (argc < 2)
 	{
@@ -355,15 +358,25 @@ int	main(int argc, char **argv)
 	}
 	i = 1;
 
-	while (i < (argc - 1) && (i < 3))
+
+//	while (argv[i][1] == '-')
+//	while (i < (argc - 1) && (i < 3))
+	while (i < (argc - 1) && (i < 3) &&  argv[i][1] == '-')
 	{
 		temp = flag_check(f, argv[i]);
-		if ((data.flag % 10) == 0 || temp > 9)
+		if ((mod(data.flag) && mod(temp)) || (data.flag / 10 && temp / 10))
+			return (0);
+		data.flag += temp;
+		/*if ((data.flag % 10) == 0 || temp > 9)
 			data.flag += temp;
+		else if (data.flag % 10 != 0 && temp % 10 != 0)
+			ft_printf("Error");*/
 		i++;
 	}
-	if (temp == 0)
-		i--;
+	if (mod(data.flag) == 4)
+		data.flag -= 4;
+//	if (temp == 0)
+//		i--;
 
 	char **list = arg_uniformisation(argv, argc, i);
 	
@@ -413,34 +426,34 @@ int	main(int argc, char **argv)
 
 
 
-//	show_stack(&stack);
+	show_stack(&stack);
 //	show_stack(&pull);
 
+
+	
 
 	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0) || data.total < 50) // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1
 	{
 		selection(&data, &stack, &pull);
+		bench_mod(data, disorder, 1);
 	}
 	else if (mod(data.flag) == 2 || (disorder < (float)0.5 && mod(data.flag) == 0))
 	{
 		buckets(&data, &stack, &pull);
+		bench_mod(data, disorder, 2);
 	}
 	else if (mod(data.flag) == 3 || (disorder >= (float)0.5 && mod(data.flag) == 0))
 	{
 		radix(&data, &stack, &pull, data.total);
+		bench_mod(data, disorder, 3);
 //		printf("radix not implemented\n");
 	}
-	else
-	{
-		printf("%f NEED CODE HERE \n", disorder);
-		
-	}
 
-	if (data.flag > 9)
-		bench_mod(data, disorder, mod(data.flag));
+	/*if (data.flag > 9)
+		bench_mod(data, disorder, mod(data.flag));*/
 
 
-//	show_stack(&stack);
+	show_stack(&stack);
 //	show_stack(&pull);
 
 //	buckets(&data, &stack, &pull);

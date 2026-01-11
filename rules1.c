@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/09 16:28:09 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 12:07:42 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ void	bench_mod(t_info d, float disorder, int strat)
 	char	*strategy;
 	int		total;
 
+	if (d.flag < 10)
+		return ;
 	total = d.sa + d.sb + d.ss + d.pa + d.pb + d.ra + d.rb + d.rr + d.rra + d.rrb + d.rrr;
 	if (strat == 1)
 		strategy = "Simple / (O(n²))";
