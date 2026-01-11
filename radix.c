@@ -6,14 +6,14 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/10 13:40:47 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 12:56:27 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> // DELETE BEFORE PUSH
+#include <stdio.h> // TODO DELETE BEFORE PUSH
 
-t_stack	*find_minmax(t_stack *pstack, int unit, int min_max)
+/*t_stack	*find_minmax(t_stack *pstack, int unit, int min_max)
 {
 	t_stack	*tmp;
 	t_stack	*result;
@@ -32,9 +32,9 @@ t_stack	*find_minmax(t_stack *pstack, int unit, int min_max)
 		tmp = tmp->next;
 	}
 	return (result);
-}
+}*/
 
-void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max, char *rotatestr)
+void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max, char *rotatestr, int base)
 {
         t_stack *pstack;
         t_stack *pmin;
@@ -47,9 +47,9 @@ void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pus
         {
 		if (*s1)
 		{
-			check = (*s1)->index % 2;
+			check = (*s1)->index % base;
 			if ((*s1)->index != 0)
-				(*s1)->index /= 2;
+				(*s1)->index /= base;
 		}
 		if ((min_max == -1 && check == 0) || (min_max == 1 && check == 1))
 			push(info, s2, s1, pushstr);
@@ -61,22 +61,22 @@ void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pus
 		push(info, s2, s1, pushstr);
 }
 
-int	find_max_bin(int size)
+int	find_max_bin(int size, int base)
 {
 	int	*bin;
-	int	base[2];
+	//int	base[2];
 	int	i;
 
 	i = 0;
-	while (size % 2 || size / 2)
+	while (size % base || size / base)
 	{
-		size = size /2;
+		size = size / base;
 		i++;
 	}
 	return (i);
 }
 
-void	radix(t_info *info, t_stack **stack, t_stack **pull, int size)
+void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base)
 {
 	t_stack	*pstack;
 	t_stack	*pmin;
@@ -86,13 +86,13 @@ void	radix(t_info *info, t_stack **stack, t_stack **pull, int size)
 	i = 1;
 	pstack = *stack;
 	init_index(*stack, size);
-	max = find_max_bin(size);
+	max = find_max_bin(size, base);
 	while (i <= max)
 	{
 		if (i % 2 != 0)
-			radix_move(info, stack, pull, size, "pb", -1, "ra");
+			radix_move(info, stack, pull, size, "pb", -1, "ra", base);
 		else
-			radix_move(info, pull, stack, size, "pa", 1, "rb");
+			radix_move(info, pull, stack, size, "pa", 1, "rb", base);
 		i++;
 	}
 	if (!(*stack))
