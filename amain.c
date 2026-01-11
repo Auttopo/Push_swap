@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 12:57:14 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 14:43:44 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -454,7 +454,7 @@ int	main(int argc, char **argv)
 
 
 
-	show_stack(&stack);
+//	show_stack(&stack);
 //	show_stack(&pull);
 
 
@@ -484,7 +484,7 @@ int	main(int argc, char **argv)
 		bench_mod(data, disorder, mod(data.flag));*/
 
 
-	show_stack(&stack);
+//	show_stack(&stack);
 //	show_stack(&pull);
 
 //	buckets(&data, &stack, &pull);
