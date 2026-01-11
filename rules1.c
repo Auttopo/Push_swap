@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 12:07:42 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 16:38:09 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void	bench_mod(t_info d, float disorder, int strat)
 	else
 		strategy = "Complex / (O(n log n))";
 
-	ft_printf("[BENCH MOD]\n\ndisorder: %d%%\n", (int)(disorder * 100));
+	ft_printf("[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100), ((int)(disorder * 10000) % 100));
 	ft_printf("strategy: %s\n", strategy);
 	ft_printf("total operations: %d\n", total);
 	ft_printf("sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n", d.sa ,d.sb ,d.ss ,d.pa ,d.pb);

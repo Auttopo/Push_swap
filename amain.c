@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 14:43:44 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 16:20:24 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,9 +473,9 @@ int	main(int argc, char **argv)
 	else if (mod(data.flag) == 3 || (disorder >= (float)0.5 && mod(data.flag) == 0))
 	{
 		if (data.total < 50)
-			radix(&data, &stack, &pull, data.total, 10);
+			radix(&data, &stack, &pull, data.total, 10, radix_move_10);
 		else
-			radix(&data, &stack, &pull, data.total, 2);
+			radix(&data, &stack, &pull, data.total, 2, radix_move);
 		bench_mod(data, disorder, 3);
 //		printf("radix not implemented\n");
 	}

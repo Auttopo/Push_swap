@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:42:40 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 13:52:52 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 16:31:35 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,44 +131,7 @@ void    min_indexing(int total, t_stack *local, int x)
 
 	temp->index = x;
 }
-/*
-char	*ft_strcat(char *s1, char *s2)
-{
-	int	size;
-	int	i;
-	char	*result;
 
-	i = 0;
-	size = 0;
-	while (s1[i])
-	{
-		size++;
-		i++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		size++;
-		i++;
-	}
-	result = malloc(sizeof(char) * size + 1);
-	if (!result)
-		return NULL;
-	i = 0;
-	j = 0;
-	while(s1[i])
-	{
-		result[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		result[i + j] = s2[j];
-		j++;
-	}
-	return (result);	
-}
-*/
 void	init_index(t_stack *stack, int size)
 {
 	int	i;

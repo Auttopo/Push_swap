@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 14:42:03 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 16:28:04 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,23 @@ t_stack	*find_minmax(t_stack *pstack, int min_max)
 	return (result);
 }
 
-void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max, char *rotatestr)
+char	*definestr_rotate(int min_max, int i, int base)
+{
+	char	*str;
+
+	if (min_max < 0 && i < 0 && base != 2)
+		str = "rra";
+	else if (min_max < 0 && i > 0)
+		str = "ra";
+	else if (min_max > 0 && i < 0 && base != 2)
+		str = "rrb";
+	else
+		str = "rb";
+	return (str);
+}
+
+
+void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
         t_stack *pstack;
         t_stack *pmin;
@@ -54,7 +70,7 @@ void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pus
 		if ((min_max == -1 && check == 0) || (min_max == 1 && check == 1))
 			push(info, s2, s1, pushstr);
 		else
-			rotate(info, s1, r_next, rotatestr);
+			rotate(info, s1, r_next, definestr_rotate(min_max, 1, 2));
 		i++;
         }
 	while (*s1)
@@ -86,28 +102,14 @@ int	radix_rotate(t_stack *pmin, t_stack *s1)
 	return (-j);
 }
 
-char	*definestr_rotate(int min_max, int i)
-{
-	char	*str;
-
-	if (min_max < 0 && i < 0)
-		str = "rra";
-	else if (min_max < 0 && i > 0)
-		str = "ra";
-	else if (min_max > 0 && i < 0)
-		str = "rrb";
-	else
-		str = "rb";
-	return (str);
-}
-
 void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
         t_stack *pstack;
         t_stack *pmin;
         int     i;
-        int     check;
+        int     mincheck;
 	char	*str;
+	int	absol;
 
         pstack = *s1;
 	if (min_max < 0)
@@ -121,14 +123,17 @@ void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *
 	while (*s1)
 	{
 		pmin = find_minmax(pstack, min_max);
-		i = radix_rotate(pmin, *s1);
+		mincheck = radix_rotate(pmin, *s1);
+		absol = mincheck;
+		if (mincheck < 0)
+			absol *= -1;
 		if(pstack == pmin)
 			pstack = pstack->next;
-        	if (i < 0)
+        	/*if (i < 0)
 		{
 			while (i < 0)
 			{
-				rotate(info, s1, r_prev, definestr_rotate(min_max, i));
+				rotate(info, s1, r_prev, definestr_rotate(min_max, i, 10));
 				i++;
 			}
 		}
@@ -136,9 +141,18 @@ void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *
 		{
 			while (i > 0)
 			{
-				rotate(info, s1, r_next, definestr_rotate(min_max, i));
+				rotate(info, s1, r_next, definestr_rotate(min_max, i, 10));
 				i--;
 			}
+		}*/
+		
+		while (absol > 0)
+		{
+			if (mincheck < 0)
+				rotate(info, s1, r_prev, definestr_rotate(min_max, -1, 10));
+			else
+				rotate(info, s1, r_next, definestr_rotate(min_max, 1, 10));
+			absol--;
 		}
 		if (*s1)
 			if((*s1)->index != 0)
@@ -161,7 +175,7 @@ int	find_max(int size, int base)
 	return (i);
 }
 
-void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base)
+void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base, void (*rad_move)(t_info*, t_stack**,t_stack**, int, char*, int))
 {
 	t_stack	*pstack;
 	t_stack	*pmin;
@@ -172,27 +186,13 @@ void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base)
 	pstack = *stack;
 	init_index(*stack, size);
 	max = find_max(size, base);
-	if(base == 2)
+	while (i <= max)
 	{
-		while (i <= max)
-		{
-			if (i % 2 != 0)
-				radix_move(info, stack, pull, size, "pb", -1, "ra");
-			else
-				radix_move(info, pull, stack, size, "pa", 1, "rb");
-			i++;
-		}
-	}
-	else
-	{
-		while (i <= max)
-		{
-			if (i % 2 != 0)
-				radix_move_10(info, stack, pull, size, "pb", -1);
-			else
-				radix_move_10(info, pull, stack, size, "pa", 1);
-			i++;
-		}
+		if (i % 2 != 0)
+			rad_move(info, stack, pull, size, "pb", -1);
+		else
+			rad_move(info, pull, stack, size, "pa", 1);
+		i++;
 	}
 	if (!(*stack))
 	{
