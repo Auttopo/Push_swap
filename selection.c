@@ -43,7 +43,6 @@ void	selection(t_info *d, t_stack **stack, t_stack **pull)
 	while (e < d->total - 1)
 	{
 		comp = min_select(d->total, *stack, &pos);
-		__builtin_printf("%ld --------------------------<<<\n", comp);
 		efficient_move(d, stack, "ra", pos);
 		push(d, pull, stack, "pb");
 
