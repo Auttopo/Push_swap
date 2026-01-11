@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 12:09:03 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/11 12:39:48 by abenabde         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,7 +432,7 @@ int	main(int argc, char **argv)
 
 	
 
-	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0) || data.total < 50) // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1
+	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0)) // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1
 	{
 		selection(&data, &stack, &pull);
 		bench_mod(data, disorder, 1);
