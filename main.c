@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   amain.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 12:39:48 by abenabde         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 
 #include <stdio.h> //REMOVE BEFORE THE END PROJECT
 #include <unistd.h> // FOR READ
@@ -318,6 +306,30 @@ char	**arg_uniformisation(char **str, int max, int i)
 	return (list);
 }
 
+int	verif_dbl(char **list)
+{
+	int	i;
+	int	j;
+	int	size;
+
+	i = 0;
+	size = 0;
+	while (list[size])
+		size++;
+	while (i < size)
+	{
+		j = i + 1;
+		while (list[j])
+		{
+			if (str_comp(list[i], list[j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -379,8 +391,12 @@ int	main(int argc, char **argv)
 //		i--;
 
 	char **list = arg_uniformisation(argv, argc, i);
-	
 
+	if (!verif_dbl(list))
+	{
+		printf("Error\n");
+		return (0);
+	}
 	if (list == NULL)
 	{
 		printf("Error occured in parsing\n");
@@ -444,7 +460,10 @@ int	main(int argc, char **argv)
 	}
 	else if (mod(data.flag) == 3 || (disorder >= (float)0.5 && mod(data.flag) == 0))
 	{
-		radix(&data, &stack, &pull, data.total);
+		if (data.total < 50)
+			radix(&data, &stack, &pull, data.total, 10);
+		else
+			radix(&data, &stack, &pull, data.total, 2);
 		bench_mod(data, disorder, 3);
 //		printf("radix not implemented\n");
 	}
