@@ -143,6 +143,7 @@ void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 			i++;
 		}
 	}
+	d->currentot -= 1;
 }
 
 int	value_select(int st_tot, t_stack *local, int buck)
@@ -191,7 +192,6 @@ void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 		}
 		efficient_move(d, pull, "rb", pos);
 		push(d, stack, pull, "pa");
-		d->currentot -= 1;
 		i++;
 	}
 	d->currentot = d->total;
@@ -218,7 +218,6 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 			continue;
 		}
 		efficient_move(d, stack, "ra", pos);
-		d->currentot -= 1;
 		push(d, pull, stack, "pb");
 		e++;
 	}

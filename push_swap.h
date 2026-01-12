@@ -61,7 +61,7 @@ void    radix(t_info *info, t_stack **s1, t_stack **s2, int size, int base, void
 void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
 void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
 
-int		add_back_nod(t_stack **stack, t_stack *new);
+t_stack	*add_back_nod(t_stack **stack, t_stack *new);
 t_stack	*new_elem(int value);
 long	min_select(int total, t_stack *local, int *pos);
 void	selection(t_info *d, t_stack **stack, t_stack **pull);

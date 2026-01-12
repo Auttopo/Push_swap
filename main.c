@@ -1,64 +1,39 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   amain.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 13:29:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 16:20:24 by jsam             ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #include <stdio.h> //REMOVE BEFORE THE END PROJECT
 #include <unistd.h> // FOR READ
 #include "push_swap.h"
 #include <stdlib.h>
-// TESTS Functions/
-/*
-t_stack	*last_nod(t_stack *stack)
-{
-	if (stack == NULL)
-		return NULL;
-	while (stack->next != NULL)
-	{
-		stack = stack->next;
-	}
-	return (stack);
-}
-*/
 
-char	**free_all(char **list)
+void	clear_stack(t_stack **stack)
+{
+	t_stack	*temp;
+
+	if (*stack == NULL)
+		return ;
+	(*stack)->previous->next = NULL;
+	while (*stack != NULL)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
+}
+
+int	free_all(t_stack **s, t_stack **p, char **list)
 {
 	int	i;
 
 	i = 0;
 	if (list == NULL)
-		return (NULL);
+		return (0);
 	while (list[i] != NULL)
 	{
 		free(list[i]);
 		i++;
 	}
 	free(list);
-	return (NULL);
-}
-
-t_stack	*get_nodx(t_stack **stack, int n)
-{
-	// NON TESTER --!
-	int	i;
-	t_stack	*temp;
-
-	i = 0;
-	temp = *stack;
-	while (temp->next != *stack || i < n)
-	{
-		temp = temp->next;
-		i++;
-	}
-	return (temp);
+	clear_stack(s);
+	clear_stack(p);
+	return (0);
 }
 
 void	show_bugs(t_stack **stack, int max)
@@ -85,7 +60,6 @@ void	show_bugs(t_stack **stack, int max)
 	}
 	printf("\n");
 }
-
 
 void	show_stack(t_stack **stack)
 {
@@ -114,16 +88,16 @@ void	init_list(t_stack **stack, t_stack *new)
 	(*stack)->previous = *stack;
 }
 
-int	add_back_nod(t_stack **stack, t_stack *new)
+t_stack	*add_back_nod(t_stack **stack, t_stack *new)
 {
 	t_stack	*temp;
 
 	if (new == NULL)
-		return (0);
+		return (NULL);
 	if (*stack == NULL)
 	{
 		init_list(stack, new);
-		return (1);
+		return (new);
 	}
 
 	temp = *stack;
@@ -133,7 +107,7 @@ int	add_back_nod(t_stack **stack, t_stack *new)
 	new->previous = temp;
 	temp->next = new;
 	(*stack)->previous = new;
-	return (new->value);
+	return (new);
 }
 
 int	add_front_nod(t_stack **stack, t_stack *new)
@@ -170,20 +144,7 @@ t_stack	*new_elem(int value)
 	return (nod);
 }
 
-void	clear_list(t_stack **stack)
-{
-	t_stack	*temp;
 
-	if (*stack == NULL)
-		return ;
-	(*stack)->previous->next = NULL;
-	while (*stack != NULL)
-	{
-		temp = (*stack)->next;
-		free(*stack);
-		*stack = temp;
-	}
-}
 
 int	arg_checker(char *src)
 {
@@ -237,7 +198,7 @@ char	*extract_str(char *str, int *i)
 	return (new);
 }
 
-char	**arg_parser(char *src, char **list, int *e)
+int	arg_parser(char *src, char **list, int *e)
 {
 	int	i;
 	int	size;
@@ -251,10 +212,10 @@ char	**arg_parser(char *src, char **list, int *e)
 			break ;
 		list[*e] = extract_str(src, &i);
 		if (list[*e] == NULL)
-			return (free_all(list));
+			return (0);
 		*e += 1;
 	}
-	return (NULL);
+	return (1);
 }
 
 int mod(int flag)
@@ -289,33 +250,33 @@ int	flag_check(t_flags f, char *str)
 	return (0);
 }
 
-char	**arg_uniformisation(char **str, int max, int i)
+int	arg_uniformisation(char ***list, char **str, int max, int i)
 {
 	int	tmp;
-	int	size;
 	int	e;
 	int	elems;
-	char	**list;
 
-	size = 0;
-	elems = 0;
 	e = i;
+	elems = 0;
 	while (i < max)
 	{
 		tmp = arg_checker(str[i]);
 		if (tmp == 0)
 			return (0);
-		size += tmp;
+		elems += tmp;
 		i++;
 	}
-	list = malloc(sizeof(char *) * (size + 1));
-
+	*list = malloc(sizeof(char *) * (elems + 1));
+	if (*list == NULL)
+		return (0);
+	elems = 0;
 	while (e < max)
 	{
-		arg_parser(str[e], list, &elems);
+		if (arg_parser(str[e], *list, &elems) == 0)
+			return (0);
 		e++;
 	}
-	return (list);
+	return (1);
 }
 
 int	verif_dbl(char **list)
@@ -342,122 +303,102 @@ int	verif_dbl(char **list)
 	return (1);
 }
 
+void	main_init(t_info *d, t_flags *f, t_stack *s, t_stack *p)
+{
+	d->sa = 0;
+	d->sb = 0;
+	d->ss = 0;
+	d->pa = 0;
+	d->pb = 0;
+	d->ra = 0;
+	d->rb = 0;
+	d->rr = 0;
+	d->rra = 0;
+	d->rrb = 0;
+	d->rrr = 0;
+
+
+	s = NULL;
+	p = NULL;
+
+	d->min = 3000000000;
+	d->max = -3000000000;
+	d->flag = 0;
+	f->bench = "--bench";
+	f->simple = "--simple";
+	f->medium = "--medium";
+	f->complex_ = "--complex";
+	f->adaptative = "--adaptative";
+	
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
 	int		temp;
 	int		flg;
 	float	disorder;
+	char	**list;
 	t_flags	f;
 	t_info	data;
+	t_stack	*stack;
+	t_stack	*pull;
+	t_stack	*stk_tmp;
 
-	data.sa = 0;
-	data.sb = 0;
-	data.ss = 0;
-	data.pa = 0;
-	data.pb = 0;
-	data.ra = 0;
-	data.rb = 0;
-	data.rr = 0;
-	data.rra = 0;
-	data.rrb = 0;
-	data.rrr = 0;
-
-
-	t_stack *stack = NULL;
-	t_stack *pull = NULL;
-	data.min = 3000000000;
-	data.max = -3000000000;
-	data.flag = 0;
-	f.bench = "--bench";
-	f.simple = "--simple";
-	f.medium = "--medium";
-	f.complex_ = "--complex";
-	f.adaptative = "--adaptative";
+	list = NULL;
+	i = 1;
+	main_init(&data, &f, stack, pull);
 	
 	if (argc < 2)
-	{
-		printf("Error, need arguments\n");
 		return (0);
-	}
-	i = 1;
 
-
-//	while (argv[i][1] == '-')
-//	while (i < (argc - 1) && (i < 3))
 	while (i < (argc - 1) && (i < 3) &&  argv[i][1] == '-')
 	{
 		temp = flag_check(f, argv[i]);
 		if ((mod(data.flag) && mod(temp)) || (data.flag / 10 && temp / 10))
 			return (0);
 		data.flag += temp;
-		/*if ((data.flag % 10) == 0 || temp > 9)
-			data.flag += temp;
-		else if (data.flag % 10 != 0 && temp % 10 != 0)
-			ft_printf("Error");*/
 		i++;
 	}
 	if (mod(data.flag) == 4)
 		data.flag -= 4;
-//	if (temp == 0)
-//		i--;
 
-	char **list = arg_uniformisation(argv, argc, i);
+	if (arg_uniformisation(&list, argv, argc, i) == 0)
+		return (free_all(&stack, &pull, list));
 
-	if (!verif_dbl(list))
-	{
-		printf("Error\n");
-		return (0);
-	}
 	if (list == NULL)
 	{
 		printf("Error occured in parsing\n");
 		return (0);
 	}
-/*
-	i = 0;
-	while (list[i] != NULL)
+	if (!verif_dbl(list))
 	{
-		printf("%s\n", list[i]);
-		i++;
+		printf("Error\n");
+		return (0);
 	}
-
-	printf("---%d flg\n", flg);
-*/
-
-/*
-	10 for bench
-	1 simple
-	2 medium
-	3 complex
-	0 adaptative
-*/
-
-
 
 	i = 0;
 	while (list[i])
 	{
-		temp = add_back_nod(&stack, new_elem(ft_atoi(list[i])));
-		if (data.max < (long)temp)
-			data.max = (long)temp;
-		else if (data.min > (long)temp)
-			data.min = (long)temp;
+		
+		stk_tmp = add_back_nod(&stack, new_elem(ft_atoi(list[i])));
+		if (stk_tmp == NULL)
+			return (free_all(&stack, &pull, list));
+		if (data.max < (long)stk_tmp->value)
+			data.max = (long)stk_tmp->value;
+		else if (data.min > (long)stk_tmp->value)
+			data.min = (long)stk_tmp->value;
 		i++;
 	}
 	data.total = i;
 	data.currentot = i;
-	data.buk_nbr = ((float)ft_sqrt(data.total) * (float)0.6);
+	data.buk_nbr = ((float)ft_sqrt(data.total)); //* (float)0.6);
 	if (data.buk_nbr < 1)
 		data.buk_nbr = 1;
 	disorder = compute_disorder(stack);
 
-
-
 //	show_stack(&stack);
 //	show_stack(&pull);
-
-
 	
 
 	if (mod(data.flag) == 1 || (disorder < (float)0.2 && mod(data.flag) == 0)) // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1
@@ -477,24 +418,11 @@ int	main(int argc, char **argv)
 		else
 			radix(&data, &stack, &pull, data.total, 2, radix_move);
 		bench_mod(data, disorder, 3);
-//		printf("radix not implemented\n");
 	}
 
-	/*if (data.flag > 9)
-		bench_mod(data, disorder, mod(data.flag));*/
-
-
+//	printf("\n");
 //	show_stack(&stack);
 //	show_stack(&pull);
 
-//	buckets(&data, &stack, &pull);
-//	value_sorter(data, &stack, &pull);
-	
-//	radix(&data, &stack, &pull, data.total);
-//	show_stack(&stack);
-//	show_stack(&pull);
-
-	free_all(list);
-	clear_list(&stack);
-	clear_list(&pull);
+	free_all(&stack, &pull, list);
 }
