@@ -13,67 +13,12 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-int	ft_sqrt(int nb)
-{
-	int	i;
-
-	i = 0;
-	while ((i * i) <= nb)
-	{
-		if (i * i == nb)
-			return (i);
-		i++;
-	}
-	return (i - 1);
-}
-
-static	int	first_select(t_info d, t_stack *local, long *comp, int buck)
-{
-	int		i;
-	
-	i = 0;
-	while (i < d.total)
-	{
-		if (local->bucket == buck)
-		{
-			*comp = (long)local->value;
-			return (i);
-		}
-		local = local->next;
-		i++;
-	}
-	*comp = 3000000000;
-	return (-1);
-}
-
-int	max_in_bucket(t_stack *local, int buck)
-{
-	long	comp;
-	int		i;
-	int		pos;
-
-	comp = -3000000000;
-	i = 0;
-	pos = -1;
-	while (local->bucket == buck && local->value != comp)
-	{
-		if ((long)local->value > comp)
-		{
-			comp = local->value;
-			pos = i;
-		}
-		local = local->next;
-		i++;
-	}
-	return (pos);
-}
-
 static	t_stack	*max_nod_select(int	total, t_stack *local)
 {
 	t_stack	*temp;
 	int		i;
 	long	comp;
-	
+
 	i = 0;
 	comp = -3000000000;
 	temp = NULL;
@@ -118,35 +63,7 @@ void	buk_setup(t_info d, t_stack *local)
 	}
 }
 
-void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
-{
-	int	i;
-	char	*strr;
-
-	i = 0;
-	strr = "rrb";
-	if (str[1] == 'a')
-		strr = "rra";
-	if (pos < (d->currentot / 2))
-	{
-		while (i < pos)
-		{
-			rotate(d, stack, r_next, str);
-			i++;
-		}
-	}
-	else
-	{
-		while ((d->currentot - i) != pos)
-		{
-			rotate(d, stack, r_prev, strr);
-			i++;
-		}
-	}
-	d->currentot -= 1;
-}
-
-int	value_select(int st_tot, t_stack *local, int buck)
+static int	value_select(int st_tot, t_stack *local, int buck)
 {
 	long	comp;
 	int		pos;
@@ -173,7 +90,7 @@ int	value_select(int st_tot, t_stack *local, int buck)
 	return (pos);
 }
 
-void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
+static void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 {
 	t_stack *start;
 	int	i;

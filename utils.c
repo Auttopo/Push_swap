@@ -6,10 +6,11 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:42:40 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 16:31:35 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 11:41:59 by abenabde         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stdlib.h"
 #include "push_swap.h"
 
 int	ft_atoi(const char *nptr)
@@ -35,6 +36,71 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * min);
 }
+
+void	clear_stack(t_stack **stack)
+{
+	t_stack	*temp;
+
+	if (*stack == NULL)
+		return ;
+	(*stack)->previous->next = NULL;
+	while (*stack != NULL)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
+}
+
+int	free_all(t_stack **s, t_stack **p, char **list)
+{
+	int	i;
+
+	i = 0;
+	if (list == NULL)
+		return (0);
+	while (list[i] != NULL)
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+	clear_stack(s);
+	clear_stack(p);
+	return (0);
+}
+
+void	main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
+{
+	d->sa = 0;
+	d->sb = 0;
+	d->ss = 0;
+	d->pa = 0;
+	d->pb = 0;
+	d->ra = 0;
+	d->rb = 0;
+	d->rr = 0;
+	d->rra = 0;
+	d->rrb = 0;
+	d->rrr = 0;
+
+
+	*s = NULL;
+	*p = NULL;
+
+	d->min = 3000000000;
+	d->max = -3000000000;
+	d->flag = 0;
+	f->bench = "--bench";
+	f->simple = "--simple";
+	f->medium = "--medium";
+	f->complex_ = "--complex";
+	f->adaptative = "--adaptative";
+
+}
+
+
+
 /*
 float compute_disorder(t_stack *s, int size)
 {
@@ -109,39 +175,3 @@ void	init_index(t_stack **stack, int size)
 	}
 }
 */
-void    min_indexing(int total, t_stack *local, int x)
-{
-	t_stack	*temp;
-        long    comp;
-        int     i;
-	int	pos;
-
-        comp = 3000000000;
-        i = 0;
-        while (i < total)
-        {
-                if (((long)local->value < comp) && (local->index == -1))
-                {
-                        temp = local;
-                        comp = (long)local->value;
-                }
-                local = local->next;
-                i++;
-        }
-
-	temp->index = x;
-}
-
-void	init_index(t_stack *stack, int size)
-{
-	int	i;
-
-	i = 1;
-	while (i <= size)
-	{
-		min_indexing(size, stack, i); 
-		i++;
-	}
-}
-
-
