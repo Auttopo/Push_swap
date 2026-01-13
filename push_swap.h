@@ -54,10 +54,17 @@ typedef struct s_flags
 	char	*adaptative;
 }	t_flags;
 
+
+
 void	init_index(t_stack *stack, int size);
 void    radix(t_info *info, t_stack **s1, t_stack **s2, int size, int base, void(rad_mov)(t_info*, t_stack**,t_stack**, int, char*, int));
 void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
 void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
+
+
+
+// FT_PRINTF
+int		ft_printf(const char *intput, ...);
 
 // DISORDERMETRIC . C
 float	compute_disorder(t_stack *s);
@@ -66,7 +73,7 @@ float	compute_disorder(t_stack *s);
 int	ft_atoi(const char *nptr);
 void	clear_stack(t_stack **stack);
 int	free_all(t_stack **s, t_stack **p, char **list);
-void	main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
+char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
 // SELECTION . C
 long	min_select(int total, t_stack *local, int *pos);

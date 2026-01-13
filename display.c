@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 #include "push_swap.h"
 
 static void	r_case(t_info *d, char *s)

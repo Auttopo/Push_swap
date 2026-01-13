@@ -70,7 +70,7 @@ int	free_all(t_stack **s, t_stack **p, char **list)
 	return (0);
 }
 
-void	main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
+char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 {
 	d->sa = 0;
 	d->sb = 0;
@@ -97,6 +97,7 @@ void	main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 	f->complex_ = "--complex";
 	f->adaptative = "--adaptative";
 
+	return (NULL);
 }
 
 
