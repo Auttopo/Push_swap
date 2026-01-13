@@ -34,7 +34,6 @@ long	min_select(int total, t_stack *local, int *pos)
 
 void	selection(t_info *d, t_stack **stack, t_stack **pull)
 {
-	int		i;
 	int		e;
 	long	comp;
 	int		pos;

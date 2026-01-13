@@ -92,7 +92,6 @@ static int	value_select(int st_tot, t_stack *local, int buck)
 
 static void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 {
-	t_stack *start;
 	int	i;
 	int	buck;
 	int	pos;
@@ -116,7 +115,6 @@ static void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 
 void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 {
-	int		i;
 	int		e;
 	long	comp;
 	int		pos;

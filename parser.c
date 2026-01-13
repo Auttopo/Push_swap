@@ -55,7 +55,7 @@ char	*extract_str(char *str, int *i)
 	if (new == NULL)
 		return (NULL);
 	e = 0;
-	while (str[*i] >= '0' && str[*i] <= '9' || str[*i] == '-')
+	while (((str[*i] >= '0') && (str[*i] <= '9')) || (str[*i] == '-'))
 	{
 		new[e] = str[*i];
 		e++;
@@ -68,7 +68,6 @@ char	*extract_str(char *str, int *i)
 int	arg_parser(char *src, char **list, int *e)
 {
 	int	i;
-	int	size;
 
 	i = 0;
 	while (src[i])

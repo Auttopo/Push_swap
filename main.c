@@ -135,26 +135,23 @@ static void    execution(t_info *data, t_stack **stack, t_stack **pull, float di
 int	main(int argc, char **argv)
 {
 	int		i;
-	int		temp;
-	int		flg;
 	float	disorder;
 	char	**list;
 	t_flags	f;
 	t_info	data;
 	t_stack	*stack;
 	t_stack	*pull;
-	t_stack	*stk_tmp;
 
 	list = main_init(&data, &f, &stack, &pull);
     i = flag_setup(f, &data, argc, argv);
     if (!i)
-        return (0);
-	if (arg_uniformisation(&list, argv, argc, i) == 0)
+	return (0);
+    if (!arg_uniformisation(&list, argv, argc, i))
 		return (free_all(&stack, &pull, list));
 	if (!list_check(list))
 		return (free_all(&stack, &pull, list));
-    if (!stack_and_data_setup(list, &stack, &data))
-        return (free_all(&stack, &pull, list));
+	if (!stack_and_data_setup(list, &stack, &data))
+		return (free_all(&stack, &pull, list));
 	disorder = compute_disorder(stack);
     execution(&data, &stack, &pull, disorder);
 	free_all(&stack, &pull, list);
