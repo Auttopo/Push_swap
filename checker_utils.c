@@ -5,115 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 12:22:32 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/12 13:57:01 by jsam             ###   ########lyon.fr   */
+/*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
+/*   Updated: 2026/01/14 11:23:44 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "checker.h"
 
-int	ft_is_sep(char a, char *charset)
+void	dblswap_checker(t_info *d, t_stack **s1, t_stack **s2)
 {
+	if (!*s1 || !*s2)
+		return ;
+	swap(d, s1, "");
+	swap(d, s2, "");
+}
+
+void	dblrotate_checker(t_info *d, t_stack **s1, t_stack **s2)
+{
+	if (!*s1 || !*s2)
+		return ;
+	rotate(d, s1, r_next, "");
+	rotate(d, s2, r_next, "");
+}
+
+void	dblrrotate_checker(t_info *d, t_stack **s1, t_stack **s2)
+{
+	if (!*s1 || !*s2)
+		return ;
+	rotate(d, s1, r_prev, "");
+	rotate(d, s2, r_prev, "");
+}
+
+
+void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
+{
+	char	buffer[10];
+	char	*line;
+	ssize_t	readbytes;
+	int	stop;
+	char	**splitline;
 	int	i;
 
 	i = 0;
-	while (charset[i] && a != charset[i])
-		i++;
-	if (charset[i] == '\0')
-		return (0);
-	return (1);
-}
-
-int	ft_count_word(char *str, char *charset)
-{
-	int	result;
-	int	i;
-	int	lf;
-
-	i = 0;
-	lf = 0;
-	result = 0;
-	while (str[i])
+	stop = 0;
+	line = NULL;
+	ft_bzero((void*)buffer, 10);
+	while (!stop)
 	{
-		if (ft_is_sep(str[i], charset) == 0 && lf == 0)
-		{
-			lf = 1;
-			result++;
-		}
-		else if (ft_is_sep(str[i], charset) == 1 && lf == 1)
-			lf = 0;
+		readbytes = read(0, buffer, 9);
+		if (readbytes == 0)
+			stop = 1;
+		line = newline(line, buffer, readbytes, readbytes);
+	}
+	splitline = ft_split(line, "\n");
+	while (splitline[i])
+	{
+		execution_checker(splitline[i], d, stack, pull);
 		i++;
 	}
-	return (result);
 }
 
-char	*ft_strdup(char *src, char *charset, int start)
+void	execution_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
 {
-	char	*srccpy;
-	int		i;
-
-	i = 0;
-	while (src[start + i] && ft_is_sep(src[start + i], charset) == 0)
-		i++;
-	srccpy = malloc(i * sizeof(char) + 1);
-	if (!srccpy)
-		return (NULL);
-	i = 0;
-	while (src[start + i] && ft_is_sep(src[start + i], charset) == 0)
-	{
-		srccpy[i] = src[start + i];
-		i++;
-	}
-	srccpy[i] = '\0';
-	return (srccpy);
-}
-
-char	*freeall(char **tab, int j)
-{
-
-	int	i;
-
-	if (!tab)
-		return NULL;
-	i = 0;
-	while (i < j)
-	{
-		free(tab[i]);
-		i++;
-	}
-	return NULL;
-}
-
-char	**ft_split(char *str, char *charset)
-{
-	char	**result;
-	int		i;
-	int		j;
-	int		start;
-
-	start = 0;
-	i = 0;
-	j = 0;
-	result = malloc(sizeof(char *) * (ft_count_word(str, charset) + 1));
-	if (!result)
-		return NULL;
-	while (str[i])
-	{
-		if (ft_is_sep(str[i], charset) == 0)
-		{
-			start = i;
-			result[j] = ft_strdup(str, charset, start);
-			if (!result[j])
-			{
-				freeall(result, j);
-				return NULL;
-			}
-			while (ft_is_sep(str[i], charset) == 0)
-				i++;
-			j++;
-		}
-		i++;
-	}
-	result[j] = NULL;
-	return (result);
+	if (str_comp(line, "sa"))
+		swap_checker(d, stack);
+	else if (str_comp(line, "sb"))
+		swap_checker(d, pull);
+	else if (str_comp(line, "ss"))
+		dblswap_checker(d, stack, pull);
+	else if (str_comp(line, "pa"))
+		push_checker(d, stack, pull);
+	else if (str_comp(line, "pb"))
+		push_checker(d, pull, stack);
+	else if (str_comp(line, "ra"))
+		rotate_checker(d, stack, r_next);
+	else if (str_comp(line, "rb"))
+		rotate_checker(d, pull, r_next);
+	else if (str_comp(line, "rr"))
+		dblrotate_checker(d, stack, pull);
+	else if (str_comp(line, "rra"))
+		rotate_checker(d, stack, r_prev);
+	else if (str_comp(line, "rrb"))
+		rotate_checker(d, pull, r_prev);
+	else if (str_comp(line, "rrr"))
+		dblrrotate_checker(d, stack, pull);
 }
