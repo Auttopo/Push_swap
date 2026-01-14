@@ -6,17 +6,17 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:42:40 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/13 11:41:59 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 13:24:09 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
 #include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	min;
-	int	result;
+	long	min;
+	long	result;
 
 	min = 1;
 	result = 0;
@@ -33,6 +33,8 @@ int	ft_atoi(const char *nptr)
 		result *= 10;
 		result += *nptr - 48;
 		nptr++;
+		if (result * min > 2147483647 || result * min < -2147483648)
+                        return (2147483648);
 	}
 	return (result * min);
 }

@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:36:11 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/11 16:00:34 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 13:01:33 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_printf(int fd, const char *intput, ...);
 float	compute_disorder(t_stack *s);
 
 // UTILS . C
-int	ft_atoi(const char *nptr);
+long	ft_atoi(const char *nptr);
 void	clear_stack(t_stack **stack);
 int	free_all(t_stack **s, t_stack **p, char **list);
 char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
@@ -82,7 +82,7 @@ void	selection(t_info *d, t_stack **stack, t_stack **pull);
 // STACK . C
 void	init_list(t_stack **stack, t_stack *new);
 t_stack	*add_back_nod(t_stack **stack, t_stack *new);
-t_stack	*new_elem(int value);
+t_stack	*new_elem(long value);
 //int	add_front_nod(t_stack **stack, t_stack *new);
 
 // BUCKETS . C
@@ -111,7 +111,7 @@ void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
 void	init_list(t_stack **stack, t_stack *new);
 t_stack	*add_back_nod(t_stack **stack, t_stack *new);
 int	add_front_nod(t_stack **stack, t_stack *new);
-t_stack	*new_elem(int value);
+t_stack	*new_elem(long value);
 
 
 // PARSER . C

@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 10:53:57 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/13 10:53:57 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 12:57:58 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ t_stack	*add_back_nod(t_stack **stack, t_stack *new)
 	return (new);
 }
 
-t_stack	*new_elem(int value)
+t_stack	*new_elem(long value)
 {
+	if (value == 2147483648)
+		return (NULL);
 	t_stack	*nod;
 	nod = malloc(sizeof(t_stack));
 	if (nod == NULL)
