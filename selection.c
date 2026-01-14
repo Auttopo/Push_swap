@@ -44,7 +44,6 @@ void	selection(t_info *d, t_stack **stack, t_stack **pull)
 		comp = min_select(d->total, *stack, &pos);
 		efficient_move(d, stack, "ra", pos);
 		push(d, pull, stack, "pb");
-
 		e++;
 	}
 	e = 0;

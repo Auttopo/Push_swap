@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-static	t_stack	*max_nod_select(int	total, t_stack *local)
+static t_stack	*max_nod_select(int total, t_stack *local)
 {
 	t_stack	*temp;
 	int		i;
@@ -37,7 +37,7 @@ static	t_stack	*max_nod_select(int	total, t_stack *local)
 
 void	buk_setup(t_info d, t_stack *local)
 {
-	t_stack *temp;
+	t_stack	*temp;
 	int		buk_nbr_tmp;
 	int		i;
 	int		number_per_bucket;
@@ -104,7 +104,7 @@ static void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 		if (pos == -1)
 		{
 			buck--;
-			continue;
+			continue ;
 		}
 		efficient_move(d, pull, "rb", pos);
 		push(d, stack, pull, "pa");
@@ -130,7 +130,7 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 		if (pos == -1)
 		{
 			buck++;
-			continue;
+			continue ;
 		}
 		efficient_move(d, stack, "ra", pos);
 		push(d, pull, stack, "pb");

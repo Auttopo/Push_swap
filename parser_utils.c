@@ -36,7 +36,7 @@ int	verif_dbl(char **list)
 	return (1);
 }
 
-int mod(int flag)
+int	mod(int flag)
 {
 	return (flag % 10);
 }

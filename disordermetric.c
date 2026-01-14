@@ -76,6 +76,8 @@ float compute_disorder(t_stack *s)
 		}
 		p1 = p1->next;
 	}
-	metric =(float)mistakes / (float)total;
+	if (mistakes == 0 || total == 0)
+		return (0);
+	metric = (float)mistakes / (float)total;
 	return (metric);
 }
