@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 11:24:38 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 11:53:52 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,11 @@ int	str_comp(char *str, char *str2);
 int	flag_check(t_flags f, char *str);
 
 // checker_utils.c
-void    readexec_checker(t_info *d, t_stack **stack, t_stack **pull);
-void    execution_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
+void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull);
+void	execution_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
+
+// checker_utils2.c
+int	arg_checker_checker(int argc, char **argv);
 
 // DISPLAY . C
 void	putstr_log(t_info *d, char *s);

@@ -77,7 +77,6 @@ static int stack_and_data_setup(char **list, t_stack **stack, t_info *data)
    	i = 0;
 	while (list[i])
 	{
-
 		stk_tmp = add_back_nod(stack, new_elem(ft_atoi(list[i])));
 		if (stk_tmp == NULL)
 			return (0);
@@ -99,7 +98,7 @@ static int list_check(char **list)
 {
     if (list == NULL)
     {
-        ft_printf("Error occured during parsing\n");
+        ft_printf("Error\n");
         return (0);
     }
    	if (!verif_dbl(list))
@@ -151,7 +150,10 @@ int	main(int argc, char **argv)
 	if (!list_check(list))
 		return (free_all(&stack, &pull, list));
 	if (!stack_and_data_setup(list, &stack, &data))
+	{
+		ft_printf("Error\n");
 		return (free_all(&stack, &pull, list));
+	}
 	disorder = compute_disorder(stack);
     execution(&data, &stack, &pull, disorder);
 	free_all(&stack, &pull, list);

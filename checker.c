@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:45:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 09:40:19 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 11:55:01 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,31 @@ int	main(int argc, char **argv)
 	t_stack	*pull;
 
 	list = main_init(&data, &f, &stack, &pull);
-    i = flag_setup(f, &data, argc, argv);
-    if (!i)
-	return (0);
-    if (!arg_uniformisation(&list, argv, argc, i))
+	i = flag_setup(f, &data, argc, argv);
+	if (!arg_checker_checker(argc, argv))
+	{
+		ft_printf("Error\n");
+		return (0);
+	}
+	if (!i)
+		return (0);
+	if (!arg_uniformisation(&list, argv, argc, i))
 		return (free_all(&stack, &pull, list));
 	if (!list_check(list))
 		return (free_all(&stack, &pull, list));
 	if (!stack_and_data_setup(list, &stack, &data))
 		return (free_all(&stack, &pull, list));
-	readexec_checker(&data, &stack, &pull);
 	if (compute_disorder(stack) == 0)
-		ft_printf("OK");
+	{
+		ft_printf("OK\n");
+		return (0);
+	}
+	readexec_checker(&data, &stack, &pull);
+	if (compute_disorder(stack) == 0 && !pull)
+		ft_printf("OK\n");
 	else
-		ft_printf("KO");
+		ft_printf("KO\n");
 	free_all(&stack, &pull, list);
+	return (0);
 }
 
