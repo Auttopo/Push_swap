@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:45:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 11:55:01 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/14 14:36:34 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	main(int argc, char **argv)
 		return (free_all(&stack, &pull, list));
 	if (!stack_and_data_setup(list, &stack, &data))
 		return (free_all(&stack, &pull, list));
+	if (data.total == 1)
+		return (0);
 	if (compute_disorder(stack) == 0)
 	{
 		ft_printf("OK\n");
