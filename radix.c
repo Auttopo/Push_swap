@@ -17,7 +17,7 @@ t_stack	*find_minmax(t_stack *pstack, int min_max)
 {
 	t_stack	*tmp;
 	t_stack	*result;
-	t_stack	*testnull;
+//	t_stack	*testnull;
 
 	if (!pstack)
 		return (NULL);
@@ -53,7 +53,7 @@ char	*definestr_rotate(int min_max, int i, int base)
 void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
         t_stack *pstack;
-        t_stack *pmin;
+//       t_stack *pmin;
         int     i;
 	int	check;
 
@@ -104,9 +104,10 @@ int	radix_rotate(t_stack *pmin, t_stack *s1)
 
 void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
+	size += 1; // FOR FLAG
         t_stack *pstack;
         t_stack *pmin;
-        int     i;
+//        int     i;
         int     mincheck;
 	char	*str;
 	int	absol;
@@ -163,7 +164,7 @@ void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *
 
 int	find_max(int size, int base)
 {
-	int	*bin;
+//	int	*bin;
 	int	i;
 
 	i = 0;
@@ -178,7 +179,7 @@ int	find_max(int size, int base)
 void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base, void (*rad_move)(t_info*, t_stack**,t_stack**, int, char*, int))
 {
 	t_stack	*pstack;
-	t_stack	*pmin;
+//	t_stack	*pmin;
 	int	i;
 	int	max;
 

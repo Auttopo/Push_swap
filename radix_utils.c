@@ -6,7 +6,7 @@ void    min_indexing(int total, t_stack *local, int x)
 	t_stack	*temp;
         long    comp;
         int     i;
-	int	pos;
+//	int	pos;
 
         comp = 3000000000;
         i = 0;
