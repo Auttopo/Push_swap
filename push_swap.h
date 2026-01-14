@@ -64,7 +64,7 @@ void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *
 
 
 // FT_PRINTF
-int		ft_printf(const char *intput, ...);
+int		ft_printf(int fd, const char *intput, ...);
 
 // DISORDERMETRIC . C
 float	compute_disorder(t_stack *s);

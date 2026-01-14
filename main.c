@@ -99,12 +99,12 @@ static int list_check(char **list)
 {
     if (list == NULL)
     {
-        ft_printf("Error occured during parsing\n");
+        ft_printf(2, "Error occured during parsing\n");
         return (0);
     }
    	if (!verif_dbl(list))
 	{
-		ft_printf("Error\n");
+		ft_printf(2, "Error\n");
 		return (0);
 	}
     return (1);
