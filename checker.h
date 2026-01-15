@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 11:53:52 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 10:32:14 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
+/*
 typedef struct s_info
 {
 	int	flag;
@@ -50,6 +50,52 @@ typedef struct s_stack
 	struct s_stack *previous;
 	int index;
 }	t_stack;
+
+typedef struct s_flags
+{
+	char	*bench;
+	char	*simple;
+	char	*medium;
+	char	*complex_;
+	char	*adaptative;
+}	t_flags;
+*/
+typedef struct s_stack
+{
+	int				value;
+	int				bucket;
+	struct s_stack	*next;
+	struct s_stack	*previous;
+	int				index;
+}	t_stack;
+
+typedef struct s_info
+{
+	t_stack	*stack;
+	t_stack	*pull;
+
+	void	*pradix;
+
+	int		flag;
+	long	max;
+	long	min;
+	int		total;
+	int		currentot;
+       	int		buk_nbr;
+
+	int		sa;
+	int		sb;
+	int		ss;
+	int		pa;
+	int		pb;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
+
+}	t_info;
 
 typedef struct s_flags
 {
@@ -125,7 +171,7 @@ void	putstr_log(t_info *d, char *s);
 void	bench_mod(t_info d, float disorder, int strat);
 
 // FT_PRINTF
-int		ft_printf(const char *intput, ...);
+int		ft_printf(int fd, const char *intput, ...);
 
 // ft_split
 char    **ft_split(char *str, char *charset);

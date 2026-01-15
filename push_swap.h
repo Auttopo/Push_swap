@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:31:22 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/14 16:31:33 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 09:28:14 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ typedef struct s_info
 	t_stack	*stack;
 	t_stack	*pull;
 
-	void	*pradix2;
-	void	*pradix10;
+	void	*pradix;
 
 	int		flag;
 	long	max;
 	long	min;
 	int		total;
 	int		currentot;
-	int		buk_nbr;
+       	int		buk_nbr;
 
 	int		sa;
 	int		sb;
@@ -61,9 +60,12 @@ typedef struct s_flags
 }	t_flags;
 
 void	init_index(t_stack *stack, int size);
-void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base, void (*rad_move)(t_info*, t_stack**,t_stack**, int, char*, int));
-void	radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
-void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
+void	radix(t_info *info, t_stack **stack, t_stack **pull, int base);
+void	radix_move(t_info *info, t_stack **s1, t_stack **s2, int min_max);
+void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int min_max);
+char    *definestr_rotate(int min_max, int i, int base);
+t_stack *find_minmax(t_stack *pstack, int min_max);
+int     find_max(int size, int base);
 
 // FT_PRINTF
 int		ft_printf(int fd, const char *intput, ...);
