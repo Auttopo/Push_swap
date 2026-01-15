@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:26:10 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/14 14:26:21 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 12:20:35 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,9 @@ static void	execution(t_info *data,
 		|| (disorder >= (float)0.5 && mod(data->flag) == 0))
 	{
 		if (data->total < 50)
-			radix(data, stack, pull, data->total, 10, radix_move_10);
+			radix(data, stack, pull, 10);
 		else
-			radix(data, stack, pull, data->total, 2, radix_move);
+			radix(data, stack, pull, 2);
 		bench_mod(*data, disorder, 3);
 	}
 }
