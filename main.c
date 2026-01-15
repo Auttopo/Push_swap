@@ -106,7 +106,10 @@ static int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 	}
 	data->total = i;
 	data->currentot = i;
-	data->buk_nbr = ((float)ft_sqrt(data->total)); //  (float)0.6);
+	if (data->total > 10)
+		data->buk_nbr = ((float)ft_sqrt(data->total) * (float)0.65);
+	else
+		data->buk_nbr = ((float)ft_sqrt(data->total) * (float)0.8);
 	if (data->buk_nbr < 1)
 		data->buk_nbr = 1;
 	return (1);
