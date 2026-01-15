@@ -119,8 +119,7 @@ static int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 static void	execution(t_info *data,
 		t_stack **stack, t_stack **pull, float disorder)
 {
- // Value data.total just to test, we have to do less than 25 op for 5 4 3 2 1   \/
-	if (disorder == 0 && mod(data->flag) != 0)
+	if (disorder == 0)
 		return (bench_mod(*data, disorder, mod(data->flag)));
 	if (mod(data->flag) == 1 || (disorder < (float)0.2 && mod(data->flag) == 0))
 	{
@@ -166,6 +165,5 @@ int	main(int argc, char **argv)
 		return (free_all(&data.stack, &data.pull, list, 0));
 	disorder = compute_disorder(data.stack);
 	execution(&data, &data.stack, &data.pull, disorder);
-	show_stack(&data.stack);
 	free_all(&data.stack, &data.pull, list, 1);
 }

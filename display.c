@@ -76,12 +76,12 @@ void	bench_mod(t_info d, float disorder, int strat)
 	if (d.flag < 10)
 		return ;
 	total = d.sa + d.sb + d.ss + d.pa + d.pb + d.ra + d.rb + d.rr + d.rra + d.rrb + d.rrr;
-	if (strat == 1)
-		strategy = "Simple / (O(n²))";
+	if (strat == 3)
+		strategy = "Complex / (O(n log n))";
 	else if (strat == 2)
 		strategy = "Medium / (O(n√n))";
 	else
-		strategy = "Complex / (O(n log n))";
+		strategy = "Simple / (O(n²))";
 
 	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100), ((int)(disorder * 10000) % 100));
 	ft_printf(2, "strategy: %s\n", strategy);
