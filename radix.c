@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 16:28:04 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 07:13:33 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ char	*definestr_rotate(int min_max, int i, int base)
 
 void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
-        t_stack *pstack;
-        t_stack *pmin;
-        int     i;
+	t_stack *pstack;
+	t_stack *pmin;
+	int	i;
 	int	check;
 
-        i = 0;
-        pstack = *s1;
-        while (i < size)
-        {
+	i = 0;
+	pstack = *s1;
+	while (i < size)
+	{
 		if (*s1)
 		{
 			check = (*s1)->index % 2;
@@ -72,7 +72,7 @@ void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pus
 		else
 			rotate(info, s1, r_next, definestr_rotate(min_max, 1, 2));
 		i++;
-        }
+	}
 	while (*s1)
 		push(info, s2, s1, pushstr);
 }
@@ -102,12 +102,12 @@ int	radix_rotate(t_stack *pmin, t_stack *s1)
 	return (-j);
 }
 
-void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
+void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max)
 {
-        t_stack *pstack;
-        t_stack *pmin;
-        int     i;
-        int     mincheck;
+	t_stack	*pstack;
+	t_stack	*pmin;
+	int	i;
+	int	mincheck;
 	char	*str;
 	int	absol;
 
@@ -179,8 +179,8 @@ void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base, vo
 {
 	t_stack	*pstack;
 	t_stack	*pmin;
-	int	i;
-	int	max;
+	int		i;
+	int		max;
 
 	i = 1;
 	pstack = *stack;
