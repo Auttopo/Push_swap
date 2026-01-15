@@ -54,7 +54,7 @@ void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 	d->currentot -= 1;
 }
 
-int	first_select(t_info d, t_stack *local, long *comp, int buck)
+int	first_select(t_info d, t_stack *local, int buck)
 {
 	int		i;
 
@@ -62,14 +62,10 @@ int	first_select(t_info d, t_stack *local, long *comp, int buck)
 	while (i < d.total)
 	{
 		if (local->bucket == buck)
-		{
-			*comp = (long)local->value;
 			return (i);
-		}
 		local = local->next;
 		i++;
 	}
-	*comp = 3000000000;
 	return (-1);
 }
 

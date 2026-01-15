@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:31:22 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/15 13:53:46 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:25:03 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull);
 // BUCKETS UTILS . C
 int		ft_sqrt(int nb);
 void	efficient_move(t_info *d, t_stack **stack, char *str, int pos);
-int		first_select(t_info d, t_stack *local, long *comp, int buck);
+int		first_select(t_info d, t_stack *local, int buck);
 int		max_in_bucket(t_stack *local, int buck);
 
 // RULES1 . C

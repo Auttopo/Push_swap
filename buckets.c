@@ -65,14 +65,12 @@ void	buk_setup(t_info d, t_stack *local)
 
 static int	value_select(int st_tot, t_stack *local, int buck)
 {
-	long	comp;
 	int		pos;
 	int		i;
 	int		moves;
 
 	i = 0;
 	moves = 0;
-	comp = (long)local->next->value;
 	while (local->previous->bucket == buck && buck != 1)
 	{
 		local = local->previous;
@@ -116,17 +114,15 @@ static void	value_sorter(t_info *d, t_stack **stack, t_stack **pull)
 void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 {
 	int		e;
-	long	comp;
 	int		pos;
 	int		buck;
 
 	e = 0;
 	buck = 1;
-	comp = -3000000000;
 	buk_setup(*d, *stack);
 	while (e < d->total)
 	{
-		pos = first_select(*d, *stack, &comp, buck);
+		pos = first_select(*d, *stack, buck);
 		if (pos == -1)
 		{
 			buck++;
