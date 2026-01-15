@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:13:10 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/13 11:13:10 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 14:00:19 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	putstr_log(t_info *d, char *s)
 	write (1, "\n", 1);
 }
 
-
 void	bench_mod(t_info d, float disorder, int strat)
 {
 	char	*strategy;
@@ -75,18 +74,20 @@ void	bench_mod(t_info d, float disorder, int strat)
 
 	if (d.flag < 10)
 		return ;
-	total = d.sa + d.sb + d.ss + d.pa + d.pb + d.ra + d.rb + d.rr + d.rra + d.rrb + d.rrr;
+	total = d.sa + d.sb + d.ss + d.pa + d.pb
+		+ d.ra + d.rb + d.rr + d.rra + d.rrb + d.rrr;
 	if (strat == 1)
 		strategy = "Simple / (O(n²))";
 	else if (strat == 2)
 		strategy = "Medium / (O(n√n))";
 	else
 		strategy = "Complex / (O(n log n))";
-
-	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100), ((int)(disorder * 10000) % 100));
+	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100),
+		((int)(disorder * 10000) % 100));
 	ft_printf(2, "strategy: %s\n", strategy);
 	ft_printf(2, "total operations: %d\n", total);
-	ft_printf(2, "sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n", d.sa ,d.sb ,d.ss ,d.pa ,d.pb);
-	ft_printf(2, "ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n", d.ra, d.rb, d.rr, d.rra, d.rrb, d.rrr);
-
+	ft_printf(2, "sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n",
+		d.sa, d.sb, d.ss, d.pa, d.pb);
+	ft_printf(2, "ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n",
+		d.ra, d.rb, d.rr, d.rra, d.rrb, d.rrr);
 }
