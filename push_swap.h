@@ -76,7 +76,7 @@ float	compute_disorder(t_stack *s);
 // UTILS . C
 long	ft_atoi(const char *nptr);
 void	clear_stack(t_stack **stack);
-int		free_all(t_stack **s, t_stack **p, char **list);
+int		free_all(t_stack **s, t_stack **p, char **list, int flag);
 char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
 // SELECTION . C

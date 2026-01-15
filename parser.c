@@ -34,7 +34,7 @@ int	arg_checker(char *src)
 			e++;
 		else if (src[i] != '\0')
 			return (0);
-		if (src[i - 1] == '-')
+		if (src[i - 1] == '-' || src[i] == '-')
 			return (0);
 	}
 	return (e);

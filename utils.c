@@ -54,11 +54,13 @@ void	clear_stack(t_stack **stack)
 	}
 }
 
-int	free_all(t_stack **s, t_stack **p, char **list)
+int	free_all(t_stack **s, t_stack **p, char **list, int flag)
 {
 	int	i;
 
 	i = 0;
+	if (flag == 0)
+		ft_printf(2, "Error\n");
 	if (list == NULL)
 		return (0);
 	while (list[i] != NULL)
