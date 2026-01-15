@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 11:23:44 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 14:25:08 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@ void	dblrrotate_checker(t_info *d, t_stack **s1, t_stack **s2)
 	rotate(d, s2, r_prev, "");
 }
 
-
 void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 {
 	char	buffer[10];
 	char	*line;
-	ssize_t	readbytes;
-	int	stop;
+//	ssize_t	readbytes;
+	int		stop;
 	char	**splitline;
-	int	i;
+	int		i;
 
 	i = 0;
 	stop = 0;
@@ -52,12 +51,15 @@ void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 	ft_bzero((void*)buffer, 10);
 	while (!stop)
 	{
-		readbytes = read(0, buffer, 9);
-		if (readbytes == 0)
+		//readbytes = read(0, buffer, 9);
+		if (read(0, buffer, 9) == 0)
 			stop = 1;
-		line = newline(line, buffer, readbytes, readbytes);
+		else
+			line = newline(line, buffer,(int)ft_strlen(line), (int)ft_strlen(line));
 	}
 	splitline = ft_split(line, "\n");
+	if (!splitline)
+		return ;
 	while (splitline[i])
 	{
 		execution_checker(splitline[i], d, stack, pull);

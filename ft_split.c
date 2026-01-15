@@ -6,7 +6,7 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/14 10:30:16 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 14:11:22 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	**ft_split(char *str, char *charset)
 	start = 0;
 	i = 0;
 	j = 0;
+	if (!str)
+		return (NULL);
 	result = malloc(sizeof(char *) * (ft_count_word(str, charset)));
 	if (!result)
 		return (NULL);
