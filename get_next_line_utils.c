@@ -6,11 +6,11 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:34:11 by jsam              #+#    #+#             */
-/*   Updated: 2025/12/02 13:46:01 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:34:57 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "checker.h"
 
 ssize_t	ft_strlen(char *str)
 {

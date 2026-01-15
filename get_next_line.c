@@ -6,11 +6,11 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:33:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:09:14 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:34:33 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "checker.h"
 
 static	ssize_t	endline(char *buf)
 {
