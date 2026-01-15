@@ -41,30 +41,28 @@ void	show_bugs(t_stack **stack, int max)
 	}
 	printf("\n");
 }
-
+*/
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
 
 	if (*stack == NULL)
 	{
-		printf("no stack\n\n");
 		return ;
 	}
 
 	temp = (*stack)->next;
-	printf("|%d PREV %d IAM %d NEXT|  %d buk\n",
+	ft_printf(1, "|%d PREV %d IAM %d NEXT|  %d buk\n",
 	(*stack)->previous->value, (*stack)->value,
 	(*stack)->next->value, (*stack)->bucket);
 	while (temp != *stack)
 	{
-		printf("|%d PREV %d IAM %d NEXT|  %d buk\n",
-		temp->previous->value, temp->value, temp->next->value, temp->bucket);
+		ft_printf(1, "|%d PREV %d IAM %d NEXT|  %d buk\n",temp->previous->value, temp->value, temp->next->value, temp->bucket);
 		temp = temp->next;
 	}
-	printf("\n");
+	ft_printf(1, "\n");
 }
-*/
+
 
 static int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 {
@@ -78,7 +76,10 @@ static int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 	{
 		temp = flag_check(f, argv[i]);
 		if ((mod(data->flag) && mod(temp)) || (data->flag / 10 && temp / 10) || temp == 0)
+		{
+			ft_printf(2, "Error\n");
 			return (0);
+		}
 		data->flag += temp;
 		i++;
 	}
@@ -112,21 +113,6 @@ static int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 		data->buk_nbr = ((float)ft_sqrt(data->total) * (float)0.8);
 	if (data->buk_nbr < 1)
 		data->buk_nbr = 1;
-	return (1);
-}
-
-static int	list_check(char **list)
-{
-	if (list == NULL)
-	{
-		ft_printf(2, "Error\n");
-		return (0);
-	}
-	if (!verif_dbl(list))
-	{
-		ft_printf(2, "Error\n");
-		return (0);
-	}
 	return (1);
 }
 
@@ -171,15 +157,15 @@ int	main(int argc, char **argv)
 	if (!i)
 		return (0);
 	if (!arg_uniformisation(&list, argv, argc, i))
-		return (free_all(&data.stack, &data.pull, list));
-	if (!list_check(list))
-		return (free_all(&data.stack, &data.pull, list));
+		return (free_all(&data.stack, &data.pull, list, 0));
+	if (list == NULL)
+		return (free_all(&data.stack, &data.pull, list, 0));
+	if (!verif_dbl(list))
+		return (free_all(&data.stack, &data.pull, list, 0));
 	if (!stack_and_data_setup(list, &data.stack, &data))
-	{
-		ft_printf(2, "Error\n");
-		return (free_all(&data.stack, &data.pull, list));
-	}
+		return (free_all(&data.stack, &data.pull, list, 0));
 	disorder = compute_disorder(data.stack);
 	execution(&data, &data.stack, &data.pull, disorder);
-	free_all(&data.stack, &data.pull, list);
+	show_stack(&data.stack);
+	free_all(&data.stack, &data.pull, list, 1);
 }
