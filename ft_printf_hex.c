@@ -37,7 +37,7 @@ void	convert_base(unsigned long long num,
 	}
 }
 
-char	*convertor(t_strc *s, unsigned long long n, char indice)
+char	*convertor(t_strc *s, unsigned long long n, char indice, int fd)
 {
 	char	*dest;
 	int		len;
@@ -49,7 +49,7 @@ char	*convertor(t_strc *s, unsigned long long n, char indice)
 		return (0);
 	if (indice == 'p')
 	{
-		if (write(1, "0x", 2) < 1)
+		if (write(fd, "0x", 2) < 1)
 			return (NULL);
 		s->count += 2;
 	}
@@ -62,7 +62,7 @@ char	*convertor(t_strc *s, unsigned long long n, char indice)
 	return (dest);
 }
 
-int	p_case(t_strc *s, va_list *args)
+int	p_case(t_strc *s, va_list *args, int fd)
 {
 	char				*str_adr;
 	unsigned long long	adress;
@@ -70,32 +70,32 @@ int	p_case(t_strc *s, va_list *args)
 	adress = (unsigned long long)va_arg(*args, void *);
 	if (adress == 0)
 	{
-		if (write(1, "(nil)", 5) < 1)
+		if (write(fd, "(nil)", 5) < 1)
 			return (0);
 		s->count += 5;
 		return (1);
 	}
-	str_adr = convertor(s, adress, 'p');
+	str_adr = convertor(s, adress, 'p', fd);
 	if (str_adr == NULL)
 		return (0);
-	ft_putstr(str_adr);
+	ft_putstr(str_adr, fd);
 	free(str_adr);
 	return (1);
 }
 
-int	x_cases(t_strc *s, va_list *args, char indice)
+int	x_cases(t_strc *s, va_list *args, char indice, int fd)
 {
 	unsigned int	temp;
 	char			*str;
 
 	temp = va_arg(*args, unsigned int);
 	if (indice == 'X')
-		str = convertor(s, temp, 'X');
+		str = convertor(s, temp, 'X', fd);
 	else
-		str = convertor(s, temp, 'x');
+		str = convertor(s, temp, 'x', fd);
 	if (str == NULL)
 		return (0);
-	ft_putstr(str);
+	ft_putstr(str, fd);
 	free(str);
 	return (1);
 }

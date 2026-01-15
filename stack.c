@@ -31,7 +31,6 @@ t_stack	*add_back_nod(t_stack **stack, t_stack *new)
 		init_list(stack, new);
 		return (new);
 	}
-
 	temp = *stack;
 	while (temp->next != *stack)
 		temp = temp->next;
@@ -44,9 +43,10 @@ t_stack	*add_back_nod(t_stack **stack, t_stack *new)
 
 t_stack	*new_elem(long value)
 {
+	t_stack	*nod;
+
 	if (value == 2147483648)
 		return (NULL);
-	t_stack	*nod;
 	nod = malloc(sizeof(t_stack));
 	if (nod == NULL)
 		return (NULL);
@@ -57,25 +57,25 @@ t_stack	*new_elem(long value)
 }
 
 /*
-int	add_front_nod(t_stack **stack, t_stack *new)
-{
-	t_stack	*temp;
+   int	add_front_nod(t_stack **stack, t_stack *new)
+   {
+   t_stack	*temp;
 
 
-	if (new == NULL)
-		return (0);
-	if (*stack == NULL)
-	{
-		init_list(stack, new);
-		return (1);
-	}
+   if (new == NULL)
+   return (0);
+   if (*stack == NULL)
+   {
+   init_list(stack, new);
+   return (1);
+   }
 
-	new->next = *stack;
-	new->previous = (*stack)->previous;
-	(*stack)->previous = new;
-	new->previous->next = new;
+   new->next = *stack;
+   new->previous = (*stack)->previous;
+   (*stack)->previous = new;
+   new->previous->next = new;
 
-	*stack = new;
-	return (1);
-}
-*/
+ *stack = new;
+ return (1);
+ }
+ */

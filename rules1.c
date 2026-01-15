@@ -20,33 +20,24 @@ void	push(t_info *d, t_stack **dest, t_stack **src, char *str)
 	if (*src == NULL)
 		return ;
 	putstr_log(d, str);
-
 	if ((*src)->next == *src)
 		tmp = NULL;
 	else
 		tmp = (*src)->next;
-
 	(*src)->previous->next = (*src)->next;
 	(*src)->next->previous = (*src)->previous;
-
 	if (*dest == NULL)
 	{
 		*dest = *src;
 		(*src)->next = *src;
 		(*src)->previous = *src;
-
 		*src = tmp;
-
 		return ;
 	}
-
 	(*src)->next = *dest;
 	(*src)->previous = (*dest)->previous;
-
-
 	(*dest)->previous->next = *src;
 	(*dest)->previous = *src;
-
 	*dest = *src;
 	*src = tmp;
 }
@@ -78,13 +69,11 @@ void	swap(t_info *d, t_stack **s, char *str)
 		return ;
 	else if (!(*s)->next)
 		return ;
-
 	if ((*s)->next == (*s)->previous)
 	{
 		rotate(d, s, r_next, str);
 		return ;
 	}
-
 	tmp = (*s)->next->next;
 	(*s)->next->previous = (*s)->previous;
 	(*s)->next = tmp;
@@ -92,8 +81,6 @@ void	swap(t_info *d, t_stack **s, char *str)
 	(*s)->previous = tmp->previous;
 	tmp->previous->next = *s;
 	*s = tmp->previous;
-
 	(*s)->next->next->previous = (*s)->next;
-
 	putstr_log(d, str);
 }

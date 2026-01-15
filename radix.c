@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 16:23:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 07:13:33 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 07:18:14 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_stack	*find_minmax(t_stack *pstack, int min_max)
 {
 	t_stack	*tmp;
 	t_stack	*result;
-	t_stack	*testnull;
+//	t_stack	*testnull;
 
 	if (!pstack)
 		return (NULL);
@@ -163,7 +163,7 @@ void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pus
 
 int	find_max(int size, int base)
 {
-	int	*bin;
+//	int	*bin;
 	int	i;
 
 	i = 0;

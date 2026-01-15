@@ -34,7 +34,7 @@ long	ft_atoi(const char *nptr)
 		result += *nptr - 48;
 		nptr++;
 		if (result * min > 2147483647 || result * min < -2147483648)
-                        return (2147483648);
+			return (2147483648);
 	}
 	return (result * min);
 }
@@ -85,11 +85,8 @@ char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 	d->rra = 0;
 	d->rrb = 0;
 	d->rrr = 0;
-
-
 	*s = NULL;
 	*p = NULL;
-
 	d->min = 3000000000;
 	d->max = -3000000000;
 	d->flag = 0;
@@ -98,83 +95,38 @@ char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 	f->medium = "--medium";
 	f->complex_ = "--complex";
 	f->adaptative = "--adaptative";
-
 	return (NULL);
 }
 
-
-
 /*
-float compute_disorder(t_stack *s, int size)
-{
-	int	mistakes;
-	int	total;
-	int	i;
-	int	tmp;
-	int	j;
-	int	k;
-	float	metric;
-	int	n;
+   void	init_index(t_stack **stack, int size)
+   {
+   t_stack	*tmp;
+   t_stack	*result;
+   int	i;
 
-	n = size;
-
-	mistakes = 0;
-	total = 0;
-	i = 0;
-	while (i < size)
-	{
-		tmp = s->value;
-		j = 0;
-		while (j < n)
-		{
-			if (s->next->value < tmp)
-				mistakes++;
-			s = s->next;
-			total++;
-			j++;
-		}
-		n--;
-		i++;
-		k = 0;
-		while (k < i)
-		{
-			s = s->next;
-			k++;
-		}
-	}
-	metric =(float)mistakes / (float)total;
-	return (metric);
-}
-*/
-/*
-void	init_index(t_stack **stack, int size)
-{
-	t_stack	*tmp;
-	t_stack	*result;
-	int	i;
-
-	i = 0;
-	if (!stack)
-		return ;
+   i = 0;
+   if (!stack)
+   return ;
 //	result = stack;
 //	tmp = stack->next;
 //	if (result == tmp)
 //		result->index = 0;
-	while (i < size)
-	{
+while (i < size)
+{
 
-		result = (*stack);
-		tmp = (*stack)->next;
-		while (tmp != (*stack))
-		{
-			__builtin_printf("%d <  %d\n", tmp->value, result->value);
-			if (tmp->value  < result->value && tmp->index == -1)
-				result = tmp;
-			tmp = tmp->next;
-		}
-		__builtin_printf(" ------------------- \n");
-		result->index = i;
-		i++;
-	}
+result = (*stack);
+tmp = (*stack)->next;
+while (tmp != (*stack))
+{
+__builtin_printf("%d <  %d\n", tmp->value, result->value);
+if (tmp->value  < result->value && tmp->index == -1)
+result = tmp;
+tmp = tmp->next;
+}
+__builtin_printf(" ------------------- \n");
+result->index = i;
+i++;
+}
 }
 */

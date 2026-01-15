@@ -83,10 +83,10 @@ void	bench_mod(t_info d, float disorder, int strat)
 	else
 		strategy = "Complex / (O(n log n))";
 
-	ft_printf("[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100), ((int)(disorder * 10000) % 100));
-	ft_printf("strategy: %s\n", strategy);
-	ft_printf("total operations: %d\n", total);
-	ft_printf("sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n", d.sa ,d.sb ,d.ss ,d.pa ,d.pb);
-	ft_printf("ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n", d.ra, d.rb, d.rr, d.rra, d.rrb, d.rrr);
+	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n", (int)(disorder * 100), ((int)(disorder * 10000) % 100));
+	ft_printf(2, "strategy: %s\n", strategy);
+	ft_printf(2, "total operations: %d\n", total);
+	ft_printf(2, "sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n", d.sa ,d.sb ,d.ss ,d.pa ,d.pb);
+	ft_printf(2, "ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n", d.ra, d.rb, d.rr, d.rra, d.rrb, d.rrr);
 
 }

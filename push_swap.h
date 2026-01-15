@@ -5,45 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 18:36:11 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/14 13:01:33 by jsam             ###   ########lyon.fr   */
+/*   Created: 2026/01/14 16:31:22 by abenabde          #+#    #+#             */
+/*   Updated: 2026/01/14 16:31:33 by abenabde         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct s_info
-{
-	int	flag;
-	long max;
-	long min;
-	int total;
-	int	currentot;
-	int	buk_nbr;
-
-	int	sa;
-	int	sb;
-	int ss;
-	int pa;
-	int pb;
-	int ra;
-	int rb;
-	int rr;
-	int rra;
-	int	rrb;
-	int	rrr;
-
-}	t_info;
-
 typedef struct s_stack
 {
-	int value;
-	int	bucket;
-	struct s_stack *next;
-	struct s_stack *previous;
-	int index;
+	int				value;
+	int				bucket;
+	struct s_stack	*next;
+	struct s_stack	*previous;
+	int				index;
 }	t_stack;
+
+typedef struct s_info
+{
+	t_stack	*stack;
+	t_stack	*pull;
+
+	void	*pradix2;
+	void	*pradix10;
+
+	int		flag;
+	long	max;
+	long	min;
+	int		total;
+	int		currentot;
+	int		buk_nbr;
+
+	int		sa;
+	int		sb;
+	int		ss;
+	int		pa;
+	int		pb;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
+
+}	t_info;
 
 typedef struct s_flags
 {
@@ -54,17 +60,13 @@ typedef struct s_flags
 	char	*adaptative;
 }	t_flags;
 
-
-
 void	init_index(t_stack *stack, int size);
-void    radix(t_info *info, t_stack **s1, t_stack **s2, int size, int base, void(rad_mov)(t_info*, t_stack**,t_stack**, int, char*, int));
-void    radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
-void    radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
-
-
+void	radix(t_info *info, t_stack **stack, t_stack **pull, int size, int base, void (*rad_move)(t_info*, t_stack**,t_stack**, int, char*, int));
+void	radix_move(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
+void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int size, char *pushstr, int min_max);
 
 // FT_PRINTF
-int		ft_printf(const char *intput, ...);
+int		ft_printf(int fd, const char *intput, ...);
 
 // DISORDERMETRIC . C
 float	compute_disorder(t_stack *s);
@@ -72,7 +74,7 @@ float	compute_disorder(t_stack *s);
 // UTILS . C
 long	ft_atoi(const char *nptr);
 void	clear_stack(t_stack **stack);
-int	free_all(t_stack **s, t_stack **p, char **list);
+int		free_all(t_stack **s, t_stack **p, char **list);
 char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
 // SELECTION . C
@@ -89,11 +91,10 @@ t_stack	*new_elem(long value);
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
 
 // BUCKETS UTILS . C
-int	ft_sqrt(int nb);
+int		ft_sqrt(int nb);
 void	efficient_move(t_info *d, t_stack **stack, char *str, int pos);
-int	first_select(t_info d, t_stack *local, long *comp, int buck);
-int	max_in_bucket(t_stack *local, int buck);
-
+int		first_select(t_info d, t_stack *local, long *comp, int buck);
+int		max_in_bucket(t_stack *local, int buck);
 
 // RULES1 . C
 void	push(t_info *d, t_stack **dest, t_stack **src, char *str);
@@ -110,25 +111,23 @@ void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
 // STACK . C
 void	init_list(t_stack **stack, t_stack *new);
 t_stack	*add_back_nod(t_stack **stack, t_stack *new);
-int	add_front_nod(t_stack **stack, t_stack *new);
+int		add_front_nod(t_stack **stack, t_stack *new);
 t_stack	*new_elem(long value);
 
-
 // PARSER . C
-int	arg_checker(char *src);
+int		arg_checker(char *src);
 char	*extract_str(char *str, int *i);
-int	arg_parser(char *src, char **list, int *e);
-int	arg_uniformisation(char ***list, char **str, int max, int i);
+int		arg_parser(char *src, char **list, int *e);
+int		arg_uniformisation(char ***list, char **str, int max, int i);
 
 // PARSER . C
-int	verif_dbl(char **list);
-int mod(int flag);
-int	str_comp(char *str, char *str2);
-int	flag_check(t_flags f, char *str);
+int		verif_dbl(char **list);
+int		mod(int flag);
+int		str_comp(char *str, char *str2);
+int		flag_check(t_flags f, char *str);
 
 // DISPLAY . C
 void	putstr_log(t_info *d, char *s);
 void	bench_mod(t_info d, float disorder, int strat);
-
 
 #endif

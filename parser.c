@@ -17,7 +17,7 @@ int	arg_checker(char *src)
 {
 	int	i;
 	int	e;
-	int temp;
+	int	temp;
 
 	i = 0;
 	e = 0;
@@ -46,7 +46,6 @@ char	*extract_str(char *str, int *i)
 	int		e;
 
 	e = *i;
-
 	if (str[e] == '-')
 		e++;
 	while (str[e] >= '0' && str[e] <= '9')
@@ -81,8 +80,10 @@ int	arg_parser(char *src, char **list, int *e)
 			return (0);
 		*e += 1;
 	}
+	list[*e] = NULL;
 	return (1);
 }
+
 int	arg_uniformisation(char ***list, char **str, int max, int i)
 {
 	int	tmp;

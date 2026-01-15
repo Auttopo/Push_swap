@@ -28,7 +28,7 @@ int	ft_sqrt(int nb)
 
 void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 {
-	int	i;
+	int		i;
 	char	*strr;
 
 	i = 0;
