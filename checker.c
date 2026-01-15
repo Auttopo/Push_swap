@@ -6,14 +6,13 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:45:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 10:40:16 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:05:12 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include <stdlib.h>
 
-//checker.c checker_utils.c radix_utils.c parser.c utils.c rules1.c rules2.c  display.c ft_printf.c ft_printf_cases.c ft_printf_hex.c parser_utils.c stack.c get_next_line.c get_next_line_utils.c disordermetric.c buckets_utils.c
 static	int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 {
 	int	i;

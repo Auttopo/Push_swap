@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:44:31 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 14:25:56 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 14:45:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	arg_checker_checker(int argc, char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if(argv[i][j] == '-' && mincheck == 0)
+			if (argv[i][j] == '-' && mincheck == 0)
 			{
 				j++;
 				mincheck = 1;

@@ -6,7 +6,7 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 14:11:22 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:04:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ char	**ft_split(char *str, char *charset)
 	char	**result;
 	int		i;
 	int		j;
-	int		start;
 
-	start = 0;
 	i = 0;
 	j = 0;
 	if (!str)
@@ -90,8 +88,7 @@ char	**ft_split(char *str, char *charset)
 	{
 		if (ft_is_sep(str[i], charset) == 0)
 		{
-			start = i;
-			result[j] = ft_strdup(str, charset, start);
+			result[j] = ft_strdup(str, charset, i);
 			while (ft_is_sep(str[i], charset) == 0)
 				i++;
 			j++;
@@ -100,26 +97,3 @@ char	**ft_split(char *str, char *charset)
 	}
 	return (result);
 }
-/*
-int	main(int argc, char **argv)
-{
-	(void)argc;
-	char *str = argv[1];
-	char *charset = argv[2];
-	char **test;
-	int	i;
-	int len;
-
-	i = 0;
-	test = ft_split(str, charset);
-	while (test[i])
-		i++;
-	len = i;
-	i = 0;
-	while(i < len)
-	{
-		printf("%s\n", test[i]);
-		i++;
-	}
-	return (0);
-}*/

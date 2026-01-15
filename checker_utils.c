@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 14:25:08 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/15 15:10:02 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 {
 	char	buffer[10];
 	char	*line;
-//	ssize_t	readbytes;
 	int		stop;
 	char	**splitline;
 	int		i;
@@ -48,26 +47,25 @@ void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 	i = 0;
 	stop = 0;
 	line = NULL;
-	ft_bzero((void*)buffer, 10);
+	ft_bzero((void *)buffer, 10);
 	while (!stop)
 	{
-		//readbytes = read(0, buffer, 9);
 		if (read(0, buffer, 9) == 0)
 			stop = 1;
 		else
-			line = newline(line, buffer,(int)ft_strlen(line), (int)ft_strlen(line));
+			line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
 	}
 	splitline = ft_split(line, "\n");
 	if (!splitline)
 		return ;
 	while (splitline[i])
 	{
-		execution_checker(splitline[i], d, stack, pull);
+		exec_checker(splitline[i], d, stack, pull);
 		i++;
 	}
 }
 
-void	execution_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
+void	exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
 {
 	if (str_comp(line, "sa"))
 		swap_checker(d, stack);
