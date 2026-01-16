@@ -6,7 +6,7 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:04:31 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 17:29:09 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,19 @@ char	*ft_strdup(char *src, char *charset, int start)
 	srccpy[i] = '\0';
 	return (srccpy);
 }
+char	**freesplit(char **result)
+{
+	int	i;
 
+	i = 0;
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
+	return (result);
+}
 char	**ft_split(char *str, char *charset)
 {
 	char	**result;
@@ -89,6 +101,8 @@ char	**ft_split(char *str, char *charset)
 		if (ft_is_sep(str[i], charset) == 0)
 		{
 			result[j] = ft_strdup(str, charset, i);
+			if (!result[j])
+				return (freesplit(result));
 			while (ft_is_sep(str[i], charset) == 0)
 				i++;
 			j++;

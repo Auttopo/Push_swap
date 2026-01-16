@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:45:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:05:12 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 14:54:04 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	main(int argc, char **argv)
 		return (free_all(&data.stack, &data.pull, list));
 	if (!stack_and_data_setup(list, &data.stack, &data))
 		return (free_all(&data.stack, &data.pull, list));
-	readexec_checker(&data, &data.stack, &data.pull);
+	if (!readexec_checker(&data, &data.stack, &data.pull))
+		return (free_all(&data.stack, &data.pull, list));
 	if (compute_disorder(data.stack) == 0 && !data.pull)
 		ft_printf(1, "OK\n");
 	else

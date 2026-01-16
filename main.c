@@ -63,7 +63,6 @@ void	show_stack(t_stack **stack)
 	ft_printf(1, "\n");
 }
 
-
 static int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 {
 	int	i;
@@ -75,7 +74,8 @@ static int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 	while (i < (argc - 1) && (i < 3) && argv[i][1] == '-')
 	{
 		temp = flag_check(f, argv[i]);
-		if ((mod(data->flag) && mod(temp)) || (data->flag / 10 && temp / 10) || temp == 0)
+		if ((mod(data->flag) && mod(temp))
+			|| (data->flag / 10 && temp / 10) || temp == 0)
 		{
 			ft_printf(2, "Error\n");
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:17:42 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 17:25:24 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,13 @@ void	dblrrotate_checker(t_info *d, t_stack **s1, t_stack **s2);
 float	compute_disorder(t_stack *s);
 
 // get_next_line
-ssize_t	ft_strlen(char *str);
+/*ssize_t	ft_strlen(char *str);
 void	ft_strlcat(char *dst, char *src, int endl);
 char	*freeline(char *line);
 int		veriffd(char *buf, int fd);
 char	*get_next_line(int fd);
 char	*newline(char *line, char *buf, ssize_t endl, ssize_t readbytes);
+*/
 
 // PARSER . C
 int		arg_checker(char *src);
@@ -159,11 +160,14 @@ int		str_comp(char *str, char *str2);
 int		flag_check(t_flags f, char *str);
 
 // checker_utils.c
-void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull);
-void	exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
+int		readexec_checker(t_info *d, t_stack **stack, t_stack **pull);
+int		exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
 
 // checker_utils2.c
 int		arg_checker_checker(int argc, char **argv);
+int		verif_cmd(char **splitline);
+int		free_readexec_checker(char *line, char **splitline);
+
 
 // DISPLAY . C
 void	putstr_log(t_info *d, char *s);
@@ -174,7 +178,7 @@ int		ft_printf(int fd, const char *intput, ...);
 
 // ft_split
 char	**ft_split(char *str, char *charset);
-
+char	**freesplit(char **result);
 // ft_bzero.c
 void	ft_bzero(void *s, size_t n);
 

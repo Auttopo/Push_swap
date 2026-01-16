@@ -6,11 +6,12 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:10:02 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 17:25:03 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+#include "get_next_line.h"
 
 void	dblswap_checker(t_info *d, t_stack **s1, t_stack **s2)
 {
@@ -36,9 +37,9 @@ void	dblrrotate_checker(t_info *d, t_stack **s1, t_stack **s2)
 	rotate(d, s2, r_prev, "");
 }
 
-void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
+int	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 {
-	char	buffer[10];
+	char	buffer[42];
 	char	*line;
 	int		stop;
 	char	**splitline;
@@ -47,25 +48,27 @@ void	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 	i = 0;
 	stop = 0;
 	line = NULL;
-	ft_bzero((void *)buffer, 10);
-	while (!stop)
+	ft_bzero((void *)buffer, 42);
+	while (read(0, buffer, 41) > 0)
 	{
-		if (read(0, buffer, 9) == 0)
-			stop = 1;
-		else
-			line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
+		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
+		if (!line)
+			return (0);
 	}
-	splitline = ft_split(line, "\n");
+	splitline = ft_split(line,"\n");
 	if (!splitline)
-		return ;
+		return (0);
 	while (splitline[i])
 	{
-		exec_checker(splitline[i], d, stack, pull);
+		if (!exec_checker(splitline[i], d, stack, pull))
+			return (free_readexec_checker(line, splitline));
 		i++;
 	}
+	free_readexec_checker(line, splitline);
+	return (1);
 }
 
-void	exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
+int	exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
 {
 	if (str_comp(line, "sa"))
 		swap_checker(d, stack);
@@ -89,4 +92,7 @@ void	exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull)
 		rotate_checker(d, pull, r_prev);
 	else if (str_comp(line, "rrr"))
 		dblrrotate_checker(d, stack, pull);
+	else
+		return (0);
+	return (1);
 }

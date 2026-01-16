@@ -6,11 +6,11 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:33:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:34:33 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 17:29:42 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "get_next_line.h"
 
 static	ssize_t	endline(char *buf)
 {
@@ -37,12 +37,17 @@ char	*newline(char *line, char *buf, ssize_t	endl, ssize_t readbytes)
 	lnewline += size;
 	newline = malloc(sizeof(char) * (lnewline + 1));
 	if (!newline)
-		return (freeline(line));
+	{
+		if (line)
+			free(line);
+		return (NULL);
+	}
 	newline[0] = '\0';
 	if (line)
 		ft_strlcat(newline, line, ft_strlen(line));
 	ft_strlcat(newline, buf, size);
-	free(line);
+	if (line)
+		free(line);
 	return (newline);
 }
 
