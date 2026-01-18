@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_utils2.c                                   :+:      :+:    :+:   */
+/*   checker_utils2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:44:31 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 12:04:45 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 18:48:39 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
-#include "get_next_line.h"
+#include "checker_bonus.h"
+#include "get_next_line_bonus.h"
 
 int	free_readexec_checker(char *line, char **splitline)
 {
@@ -33,11 +33,24 @@ char	*read_line(void)
 {
 	char	*line;
 	char	buffer[42];
+	ssize_t	readbytes;
+	int	stop;
 
+	stop = 0;
 	line = NULL;
 	ft_bzero((void *)buffer, 42);
-	while (read(0, buffer, 41) > 0)
+	while (!stop)
 	{
+		readbytes = read(0, buffer, 41);
+		if (!readbytes)
+			stop = 1;
+		buffer[readbytes] = '\0';
+		if (!verif_cmd(buffer) && readbytes > 0)
+			{
+				if (line)
+					free(line);
+				return (NULL);
+			}
 		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
 		if (!line)
 			return (NULL);
@@ -45,30 +58,25 @@ char	*read_line(void)
 	return (line);
 }
 
-int	verif_cmd(char **splitline)
+int	verif_cmd(char *buffer)
 {
 	int	result;
 	int	i;
 
 	i = 0;
-	result = 1;
-	while (splitline[i])
-	{
-		result = 0;
-		result += str_comp(splitline[i], "sa");
-		result += str_comp(splitline[i], "sb");
-		result += str_comp(splitline[i], "ss");
-		result += str_comp(splitline[i], "pa");
-		result += str_comp(splitline[i], "pb");
-		result += str_comp(splitline[i], "ra");
-		result += str_comp(splitline[i], "rb");
-		result += str_comp(splitline[i], "rr");
-		result += str_comp(splitline[i], "rra");
-		result += str_comp(splitline[i], "rrb");
-		result += str_comp(splitline[i], "rrr");
-		if (!result)
-			return (0);
-		i++;
-	}
+	result = 0;
+	result += str_comp(buffer, "sa\n");
+	result += str_comp(buffer, "sb\n");
+	result += str_comp(buffer, "ss\n");
+	result += str_comp(buffer, "pa\n");
+	result += str_comp(buffer, "pb\n");
+	result += str_comp(buffer, "ra\n");
+	result += str_comp(buffer, "rb\n");
+	result += str_comp(buffer, "rr\n");
+	result += str_comp(buffer, "rra\n");
+	result += str_comp(buffer, "rrb\n");
+	result += str_comp(buffer, "rrr\n");
+	if (!result)
+		return (0);
 	return (1);
 }

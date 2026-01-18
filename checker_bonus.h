@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 11:47:00 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 18:09:31 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -165,7 +165,7 @@ int		exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
 
 // checker_utils2.c
 int		arg_checker_checker(int argc, char **argv);
-int		verif_cmd(char **splitline);
+int		verif_cmd(char *buffer);
 int		free_readexec_checker(char *line, char **splitline);
 char	*read_line(void);
 

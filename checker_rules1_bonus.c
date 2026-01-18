@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_rules1.c                                   :+:      :+:    :+:   */
+/*   checker_rules1_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:19:13 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 15:21:21 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 18:43:30 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push_checker(t_info *d, t_stack **dest, t_stack **src)
 {
 	t_stack	*tmp;
 
-	if (*src == NULL)
+	if (!(*src))
 		return ;
 	if ((*src)->next == *src)
 		tmp = NULL;
