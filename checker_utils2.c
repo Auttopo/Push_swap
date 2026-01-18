@@ -6,18 +6,20 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:44:31 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/16 17:23:41 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 12:04:45 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+#include "get_next_line.h"
 
 int	free_readexec_checker(char *line, char **splitline)
 {
 	int	i;
 
 	i = 0;
-	free(line);
+	if (line)
+		free(line);
 	while (splitline[i])
 	{
 		free(splitline[i]);
@@ -25,6 +27,22 @@ int	free_readexec_checker(char *line, char **splitline)
 	}
 	free(splitline);
 	return (0);
+}
+
+char	*read_line(void)
+{
+	char	*line;
+	char	buffer[42];
+
+	line = NULL;
+	ft_bzero((void *)buffer, 42);
+	while (read(0, buffer, 41) > 0)
+	{
+		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
+		if (!line)
+			return (NULL);
+	}
+	return (line);
 }
 
 int	verif_cmd(char **splitline)
@@ -49,12 +67,8 @@ int	verif_cmd(char **splitline)
 		result += str_comp(splitline[i], "rrb");
 		result += str_comp(splitline[i], "rrr");
 		if (!result)
-		{
-			free(splitline);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
 }
-

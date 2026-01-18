@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/16 17:25:24 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 11:47:00 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int		exec_checker(char *line, t_info *d, t_stack **stack, t_stack **pull);
 int		arg_checker_checker(int argc, char **argv);
 int		verif_cmd(char **splitline);
 int		free_readexec_checker(char *line, char **splitline);
-
+char	*read_line(void);
 
 // DISPLAY . C
 void	putstr_log(t_info *d, char *s);

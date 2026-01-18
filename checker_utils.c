@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/16 17:25:03 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 11:47:50 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,16 @@ void	dblrrotate_checker(t_info *d, t_stack **s1, t_stack **s2)
 
 int	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 {
-	char	buffer[42];
 	char	*line;
-	int		stop;
 	char	**splitline;
 	int		i;
 
 	i = 0;
-	stop = 0;
 	line = NULL;
-	ft_bzero((void *)buffer, 42);
-	while (read(0, buffer, 41) > 0)
-	{
-		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
-		if (!line)
-			return (0);
-	}
-	splitline = ft_split(line,"\n");
+	line = read_line();
+	if (!line)
+		return (0);
+	splitline = ft_split(line, "\n");
 	if (!splitline)
 		return (0);
 	while (splitline[i])

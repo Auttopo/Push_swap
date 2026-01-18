@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:26:10 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/15 12:20:35 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 12:09:23 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ void	show_stack(t_stack **stack)
 	{
 		return ;
 	}
-
 	temp = (*stack)->next;
 	ft_printf(1, "|%d PREV %d IAM %d NEXT|  %d buk\n",
-	(*stack)->previous->value, (*stack)->value,
-	(*stack)->next->value, (*stack)->bucket);
+		(*stack)->previous->value, (*stack)->value,
+		(*stack)->next->value, (*stack)->bucket);
 	while (temp != *stack)
 	{
-		ft_printf(1, "|%d PREV %d IAM %d NEXT|  %d buk\n",temp->previous->value, temp->value, temp->next->value, temp->bucket);
+		ft_printf(1, "|%d PREV %d IAM %d NEXT|  %d buk\n",
+			temp->previous->value, temp->value,
+			temp->next->value, temp->bucket);
 		temp = temp->next;
 	}
 	ft_printf(1, "\n");

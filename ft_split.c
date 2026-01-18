@@ -6,11 +6,12 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 10:59:56 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 12:03:49 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "get_next_line.h"
 //#include <stdio.h>
 
 int	ft_is_sep(char a, char *charset)
@@ -70,6 +71,7 @@ char	*ft_strdup(char *src, char *charset, int start)
 	srccpy[i] = '\0';
 	return (srccpy);
 }
+
 char	**freesplit(char **result)
 {
 	int	i;
@@ -83,6 +85,7 @@ char	**freesplit(char **result)
 	free(result);
 	return (result);
 }
+
 char	**ft_split(char *str, char *charset)
 {
 	char	**result;
@@ -91,7 +94,7 @@ char	**ft_split(char *str, char *charset)
 
 	i = 0;
 	j = 0;
-	if (!str)
+	if (!str || !charset)
 		return (NULL);
 	result = malloc(sizeof(char *) * (1 + (ft_count_word(str, charset))));
 	if (!result)
@@ -103,8 +106,7 @@ char	**ft_split(char *str, char *charset)
 			result[j] = ft_strdup(str, charset, i);
 			if (!result[j])
 				return (freesplit(result));
-			while (ft_is_sep(str[i], charset) == 0)
-				i++;
+			i += (int)ft_strlen(result[j]);
 			j++;
 		}
 		i++;
