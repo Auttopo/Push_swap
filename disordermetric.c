@@ -6,20 +6,23 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:00:45 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/15 09:54:18 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 17:31:59 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+
+
 float	compute_disorder(t_stack *s)
 {
 	int		mistakes;
 	int		total;
-	float	metric;
 	t_stack	*p1;
 	t_stack	*p2;
 
+	if (!s)
+		return (-1);
 	p1 = s;
 	mistakes = 0;
 	total = 0;
@@ -37,6 +40,5 @@ float	compute_disorder(t_stack *s)
 	}
 	if (mistakes == 0 || total == 0)
 		return (0);
-	metric = (float)mistakes / (float)total;
-	return (metric);
+	return ((float)mistakes / (float)total);
 }

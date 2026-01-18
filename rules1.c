@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:26:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/11 16:38:09 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 18:44:24 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push(t_info *d, t_stack **dest, t_stack **src, char *str)
 {
 	t_stack	*tmp;
 
-	if (*src == NULL)
+	if (!(*src))
 		return ;
 	putstr_log(d, str);
 	if ((*src)->next == *src)

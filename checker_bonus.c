@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:45:47 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/16 14:54:04 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 17:20:44 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 #include <stdlib.h>
 
 static	int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
