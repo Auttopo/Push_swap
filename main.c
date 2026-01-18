@@ -88,7 +88,6 @@ static int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 	return (1);
 }
 
-
 static void	execution(t_info *data,
 		t_stack **stack, t_stack **pull, float disorder)
 {
@@ -110,11 +109,8 @@ static void	execution(t_info *data,
 	{
 		if (data->total < 10)
 			merge_bubble(data, stack, pull);
-		if (data->total < 50)
-		{
-			bubble(data, stack, data->total);
-		//	radix(data, stack, pull, 10);
-		}
+		else if (data->total < 50)
+			radix(data, stack, pull, 10);
 		else
 			radix(data, stack, pull, 2);
 		bench_mod(*data, disorder, 3);
@@ -144,4 +140,5 @@ int	main(int argc, char **argv)
 	disorder = compute_disorder(data.stack);
 	execution(&data, &data.stack, &data.pull, disorder);
 	free_all(&data.stack, &data.pull, list, 1);
+	return (0);
 }

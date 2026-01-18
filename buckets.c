@@ -35,7 +35,7 @@ t_stack	*max_nod_select(int total, t_stack *local)
 	return (temp);
 }
 
-void	buk_setup(t_info d, t_stack *local, t_stack* (*select)(int, t_stack*))
+void	buk_setup(t_info d, t_stack *local, t_stack *(*select)(int, t_stack*))
 {
 	t_stack	*temp;
 	int		buk_nbr_tmp;

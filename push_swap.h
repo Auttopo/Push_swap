@@ -95,7 +95,7 @@ t_stack	*new_elem(long value);
 
 // BUCKETS . C
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
-void	buk_setup(t_info d, t_stack *local, t_stack* (*select)(int, t_stack*));
+void	buk_setup(t_info d, t_stack *local, t_stack *(*select)(int, t_stack*));
 
 // BUCKETS UTILS . C
 int		ft_sqrt(int nb);

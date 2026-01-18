@@ -16,28 +16,26 @@
 static void	compare(t_info *d, t_stack **s1)
 {
 	if ((*s1)->value > (*s1)->next->value)
-	{
 		swap(d, s1, "sa");
-	}
 }
 
 void	bubble(t_info *d, t_stack **s1, int size)
 {
-	int i = -2;
+	int	i;
+
+	i = 0;
 	if (size < 3)
 	{
-		compare(d, s1);	
+		compare(d, s1);
 		return ;
 	}
 	while (1)
 	{
-		if (i < size - 0)
+		if (i < size)
 		{
-			compare(d, s1);	
+			compare(d, s1);
 			if (compute_disorder((*s1)) == 0)
-			{
 				return ;
-			}
 			rotate(d, s1, r_prev, "rra");
 		}
 		else
@@ -71,7 +69,8 @@ static t_stack	*min_nod_select(int total, t_stack *local)
 	return (temp);
 }
 
-static void	half_selection(t_info *d, int total, t_stack **stack, t_stack **pull)
+static void	half_selection(t_info *d, int total,
+	t_stack **stack, t_stack **pull)
 {
 	int		e;
 	int		pos;
@@ -99,9 +98,7 @@ void	merge_bubble(t_info *d, t_stack **stack, t_stack **pull)
 	{
 		pos = first_select(d->currentot, *stack, 2);
 		if (pos == -1)
-		{
 			break ;
-		}
 		efficient_move(d, stack, "ra", pos);
 		push(d, pull, stack, "pb");
 		e++;
@@ -109,5 +106,3 @@ void	merge_bubble(t_info *d, t_stack **stack, t_stack **pull)
 	bubble(d, stack, d->total - (d->total / d->buk_nbr));
 	half_selection(d, (d->total / d->buk_nbr), stack, pull);
 }
-
-

@@ -76,7 +76,7 @@ int	first_select(int total, t_stack *local, int buck)
 		if (local->bucket == buck)
 			pos_prev = i;
 		local = local->next;
-		i++;	
+		i++;
 	}
 	if (pos_next > pos_prev && pos_next != -1)
 		return (total - pos_prev);
