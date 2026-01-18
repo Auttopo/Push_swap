@@ -79,6 +79,9 @@ void	clear_stack(t_stack **stack);
 int		free_all(t_stack **s, t_stack **p, char **list, int flag);
 char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
+// BUBBLE . C
+void	bubble(t_info *d, t_stack **s1, int size);
+
 // SELECTION . C
 long	min_select(int total, t_stack *local, int *pos);
 void	selection(t_info *d, t_stack **stack, t_stack **pull);
