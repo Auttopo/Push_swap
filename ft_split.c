@@ -6,7 +6,7 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/16 17:29:09 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/18 10:59:56 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_split(char *str, char *charset)
 	j = 0;
 	if (!str)
 		return (NULL);
-	result = malloc(sizeof(char *) * (ft_count_word(str, charset)));
+	result = malloc(sizeof(char *) * (1 + (ft_count_word(str, charset))));
 	if (!result)
 		return (NULL);
 	while (str[i])
@@ -109,5 +109,6 @@ char	**ft_split(char *str, char *charset)
 		}
 		i++;
 	}
+	result[j] = NULL;
 	return (result);
 }
