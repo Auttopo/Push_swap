@@ -81,6 +81,7 @@ char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
 // BUBBLE . C
 void	bubble(t_info *d, t_stack **s1, int size);
+void	merge_bubble(t_info *d, t_stack **stack, t_stack **pull);
 
 // SELECTION . C
 long	min_select(int total, t_stack *local, int *pos);
@@ -94,11 +95,12 @@ t_stack	*new_elem(long value);
 
 // BUCKETS . C
 void	buckets(t_info *d, t_stack **stack, t_stack **pull);
+void	buk_setup(t_info d, t_stack *local, t_stack* (*select)(int, t_stack*));
 
 // BUCKETS UTILS . C
 int		ft_sqrt(int nb);
 void	efficient_move(t_info *d, t_stack **stack, char *str, int pos);
-int		first_select(t_info d, t_stack *local, int buck);
+int		first_select(int total, t_stack *local, int buck);
 int		max_in_bucket(t_stack *local, int buck);
 
 // RULES1 . C

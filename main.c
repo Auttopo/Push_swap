@@ -13,35 +13,6 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
-/*
-void	show_bugs(t_stack **stack, int max)
-{
-	t_stack	*temp;
-	int	i;
-
-	if (*stack == NULL)
-	{
-		printf("no stack\n\n");
-		return ;
-	}
-
-	i = 0;
-	temp = (*stack)->next;
-//	printf("|%d|\n", (*stack)->value);
-	printf("|%d PREV %d IAM %d NEXT|  %d buk\n",
-	(*stack)->previous->value,(*stack)->value,
-	(*stack)->next->value,(*stack)->bucket);
-	while (i < max - 1)
-	{
-		printf("|%d PREV %d IAM %d NEXT|  %d buk\n",
-		temp->previous->value, temp->value, temp->next->value, temp->bucket);
-//		printf("|%d|\n", temp->value);
-		temp = temp->next;
-		i++;
-	}
-	printf("\n");
-}
-*/
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
@@ -117,6 +88,7 @@ static int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 	return (1);
 }
 
+
 static void	execution(t_info *data,
 		t_stack **stack, t_stack **pull, float disorder)
 {
@@ -136,6 +108,8 @@ static void	execution(t_info *data,
 	else if (mod(data->flag) == 3
 		|| (disorder >= (float)0.5 && mod(data->flag) == 0))
 	{
+		if (data->total < 10)
+			merge_bubble(data, stack, pull);
 		if (data->total < 50)
 			radix(data, stack, pull, 10);
 		else
