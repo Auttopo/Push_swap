@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+static int DEBUG;
+
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
 //#include <stdio.h>
@@ -59,6 +62,36 @@ char	*ft_strdup(char *src, char *charset, int start)
 	i = 0;
 	while (src[start + i] && ft_is_sep(src[start + i], charset) == 0)
 		i++;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	DEBUG += 1;
+	__builtin_printf("DEBUG AT PHASE %d <--------------------------\n", DEBUG);
+	if (DEBUG == 1)
+	{
+		__builtin_printf("ERROR NOT HANDLED !!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		return (NULL);
+	}
+
+
+
+
+
+
+
+
+
 	srccpy = malloc(i * sizeof(char) + 1);
 	if (!srccpy)
 		return (NULL);
@@ -83,7 +116,7 @@ char	**freesplit(char **result)
 		i++;
 	}
 	free(result);
-	return (result);
+	return (NULL);
 }
 
 char	**ft_split(char *str, char *charset)

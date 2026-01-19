@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "stdlib.h"
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 long	ft_atoi(const char *nptr)
 {
@@ -59,8 +59,11 @@ int	free_all(t_stack **s, t_stack **p, char **list, int flag)
 	int	i;
 
 	i = 0;
+	ft_printf(2, "SOMETING SERIOULSY WRONG !!!!! 2112121212121!!!!! \n");
 	if (flag == 0)
 		ft_printf(2, "Error\n");
+
+
 	if (list == NULL)
 		return (0);
 	while (list[i] != NULL)

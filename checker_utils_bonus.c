@@ -47,12 +47,19 @@ int	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 	line = NULL;
 	line = read_line();
 	if (!line)
+		return (-1);
+	if (line[0] == '\0')
 		return (1);
 /*	else if (line[0]=='\n')
 		return (0);*/
 	splitline = ft_split(line, "\n");
-	if (!splitline || !(*splitline))
+	if (!splitline)
+	{
+		free(line);
 		return (0);
+	}
+	if (!(*splitline))
+		return (free_readexec_checker(line, splitline));
 	while (splitline[i])
 	{
 		if (!exec_checker(splitline[i], d, stack, pull))

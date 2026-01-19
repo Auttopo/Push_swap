@@ -90,17 +90,17 @@ int	main(int argc, char **argv)
 	if (!i)
 		return (0);
 	if (!arg_uniformisation(&list, argv, argc, i))
-		return (free_all(&data.stack, &data.pull, list));
+		return (free_all(&data.stack, &data.pull, list, 0));
 	if (!list_check(list))
-		return (free_all(&data.stack, &data.pull, list));
+		return (free_all(&data.stack, &data.pull, list, 0));
 	if (!stack_and_data_setup(list, &data.stack, &data))
-		return (free_all(&data.stack, &data.pull, list));
-	if (!readexec_checker(&data, &data.stack, &data.pull))
-		return (free_all(&data.stack, &data.pull, list));
+		return (free_all(&data.stack, &data.pull, list, 0));
+	if (0 >= readexec_checker(&data, &data.stack, &data.pull))
+		return (free_all(&data.stack, &data.pull, list, 0));
 	if (compute_disorder(data.stack) == 0 && !data.pull)
 		ft_printf(1, "OK\n");
 	else
 		ft_printf(1, "KO\n");
-	free_all(&data.stack, &data.pull, list);
+	free_all(&data.stack, &data.pull, list, 1);
 	return (0);
 }

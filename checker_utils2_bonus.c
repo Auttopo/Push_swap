@@ -29,7 +29,7 @@ int	free_readexec_checker(char *line, char **splitline)
 	return (0);
 }
 
-char	*read_line(void)
+char	*read_line()
 {
 	char	*line;
 	char	buffer[42];
@@ -46,8 +46,13 @@ char	*read_line(void)
 			stop = 1;
 		buffer[readbytes] = '\0';
 		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
-		if (!verif_cmd(buffer) && readbytes > 0)
-			return (line);
+		if (line == NULL)
+			return (NULL);
+		if (!verif_cmd(buffer))
+		{
+			free(line);
+			return (NULL);
+		}
 		//	line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
 		/*if (!line)
 			return (NULL);*/
