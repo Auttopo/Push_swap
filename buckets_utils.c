@@ -35,7 +35,7 @@ void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 	strr = "rrb";
 	if (str[1] == 'a')
 		strr = "rra";
-	if (pos < (d->currentot / 2))
+	if (pos < (d->currentot / 2) && d->currentot != 1)
 	{
 		while (i < pos)
 		{
@@ -43,7 +43,7 @@ void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 			i++;
 		}
 	}
-	else
+	else if (d->currentot != 1)
 	{
 		while ((d->currentot - i) != pos)
 		{
@@ -54,19 +54,33 @@ void	efficient_move(t_info *d, t_stack **stack, char *str, int pos)
 	d->currentot -= 1;
 }
 
-int	first_select(t_info d, t_stack *local, int buck)
+int	first_select(int total, t_stack *local, int buck)
 {
 	int		i;
+	int		pos_next;
+	int		pos_prev;
 
 	i = 0;
-	while (i < d.total)
+	pos_next = -1;
+	pos_prev = -1;
+	while (i < total)
 	{
-		if (local->bucket == buck)
-			return (i);
+		if (local->bucket == buck && pos_next == -1)
+			pos_next = i;
 		local = local->next;
 		i++;
 	}
-	return (-1);
+	i = 0;
+	while (i < total)
+	{
+		if (local->bucket == buck)
+			pos_prev = i;
+		local = local->next;
+		i++;
+	}
+	if (pos_next > pos_prev && pos_next != -1)
+		return (total - pos_prev);
+	return (pos_next);
 }
 
 int	max_in_bucket(t_stack *local, int buck)
