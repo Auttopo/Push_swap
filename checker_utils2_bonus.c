@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:44:31 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 18:48:39 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/19 16:20:34 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,12 @@ char	*read_line(void)
 		if (!readbytes)
 			stop = 1;
 		buffer[readbytes] = '\0';
-		if (!verif_cmd(buffer) && readbytes > 0)
-			{
-				if (line)
-					free(line);
-				return (NULL);
-			}
 		line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
-		if (!line)
-			return (NULL);
+		if (!verif_cmd(buffer) && readbytes > 0)
+			return (line);
+		//	line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
+		/*if (!line)
+			return (NULL);*/
 	}
 	return (line);
 }
@@ -76,6 +73,7 @@ int	verif_cmd(char *buffer)
 	result += str_comp(buffer, "rra\n");
 	result += str_comp(buffer, "rrb\n");
 	result += str_comp(buffer, "rrr\n");
+	result += str_comp(buffer, "");
 	if (!result)
 		return (0);
 	return (1);

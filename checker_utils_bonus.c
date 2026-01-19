@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 18:48:58 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/19 16:32:43 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ int	readexec_checker(t_info *d, t_stack **stack, t_stack **pull)
 	line = NULL;
 	line = read_line();
 	if (!line)
-	{
-		ft_printf(2, "Error\n");
-		return (0);
-	}
+		return (1);
+/*	else if (line[0]=='\n')
+		return (0);*/
 	splitline = ft_split(line, "\n");
-	if (!splitline)
+	if (!splitline || !(*splitline))
 		return (0);
 	while (splitline[i])
 	{
