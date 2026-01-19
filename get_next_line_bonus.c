@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:33:43 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 18:49:38 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/19 14:24:47 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*newline(char *line, char *buf, ssize_t	endl, ssize_t readbytes)
 		size++;
 	lnewline += size;
 	newline = malloc(sizeof(char) * (lnewline + 1));
-	if (!newline)
+	if (!newline && readbytes < 1)
 	{
 		if (line)
 			free(line);
