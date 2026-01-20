@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:44:31 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/19 16:20:34 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 16:09:28 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	dblswap_checker(t_stack **s1, t_stack **s2)
 {
-	if (!*s1 || !*s2)
+	if (!*s1 && !*s2)
 		return ;
 	swap_checker(s1);
 	swap_checker(s2);

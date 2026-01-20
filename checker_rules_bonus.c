@@ -6,7 +6,7 @@
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:18:07 by abenabde          #+#    #+#             */
-/*   Updated: 2026/01/20 11:18:39 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 14:48:14 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	push_checker(t_stack **dest, t_stack **src)
 
 void	rotate_checker(t_stack **s, void (*move)(t_stack **))
 {
-	if (!*s)
+	if (!*s || (*s)->next == *s)
 		return ;
 	move(s);
 }
@@ -62,9 +62,7 @@ void	swap_checker(t_stack **s)
 {
 	t_stack	*tmp;
 
-	if (!*s)
-		return ;
-	else if (!(*s)->next)
+	if (!*s || (*s)->next == *s)
 		return ;
 	if ((*s)->next == (*s)->previous)
 	{

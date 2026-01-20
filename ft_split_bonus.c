@@ -6,14 +6,14 @@
 /*   By: jsam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:29:41 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 18:49:20 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 14:43:21 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "checker_bonus.h"
 
-int	ft_is_sep(char a, char *charset)
+static	int	ft_is_sep(char a, char *charset)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	ft_is_sep(char a, char *charset)
 	return (1);
 }
 
-int	ft_count_word(char *str, char *charset)
+static	int	ft_count_word(char *str, char *charset)
 {
 	int	result;
 	int	i;
@@ -50,7 +50,7 @@ int	ft_count_word(char *str, char *charset)
 	return (result);
 }
 
-char	*ft_strdup(char *src, char *charset, int start)
+static	char	*ft_strdup(char *src, char *charset, int start)
 {
 	char	*srccpy;
 	int		i;
