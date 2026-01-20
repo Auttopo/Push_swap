@@ -11,7 +11,14 @@
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-#include "get_next_line_bonus.h"
+
+void	dblswap_checker(t_stack **s1, t_stack **s2)
+{
+	if (!*s1 || !*s2)
+		return ;
+	swap_checker(s1);
+	swap_checker(s2);
+}
 
 int	free_readexec_checker(char *line, char **splitline)
 {
@@ -29,12 +36,12 @@ int	free_readexec_checker(char *line, char **splitline)
 	return (0);
 }
 
-char	*read_line()
+char	*read_line(void)
 {
 	char	*line;
 	char	buffer[42];
 	ssize_t	readbytes;
-	int	stop;
+	int		stop;
 
 	stop = 0;
 	line = NULL;
@@ -53,9 +60,6 @@ char	*read_line()
 			free(line);
 			return (NULL);
 		}
-		//	line = newline(line, buffer, ft_strlen(buffer), ft_strlen(buffer));
-		/*if (!line)
-			return (NULL);*/
 	}
 	return (line);
 }

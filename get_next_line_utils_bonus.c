@@ -38,29 +38,3 @@ void	ft_strlcat(char *dst, char *src, int endl)
 	}
 	dst[ldst + i] = '\0';
 }
-
-int	veriffd(char *buf, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (BUFFER_SIZE <= 0)
-		return (0);
-	if (fd < 0)
-	{
-		while (i < BUFFER_SIZE)
-		{
-			buf[i] = '\0';
-			i++;
-		}
-		return (0);
-	}
-	return (1);
-}
-
-char	*freeline(char *line)
-{
-	if (line)
-		free(line);
-	return (NULL);
-}

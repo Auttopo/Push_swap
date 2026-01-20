@@ -59,11 +59,8 @@ int	free_all(t_stack **s, t_stack **p, char **list, int flag)
 	int	i;
 
 	i = 0;
-	ft_printf(2, "SOMETING SERIOULSY WRONG !!!!! 2112121212121!!!!! \n");
 	if (flag == 0)
 		ft_printf(2, "Error\n");
-
-
 	if (list == NULL)
 		return (0);
 	while (list[i] != NULL)
@@ -102,36 +99,3 @@ char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 	f->adaptative = "--adaptative";
 	return (NULL);
 }
-
-/*
-   void	init_index(t_stack **stack, int size)
-   {
-   t_stack	*tmp;
-   t_stack	*result;
-   int	i;
-
-   i = 0;
-   if (!stack)
-   return ;
-//	result = stack;
-//	tmp = stack->next;
-//	if (result == tmp)
-//		result->index = 0;
-while (i < size)
-{
-
-result = (*stack);
-tmp = (*stack)->next;
-while (tmp != (*stack))
-{
-__builtin_printf("%d <  %d\n", tmp->value, result->value);
-if (tmp->value  < result->value && tmp->index == -1)
-result = tmp;
-tmp = tmp->next;
-}
-__builtin_printf(" ------------------- \n");
-result->index = i;
-i++;
-}
-}
-*/

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 void	dblswap(t_info *d, t_stack **s1, t_stack **s2)
 {
 	if (!*s1 || !*s2)
@@ -35,3 +35,4 @@ void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2)
 	rotate(d, s1, r_prev, "rrr");
 	rotate(d, s2, r_prev, "\0\0");
 }
+*/

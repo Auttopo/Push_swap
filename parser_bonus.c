@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	arg_checker(char *src)
 {

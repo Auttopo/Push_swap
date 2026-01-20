@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 static void	r_case(t_info *d, char *s)
 {
