@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 08:09:16 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/19 16:32:43 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 15:40:47 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ static void	dblrrotate_checker(t_stack **s1, t_stack **s2)
 	rotate_checker(s2, r_prev);
 }
 
-static int	readexec_return(char *line)
+static int	readexec_return(char *line, int freeflag)
 {
 	if (!line)
 		return (-1);
-	if (line[0] == '\0')
+	if (line[0] == '\0' && !freeflag)
 		return (1);
+	else if (line[0] == '\0' && freeflag)
+	{
+		free(line);
+		return (1);
+	}
 	return (0);
 }
 
@@ -46,8 +51,8 @@ int	readexec_checker(t_stack **stack, t_stack **pull)
 	i = 0;
 	line = NULL;
 	line = read_line();
-	if (readexec_return(line) != 0)
-		return (readexec_return(line));
+	if (readexec_return(line, 0) != 0)
+		return (readexec_return(line, 1));
 	splitline = ft_split(line, "\n");
 	if (!splitline)
 	{

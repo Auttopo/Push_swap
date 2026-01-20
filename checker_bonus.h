@@ -6,7 +6,7 @@
 /*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 07:56:12 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/20 14:04:40 by jsam             ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 15:02:11 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_info
 	int		total;
 
 }	t_info;
-
 
 // UTILS_BONUS. C
 long	ft_atoi(const char *nptr);
