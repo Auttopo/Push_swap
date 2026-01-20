@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:32:44 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/02 14:32:45 by abenabde         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 14:39:36 by jsam             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_putstr(char *str, int fd)
+static	int	ft_putstr(char *str, int fd)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ int	ft_putstr(char *str, int fd)
 	return (1);
 }
 
-int	ft_putnbr(size_t *count, long long n, int fd)
+static	int	ft_putnbr(size_t *count, long long n, int fd)
 {
 	char	c;
 
@@ -46,7 +46,7 @@ int	ft_putnbr(size_t *count, long long n, int fd)
 	return (1);
 }
 
-int	no_case(t_strc *s, int fd)
+static	int	no_case(t_strc *s, int fd)
 {
 	if (s->str[s->i] == '\0')
 		return (0);
@@ -58,7 +58,7 @@ int	no_case(t_strc *s, int fd)
 	return (1);
 }
 
-int	parser(t_strc *s, va_list *args, int fd)
+static	int	parser(t_strc *s, va_list *args, int fd)
 {
 	int	check;
 
