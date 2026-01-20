@@ -79,9 +79,8 @@ void	clear_stack(t_stack **stack);
 int		free_all(t_stack **s, t_stack **p, char **list, int flag);
 char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
 
-// BUBBLE . C
-void	bubble(t_info *d, t_stack **s1, int size);
-void	merge_bubble(t_info *d, t_stack **stack, t_stack **pull);
+// MAERGE . C
+void	merge_short(t_info *d, t_stack **stack, t_stack **pull);
 
 // SELECTION . C
 long	min_select(int total, t_stack *local, int *pos);
@@ -111,9 +110,9 @@ void	rotate(t_info *d, t_stack **s, void (*move)(t_stack **), char *str);
 void	swap(t_info *d, t_stack **s, char *str);
 
 //RULES2 . C
-void	dblswap(t_info *d, t_stack **s1, t_stack **s2);
-void	dblrotate(t_info *d, t_stack **s1, t_stack **s2);
-void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
+//void	dblswap(t_info *d, t_stack **s1, t_stack **s2);
+//void	dblrotate(t_info *d, t_stack **s1, t_stack **s2);
+//void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
 
 // STACK . C
 void	init_list(t_stack **stack, t_stack *new);

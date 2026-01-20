@@ -107,8 +107,8 @@ static void	execution(t_info *data,
 	else if (mod(data->flag) == 3
 		|| (disorder >= (float)0.5 && mod(data->flag) == 0))
 	{
-		if (data->total < 10)
-			merge_bubble(data, stack, pull);
+		if (data->total < 5)
+			merge_short(data, stack, pull);
 		else if (data->total < 50)
 			radix(data, stack, pull, 10);
 		else

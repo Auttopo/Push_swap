@@ -1,7 +1,7 @@
 CFLAGS= cc -Wall -Wextra -Werror
 OBJ=	ft_printf.o ft_printf_cases.o ft_printf_hex.o \
-		main.o utils.o parser.o stack.o parser_utils.o display.o rules1.o rules2.o disordermetric.o \
-		selection.o bubble.o \
+		main.o utils.o parser.o stack.o parser_utils.o display.o rules1.o disordermetric.o \
+		selection.o merge.o \
 		buckets.o buckets_utils.o \
 		radix.o radix_utils.o
 
@@ -22,7 +22,7 @@ bonus : $(NAMEBONUS)
 %.o : %.c push_swap.h ft_printf.h
 	$(CFLAGS) -c $< -o $@
 
-%_bonus.o : %_bonus.c
+%_bonus.o : %_bonus.c checker_bonus.h ft_printf_bonus.h
 	$(CFLAGS) -c $< -o $@
 
 
@@ -31,7 +31,6 @@ $(NAME) : $(OBJ)
 
 $(NAMEBONUS) : $(OBJBONUS)
 	$(CFLAGS) $(OBJBONUS) -o $(NAMEBONUS)
-
 
 
 clean :
@@ -50,4 +49,5 @@ re : fclean all
 
 rebonus : fcleanbonus bonus
 
-.PHONY : all clean fclean re
+
+.PHONY : all clean fclean re bonus cleanbonus fcleanbonus rebonus
