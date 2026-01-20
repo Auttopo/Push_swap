@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	verif_dbl(char **list)
 {
@@ -36,11 +36,6 @@ int	verif_dbl(char **list)
 	return (1);
 }
 
-int	mod(int flag)
-{
-	return (flag % 10);
-}
-
 int	str_comp(char *str, char *str2)
 {
 	int	i;
@@ -51,19 +46,4 @@ int	str_comp(char *str, char *str2)
 	if (str[i] != str2[i])
 		return (0);
 	return (1);
-}
-
-int	flag_check(t_flags f, char *str)
-{
-	if (str_comp(str, f.bench) == 1)
-		return (10);
-	else if (str_comp(str, f.simple) == 1)
-		return (1);
-	else if (str_comp(str, f.medium) == 1)
-		return (2);
-	else if (str_comp(str, f.complex_) == 1)
-		return (3);
-	else if (str_comp(str, f.adaptative) == 1)
-		return (4);
-	return (0);
 }

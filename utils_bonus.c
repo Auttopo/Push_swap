@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "stdlib.h"
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 long	ft_atoi(const char *nptr)
 {
@@ -74,61 +74,12 @@ int	free_all(t_stack **s, t_stack **p, char **list, int flag)
 	return (0);
 }
 
-char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
+char	**main_init(t_info *d, t_stack **s, t_stack **p)
 {
-	d->sa = 0;
-	d->sb = 0;
-	d->ss = 0;
-	d->pa = 0;
-	d->pb = 0;
-	d->ra = 0;
-	d->rb = 0;
-	d->rr = 0;
-	d->rra = 0;
-	d->rrb = 0;
-	d->rrr = 0;
 	*s = NULL;
 	*p = NULL;
 	d->min = 3000000000;
 	d->max = -3000000000;
 	d->flag = 0;
-	f->bench = "--bench";
-	f->simple = "--simple";
-	f->medium = "--medium";
-	f->complex_ = "--complex";
-	f->adaptative = "--adaptative";
 	return (NULL);
 }
-
-/*
-   void	init_index(t_stack **stack, int size)
-   {
-   t_stack	*tmp;
-   t_stack	*result;
-   int	i;
-
-   i = 0;
-   if (!stack)
-   return ;
-//	result = stack;
-//	tmp = stack->next;
-//	if (result == tmp)
-//		result->index = 0;
-while (i < size)
-{
-
-result = (*stack);
-tmp = (*stack)->next;
-while (tmp != (*stack))
-{
-__builtin_printf("%d <  %d\n", tmp->value, result->value);
-if (tmp->value  < result->value && tmp->index == -1)
-result = tmp;
-tmp = tmp->next;
-}
-__builtin_printf(" ------------------- \n");
-result->index = i;
-i++;
-}
-}
-*/

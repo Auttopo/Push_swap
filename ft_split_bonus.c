@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "get_next_line_bonus.h"
-//#include <stdio.h>
+#include "checker_bonus.h"
 
 int	ft_is_sep(char a, char *charset)
 {
@@ -83,7 +82,7 @@ char	**freesplit(char **result)
 		i++;
 	}
 	free(result);
-	return (result);
+	return (NULL);
 }
 
 char	**ft_split(char *str, char *charset)

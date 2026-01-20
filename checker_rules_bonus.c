@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_rules1_bonus.c                             :+:      :+:    :+:   */
+/*   checker_rules_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsam <jsam@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 11:19:13 by jsam              #+#    #+#             */
-/*   Updated: 2026/01/18 18:43:30 by jsam             ###   ########lyon.fr   */
+/*   Created: 2026/01/20 11:18:07 by abenabde          #+#    #+#             */
+/*   Updated: 2026/01/20 11:18:39 by abenabde         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 #include <unistd.h>
 
-void	push_checker(t_info *d, t_stack **dest, t_stack **src)
+void	push_checker(t_stack **dest, t_stack **src)
 {
 	t_stack	*tmp;
 
@@ -41,14 +41,24 @@ void	push_checker(t_info *d, t_stack **dest, t_stack **src)
 	*src = tmp;
 }
 
-void	rotate_checker(t_info *d, t_stack **s, void (*move)(t_stack **))
+void	rotate_checker(t_stack **s, void (*move)(t_stack **))
 {
 	if (!*s)
 		return ;
 	move(s);
 }
 
-void	swap_checker(t_info *d, t_stack **s)
+void	r_next(t_stack **s)
+{
+	*s = (*s)->next;
+}
+
+void	r_prev(t_stack **s)
+{
+	*s = (*s)->previous;
+}
+
+void	swap_checker(t_stack **s)
 {
 	t_stack	*tmp;
 
@@ -58,7 +68,7 @@ void	swap_checker(t_info *d, t_stack **s)
 		return ;
 	if ((*s)->next == (*s)->previous)
 	{
-		rotate_checker(d, s, r_next);
+		rotate_checker(s, r_next);
 		return ;
 	}
 	tmp = (*s)->next->next;

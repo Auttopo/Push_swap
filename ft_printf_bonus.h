@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenabde <abenabde@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 12:43:13 by abenabde          #+#    #+#             */
-/*   Updated: 2025/12/08 12:43:13 by abenabde         ###   ########lyon.fr   */
+/*   Created: 2026/01/20 11:16:23 by abenabde          #+#    #+#             */
+/*   Updated: 2026/01/20 11:16:23 by abenabde         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include <unistd.h>
 # include <stdarg.h>

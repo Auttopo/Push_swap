@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-
-
 float	compute_disorder(t_stack *s)
 {
 	int		mistakes;
