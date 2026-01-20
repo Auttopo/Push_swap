@@ -74,28 +74,12 @@ int	free_all(t_stack **s, t_stack **p, char **list, int flag)
 	return (0);
 }
 
-char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
+char	**main_init(t_info *d, t_stack **s, t_stack **p)
 {
-	d->sa = 0;
-	d->sb = 0;
-	d->ss = 0;
-	d->pa = 0;
-	d->pb = 0;
-	d->ra = 0;
-	d->rb = 0;
-	d->rr = 0;
-	d->rra = 0;
-	d->rrb = 0;
-	d->rrr = 0;
 	*s = NULL;
 	*p = NULL;
 	d->min = 3000000000;
 	d->max = -3000000000;
 	d->flag = 0;
-	f->bench = "--bench";
-	f->simple = "--simple";
-	f->medium = "--medium";
-	f->complex_ = "--complex";
-	f->adaptative = "--adaptative";
 	return (NULL);
 }

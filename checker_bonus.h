@@ -15,53 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-/*
-typedef struct s_info
-{
-	int	flag;
-	long max;
-	long min;
-	int total;
-	int	currentot;
-	int	buk_nbr;
-
-	int	sa;
-	int	sb;
-	int ss;
-	int pa;
-	int pb;
-	int ra;
-	int rb;
-	int rr;
-	int rra;
-	int	rrb;
-	int	rrr;
-
-}	t_info;
-
-typedef struct s_stack
-{
-	int value;
-	int	bucket;
-	struct s_stack *next;
-	struct s_stack *previous;
-	int index;
-}	t_stack;
-
-typedef struct s_flags
-{
-	char	*bench;
-	char	*simple;
-	char	*medium;
-	char	*complex_;
-	char	*adaptative;
-}	t_flags;
-
-*/
-
 typedef struct s_stack
 {
 	int				value;
@@ -82,31 +35,8 @@ typedef struct s_info
 	long	max;
 	long	min;
 	int		total;
-	int		currentot;
-	int		buk_nbr;
-
-	int		sa;
-	int		sb;
-	int		ss;
-	int		pa;
-	int		pb;
-	int		ra;
-	int		rb;
-	int		rr;
-	int		rra;
-	int		rrb;
-	int		rrr;
 
 }	t_info;
-
-typedef struct s_flags
-{
-	char	*bench;
-	char	*simple;
-	char	*medium;
-	char	*complex_;
-	char	*adaptative;
-}	t_flags;
 
 // BUCKETS UTILS . C
 int		ft_sqrt(int nb);
@@ -115,7 +45,7 @@ int		ft_sqrt(int nb);
 long	ft_atoi(const char *nptr);
 void	clear_stack(t_stack **stack);
 int		free_all(t_stack **s, t_stack **p, char **list, int flag);
-char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p);
+char	**main_init(t_info *d, t_stack **s, t_stack **p);
 
 // STACK . C
 void	init_list(t_stack **stack, t_stack *new);
@@ -156,14 +86,15 @@ int		ft_printf(int fd, const char *intput, ...);
 // ft_split
 char	**ft_split(char *str, char *charset);
 char	**freesplit(char **result);
+
 // ft_bzero.c
 void	ft_bzero(void *s, size_t n);
 
 // checker_rules1.c
-
 void	push_checker(t_stack **dest, t_stack **src);
 void	rotate_checker(t_stack **s, void (*move)(t_stack **));
 void	swap_checker(t_stack **s);
 void	r_next(t_stack **s);
 void	r_prev(t_stack **s);
+
 #endif

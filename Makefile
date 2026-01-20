@@ -7,7 +7,7 @@ OBJ=	ft_printf.o ft_printf_cases.o ft_printf_hex.o \
 
 OBJBONUS=	checker_bonus.o checker_utils_bonus.o checker_utils2_bonus.o checker_rules_bonus.o \
 			parser_bonus.o parser_utils_bonus.o stack_bonus.o utils_bonus.o \
-			disordermetric_bonus.o display_bonus.o ft_split_bonus.o ft_bzero_bonus.o \
+			disordermetric_bonus.o ft_split_bonus.o ft_bzero_bonus.o \
 			ft_printf_bonus.o ft_printf_cases_bonus.o ft_printf_hex_bonus.o \
 			get_next_line_bonus.o get_next_line_utils_bonus.o
 

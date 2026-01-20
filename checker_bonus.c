@@ -41,7 +41,6 @@ static	int	stack_and_data_setup(char **list, t_stack **stack, t_info *data)
 		i++;
 	}
 	data->total = i;
-	data->currentot = i;
 	return (1);
 }
 
@@ -63,10 +62,9 @@ static	int	list_check(char **list)
 int	main(int argc, char **argv)
 {
 	char	**list;
-	t_flags	f;
 	t_info	data;
 
-	list = main_init(&data, &f, &data.stack, &data.pull);
+	list = main_init(&data, &data.stack, &data.pull);
 	if (!args_verif(argc))
 		return (list_check(NULL));
 	if (!arg_uniformisation(&list, argv, argc, 1))
