@@ -94,10 +94,10 @@ void	bench_mod(t_info d, float disorder, int strat)
 		strategy = "Simple / (O(n²))";
 	else
 		adaptive_case(&strategy, disorder);
-	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n",
-		(int)(disorder * 100), ((int)(disorder * 10000) % 100));
-	ft_printf(2, "strategy: %s\n", strategy);
-	ft_printf(2, "total operations: %d\n", total);
+	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%d%%\n",
+		(int)(disorder * 100), ((int)(disorder * 1000) % 10),
+		((int)(disorder * 10000) % 10));
+	ft_printf(2, "strategy: %s\ntotal operations: %d\n", strategy, total);
 	ft_printf(2, "sa: %d | sb: %d | ss: %d | pa: %d | pb: %d\n",
 		d.sa, d.sb, d.ss, d.pa, d.pb);
 	ft_printf(2, "ra: %d | rb: %d | rr: %d | rra: %d | rrb: %d | rrr: %d\n",
