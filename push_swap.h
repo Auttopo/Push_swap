@@ -27,8 +27,6 @@ typedef struct s_info
 	t_stack	*stack;
 	t_stack	*pull;
 
-	void	*pradix;
-
 	int		flag;
 	long	max;
 	long	min;
