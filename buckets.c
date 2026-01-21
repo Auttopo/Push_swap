@@ -122,7 +122,7 @@ void	buckets(t_info *d, t_stack **stack, t_stack **pull)
 	buk_setup(*d, *stack, max_nod_select);
 	while (e < d->total)
 	{
-		pos = first_select(d->total, *stack, buck);
+		pos = first_select(d->currentot, *stack, buck);
 		if (pos == -1)
 		{
 			buck++;
