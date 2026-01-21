@@ -107,11 +107,6 @@ void	r_prev(t_stack **s);
 void	rotate(t_info *d, t_stack **s, void (*move)(t_stack **), char *str);
 void	swap(t_info *d, t_stack **s, char *str);
 
-//RULES2 . C
-//void	dblswap(t_info *d, t_stack **s1, t_stack **s2);
-//void	dblrotate(t_info *d, t_stack **s1, t_stack **s2);
-//void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2);
-
 // STACK . C
 void	init_list(t_stack **stack, t_stack *new);
 t_stack	*add_back_nod(t_stack **stack, t_stack *new);

@@ -84,29 +84,3 @@ void	swap(t_info *d, t_stack **s, char *str)
 	(*s)->next->next->previous = (*s)->next;
 	putstr_log(d, str);
 }
-
-/*
-void	dblswap(t_info *d, t_stack **s1, t_stack **s2)
-{
-	if (!*s1 || !*s2)
-		return ;
-	swap(d, s1, "ss");
-	swap(d, s2, "\0\0");
-}
-
-void	dblrotate(t_info *d, t_stack **s1, t_stack **s2)
-{
-	if (!*s1 || !*s2)
-		return ;
-	rotate(d, s1, r_next, "rr");
-	rotate(d, s2, r_next, "\0\0");
-}
-
-void	dblrrotate(t_info *d, t_stack **s1, t_stack **s2)
-{
-	if (!*s1 || !*s2)
-		return ;
-	rotate(d, s1, r_prev, "rrr");
-	rotate(d, s2, r_prev, "\0\0");
-}
-*/

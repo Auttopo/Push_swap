@@ -55,27 +55,3 @@ t_stack	*new_elem(long value)
 	nod->bucket = 0;
 	return (nod);
 }
-
-/*
-   int	add_front_nod(t_stack **stack, t_stack *new)
-   {
-   t_stack	*temp;
-
-
-   if (new == NULL)
-   return (0);
-   if (*stack == NULL)
-   {
-   init_list(stack, new);
-   return (1);
-   }
-
-   new->next = *stack;
-   new->previous = (*stack)->previous;
-   (*stack)->previous = new;
-   new->previous->next = new;
-
- *stack = new;
- return (1);
- }
- */
