@@ -63,7 +63,7 @@ int	flag_check(t_flags f, char *str)
 		return (2);
 	else if (str_comp(str, f.complex_) == 1)
 		return (3);
-	else if (str_comp(str, f.adaptative) == 1)
+	else if (str_comp(str, f.adaptive) == 1)
 		return (4);
 	return (0);
 }

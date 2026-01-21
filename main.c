@@ -98,13 +98,13 @@ static void	execution(t_info *data,
 	if (mod(data->flag) == 1 || (disorder < (float)0.2 && mod(data->flag) == 0))
 	{
 		selection(data, stack, pull);
-		bench_mod(*data, disorder, 1);
+		bench_mod(*data, disorder, mod(data->flag));
 	}
 	else if (mod(data->flag) == 2
 		|| (disorder < (float)0.5 && mod(data->flag) == 0))
 	{
 		buckets(data, stack, pull);
-		bench_mod(*data, disorder, 2);
+		bench_mod(*data, disorder, mod(data->flag));
 	}
 	else if (mod(data->flag) == 3
 		|| (disorder >= (float)0.5 && mod(data->flag) == 0))
@@ -115,7 +115,7 @@ static void	execution(t_info *data,
 			radix(data, stack, pull, 10);
 		else
 			radix(data, stack, pull, 2);
-		bench_mod(*data, disorder, 3);
+		bench_mod(*data, disorder, mod(data->flag));
 	}
 }
 

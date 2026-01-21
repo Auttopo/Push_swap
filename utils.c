@@ -96,6 +96,6 @@ char	**main_init(t_info *d, t_flags *f, t_stack **s, t_stack **p)
 	f->simple = "--simple";
 	f->medium = "--medium";
 	f->complex_ = "--complex";
-	f->adaptative = "--adaptative";
+	f->adaptive = "--adaptive";
 	return (NULL);
 }

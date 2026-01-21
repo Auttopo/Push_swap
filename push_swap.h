@@ -54,7 +54,7 @@ typedef struct s_flags
 	char	*simple;
 	char	*medium;
 	char	*complex_;
-	char	*adaptative;
+	char	*adaptive;
 }	t_flags;
 
 void	init_index(t_stack *stack, int size);

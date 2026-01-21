@@ -67,6 +67,16 @@ void	putstr_log(t_info *d, char *s)
 	write (1, "\n", 1);
 }
 
+void	adaptive_case(char **strategy, float disorder)
+{
+	if (disorder < 0.2)
+		*strategy = "Adaptive / (O(n²))";
+	else if (disorder < 0.5)
+		*strategy = "Adaptive / (O(n√n))";
+	else
+		*strategy = "Adaptive / (O(n log n))";
+}
+
 void	bench_mod(t_info d, float disorder, int strat)
 {
 	char	*strategy;
@@ -80,8 +90,10 @@ void	bench_mod(t_info d, float disorder, int strat)
 		strategy = "Complex / (O(n log n))";
 	else if (strat == 2)
 		strategy = "Medium / (O(n√n))";
-	else
+	else if (strat == 1)
 		strategy = "Simple / (O(n²))";
+	else
+		adaptive_case(&strategy, disorder);
 	ft_printf(2, "[BENCH MOD]\n\ndisorder: %d,%d%%\n",
 		(int)(disorder * 100), ((int)(disorder * 10000) % 100));
 	ft_printf(2, "strategy: %s\n", strategy);
