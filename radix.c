@@ -102,8 +102,7 @@ void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int min_max)
 	while (*s1)
 	{
 		radix_rotate(info, s1, &pstack, min_max);
-		if (*s1)
-			if ((*s1)->index != 0)
+		if (*s1 && (*s1)->index != 0)
 				(*s1)->index /= 10;
 		push(info, s2, s1, pushstr);
 	}
