@@ -13,6 +13,7 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
+/*
 void	show_stack(t_stack **stack)
 {
 	t_stack	*temp;
@@ -34,6 +35,7 @@ void	show_stack(t_stack **stack)
 	}
 	ft_printf(1, "\n");
 }
+*/
 
 static int	flag_setup(t_flags f, t_info *data, int argc, char **argv)
 {

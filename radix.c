@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> // TODO DELETE BEFORE PUSH
 
 void	radix_move(t_info *info, t_stack **s1, t_stack **s2, int min_max)
 {
@@ -103,7 +102,7 @@ void	radix_move_10(t_info *info, t_stack **s1, t_stack **s2, int min_max)
 	{
 		radix_rotate(info, s1, &pstack, min_max);
 		if (*s1 && (*s1)->index != 0)
-				(*s1)->index /= 10;
+			(*s1)->index /= 10;
 		push(info, s2, s1, pushstr);
 	}
 }
